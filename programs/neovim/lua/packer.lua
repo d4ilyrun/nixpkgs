@@ -1,3 +1,5 @@
+vim.api.nvim_command('packadd packer.nvim')
+
 return require('packer').startup(function()
     -- Themes
     use 'folke/tokyonight.nvim'

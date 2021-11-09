@@ -20,7 +20,7 @@ in
 
   extraConfig = ''
     source ${vim_folder}/settings.vim
-    lua dofile("${vim_lua}/packer.lua")
+    silent! lua dofile("${vim_lua}/packer.lua")
     source ${vim_themes}/tokyonight.vim
     source ${vim_plugins}/lsp.vim
   '';

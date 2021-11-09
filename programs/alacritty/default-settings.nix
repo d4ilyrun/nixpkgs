@@ -15,7 +15,7 @@ in
     };
 
     window = {
-      dynamic_padding = false;
+      dynamic_padding = true;
       title = "Alacritty";
     };
 
@@ -46,5 +46,10 @@ in
       program = "${pkgs.fish}/bin/fish";
       args = [ "-C" "neofetch" ];
     };
+
+    key_bindings = [
+      { key = "N"; mods = "Control"; action = "SpawnNewInstance"; }
+      { key = "Equals"; mods = "Control|Alt"; action = "ResetFontSize"; }
+    ];
   };
 }
