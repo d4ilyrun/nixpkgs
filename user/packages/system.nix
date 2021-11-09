@@ -31,6 +31,7 @@
     # Extra
     discord
     betterdiscordctl
+    lxappearance
   ];
 }
 
