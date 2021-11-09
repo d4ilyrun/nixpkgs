@@ -55,7 +55,7 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp', max_item_count = 10 },
     { name = 'path' },
     { name = 'luasnip' },
     { name = 'buffer', keyword_length = 5, max_item_count = 5 },
@@ -113,3 +113,11 @@ require('lspkind').init({
     },
 })
 
+-- Custom diagnostic symbols
+local colors = require("tokyonight.colors").setup({})
+local signs = { Error = " ", Warn = " ", Hint = "", Info = " " }
+
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
