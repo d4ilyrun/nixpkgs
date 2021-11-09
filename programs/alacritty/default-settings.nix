@@ -15,8 +15,6 @@ in
     };
 
     window = {
-      padding.x = 6;
-      padding.y = 6;
       dynamic_padding = false;
       title = "Alacritty";
     };

@@ -3,7 +3,7 @@
 let
   wallpaper = "~/.wallpaper.jpg";
   browser = "firefox";
-  term = "alacritty";
+  term = "${pkgs.alacritty}/bin/alacritty";
 
   ws1 = "1";
   ws2 = "2";
@@ -16,28 +16,7 @@ let
   ws9 = "9";
   ws0 = "0";
 
-  colors = {
-    background = "#2e3440";
-    foreground = "#c0caf5";
-
-    dark_black = "#1D202F";
-    dark_red = "#f7768e";
-    dark_green = "#9ece6a";
-    dark_yellow = "#e0af68";
-    dark_blue = "#7aa2f7";
-    dark_purple = "#A569BD";
-    dark_cyan = "#7dcfff";
-    dark_grey = "#a9b1d6";
-
-    light_black = "#4c546c";
-    light_red = "#f7768e";
-    light_green = "#9ece6a";
-    light_yellow = "#e0af68";
-    light_blue = "#7aa2f7";
-    light_purple = "#bb9af7";
-    light_cyan = "#7dcfff";
-    light_grey = "#c0caf5";
-  };
+  colorschemes = import ~/.config/nixpkgs/config/colorschemes.nix;
 in
 {
   
@@ -45,12 +24,18 @@ in
   package = pkgs.i3-gaps;
 
   config = rec {
+
     modifier = "Mod4";
-		
-    window.border = 0;
-		
+    terminal = term;
+
+    gaps = {
+      inner = 4;
+      outer = 2;
+      smartGaps = true;
+    };
+    
     keybindings = lib.mkOptionDefault {
-      "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+      "${modifier}+Return" = "exec ${term}";
       "${modifier}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
       "${modifier}+Shift+q" = "kill";
 
@@ -83,6 +68,7 @@ in
       "Print" = "exec scrot -e 'mv $f ~/Images/Screenshots/'";
       "${modifier}+Print" = "exec scrot -ub -e 'mv $f ~/Images/Screenshots/'";
       
+      # TODO: xbacklight
       # Brightness
       "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 5";
       "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 5";
@@ -96,23 +82,36 @@ in
       "${modifier}+n" = "exec ${pkgs.${browser}}/bin/${browser}";
     };
 
+    modes.resize = {
+      Left = "resize shrink width 3 px or 3 ppt";
+      Down = "resize grow height 3 px or 3 ppt";
+      Up = "resize shrink height 3 px or 3 ppt";
+      Right = "resize grow width 3 px or 3 ppt";
+
+      Escape = "mode \"default\"";
+    };
+
+    bars = [ ]; # Handled by polybar
+
     startup = [
-      {
-        command = "${pkgs.feh}/bin/feh --bg-scale ${wallpaper}";
-        always = true;
-        notification = false;
-      }
-
-      {
-        command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}";
-        always = true;
-        notification = false;
-      }
+      { command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}"; always = true; notification = false; }
+      { command = "pkill i3bar polybar && ~/.config/polybar/launch.sh --forest"; always = true; }
+      { command = "${pkgs.i3-gaps}/bin/i3-msg workspace ${ws1}"; always = false; }
     ];
 
-    bars = [
-      { statusCommand = "bash ~/.config/polybar/launch.sh --forest"; }
-    ];
+    window.border = 2;
+
+    colors = with colorschemes.tokyonight; {
+      background = primary.background;
+
+      focused = {
+        background = primary.background;
+        text = primary.foreground;
+        border = primary.background;
+        childBorder = normal.magenta;
+        indicator = normal.magenta;
+      };
+    };
+
   };
-
 }
