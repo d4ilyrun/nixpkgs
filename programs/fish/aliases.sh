@@ -35,3 +35,4 @@ alias gtree='tree -a -I ".git"'
 # Nixos
 alias hms="home-manager switch"
 alias nrs="sudo nixos-rebuild switch"
+alias neofetch="neofetch --config ~/.config/nixpkgs/programs/neofetch/config.conf"

@@ -29,8 +29,8 @@ in
     terminal = term;
 
     gaps = {
-      inner = 4;
-      outer = 2;
+      inner = 3;
+      outer = 3;
       smartGaps = true;
     };
     
@@ -99,7 +99,7 @@ in
       { command = "${pkgs.i3-gaps}/bin/i3-msg workspace ${ws1}"; always = false; }
     ];
 
-    window.border = 2;
+    window.border = 3;
 
     colors = with colorschemes.tokyonight; {
       background = primary.background;
@@ -109,6 +109,14 @@ in
         text = primary.foreground;
         border = primary.background;
         childBorder = normal.magenta;
+        indicator = normal.magenta;
+      };
+
+      unfocused = {
+        background = primary.background;
+        text = primary.foreground;
+        border = primary.background;
+        childBorder = primary.background;
         indicator = normal.magenta;
       };
     };
