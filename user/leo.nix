@@ -5,7 +5,12 @@ let
   discord_url = https://discord.com/api/download?platform=linux&format=tar.gz;
 in
 {
-  home.homeDirectory = "/home/leo";
+  home = {
+    homeDirectory = "/home/leo";
+    sessionVariables = {
+      PATH = "/home/leo/.npm-packages/bin/:$PATH";
+    };
+  };
 
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {

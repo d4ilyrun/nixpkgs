@@ -14,6 +14,7 @@
     htop neofetch
     killall
     fzf tree
+    file
     
     # Applications
     feh
