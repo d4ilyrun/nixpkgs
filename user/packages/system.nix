@@ -17,16 +17,19 @@
     
     # Applications
     feh
-    light
     dunst
-    rofi
     scrot
+    firefox
 
     # i3
     dmenu
     picom
     polybar
     betterlockscreen
+
+    # Extra
+    discord
+    betterdiscordctl
   ];
 }
 

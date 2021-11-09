@@ -1,8 +1,11 @@
 { pkgs, lib, ... }:
 
 let
-  wallpaper = "~/.wallpaper.jpg";
-  browser = "firefox";
+  wallpaper = builtins.fetchurl {
+    url = "https://free4kwallpapers.com/uploads/originals/2020/08/27/tokyo-night-wallpaper.jpg";
+  };
+
+  browser = "${pkgs.firefox}/bin/firefox";
   term = "${pkgs.alacritty}/bin/alacritty";
 
   ws1 = "1";
@@ -79,7 +82,7 @@ in
       "XF86AudioMute" = "exec \"amixer -q sset Master toggle\"";
 
       # Applications
-      "${modifier}+n" = "exec ${pkgs.${browser}}/bin/${browser}";
+      "${modifier}+n" = "exec ${browser}";
     };
 
     modes.resize = {
@@ -94,8 +97,8 @@ in
     bars = [ ]; # Handled by polybar
 
     startup = [
-      { command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}"; always = true; notification = false; }
-      { command = "pkill i3bar polybar && ~/.config/polybar/launch.sh --forest"; always = true; }
+      { command = "${pkgs.feh}/bin/feh --bg-scale ${wallpaper}"; always = true; }
+      { command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}"; always = true; }
       { command = "${pkgs.i3-gaps}/bin/i3-msg workspace ${ws1}"; always = false; }
     ];
 
