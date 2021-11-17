@@ -11,5 +11,6 @@ in
     neovim  = import "${programs}/neovim/default.nix" { inherit pkgs; };
     alacritty  = import "${programs}/alacritty/default-settings.nix" { inherit pkgs; };
     fish = import "${programs}/fish/default.nix";
+    starship = import "${programs}/starship/default.nix" { inherit lib; };
   };
 }

@@ -3,18 +3,16 @@
 {
   home.packages = with pkgs; [
     # ACDC
+    # ocaml
     opam ocaml
     pkg-config
-    xorg.libX11
     bubblewrap
+    xorg.libX11
     ocamlPackages.graphics
     ocamlPackages.findlib
     ocamlPackages.batteries
-    (python39.withPackages (ps: with ps; [
-      pip
-      setuptools
-      click
-    ]))
+
+    # C#
   ];
 }
 
