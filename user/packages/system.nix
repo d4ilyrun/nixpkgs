@@ -11,28 +11,22 @@
     # CLI/terminal
     alacritty fish
     wget curl
-    htop neofetch
     killall
-    fzf tree
     starship
+    htop neofetch
+    fzf tree
     file
     
     # Applications
     feh
-    dunst
+    dunst libnotify
     scrot
-    firefox
 
     # i3
     dmenu
-    picom
+    rofi
     polybar
     betterlockscreen
-
-    # Extra
-    discord
-    betterdiscordctl
-    lxappearance
   ];
 }
 

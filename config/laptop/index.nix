@@ -13,4 +13,8 @@ in
     fish = import "${programs}/fish/default.nix";
     starship = import "${programs}/starship/default.nix" { inherit lib; };
   };
+
+  services = {
+    dunst = import "${programs}/dunst/default.nix" { inherit pkgs; };
+  };
 }

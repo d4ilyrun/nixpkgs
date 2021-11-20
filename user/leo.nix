@@ -30,6 +30,8 @@ in
     ./packages/pie.nix
   ];
 
+  systemd.user.startServices = true;
+
   programs.git = {
     enable = true;
     userEmail = "leo@duboin.com";
