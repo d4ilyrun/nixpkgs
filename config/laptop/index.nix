@@ -12,6 +12,7 @@ in
     alacritty  = import "${programs}/alacritty/default-settings.nix" { inherit pkgs; };
     fish = import "${programs}/fish/default.nix";
     starship = import "${programs}/starship/default.nix" { inherit lib; };
+    rofi = import "${programs}/rofi/default.nix" { inherit pkgs; };
   };
 
   services = {

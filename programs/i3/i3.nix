@@ -39,7 +39,7 @@ in
     
     keybindings = lib.mkOptionDefault {
       "${modifier}+Return" = "exec ${term}";
-      "${modifier}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
+      "${modifier}+d" = "exec i3-dmenu-desktop";
       "${modifier}+Shift+q" = "kill";
 
       # Custom workspaces names

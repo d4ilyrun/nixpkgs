@@ -9,5 +9,6 @@ in
     source ${dir}/aliases.sh
     source ${dir}/${themes}.fish
     set fish_greeting
+    set EDITOR /usr/bin/env nvim
   ";
 }
