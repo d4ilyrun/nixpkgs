@@ -8,11 +8,15 @@
     pkg-config
     bubblewrap
     xorg.libX11
-    ocamlPackages.graphics
-    ocamlPackages.findlib
-    ocamlPackages.batteries
 
-    # C#
-  ];
+    # CSharp
+    dotnet-netcore
+  ]
+  ++ ( with ocamlPackages; [
+    graphics
+    findlib
+    batteries
+    ocaml-lsp
+  ]);
 }
 
