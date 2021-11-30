@@ -38,7 +38,7 @@ in
       offset.y = 1;
     };
 
-    colors = my.colorschemes.tokyonight;
+    colors = my.config.colorscheme;
 
     background_opacity = 0.93;
 

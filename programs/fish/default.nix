@@ -1,13 +1,13 @@
 let
-  dir = "~/.config/nixpkgs/programs/fish";
-  themes = "tokyonight";
+  my = import ~/.config/nixpkgs/config;
+  dir = "${my.config.nixpkgs}/programs/fish";
 in
 {
   enable = true;
 
   shellInit = " \
     source ${dir}/aliases.sh
-    source ${dir}/${themes}.fish
+    source ${dir}/${my.config.colorscheme_name}.fish
     set fish_greeting
     set EDITOR /usr/bin/env nvim
   ";

@@ -28,6 +28,7 @@ in
     ./packages/fonts.nix
     ./packages/dev.nix
     ./packages/pie.nix
+    ./packages/apps.nix
   ];
 
   systemd.user.startServices = true;

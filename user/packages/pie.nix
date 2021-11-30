@@ -11,6 +11,7 @@
 
     # CSharp
     dotnet-netcore
+    dotnet-sdk
   ]
   ++ ( with ocamlPackages; [
     graphics

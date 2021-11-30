@@ -1,9 +1,11 @@
 { pkgs, ... }:
 let
-  vim_folder = ~/.config/nixpkgs/programs/neovim;
-  vim_plugins = ~/.config/nixpkgs/programs/neovim/plugins;
-  vim_lua = ~/.config/nixpkgs/programs/neovim/lua;
-  vim_themes = ~/.config/nixpkgs/programs/neovim/themes;
+  my = import ~/.config/nixpkgs/config;
+
+  vim_folder = "${my.config.nixpkgs}/programs/neovim";
+  vim_plugins = "${my.config.nixpkgs}/programs/neovim/plugins";
+  vim_lua = "${my.config.nixpkgs}/programs/neovim/lua";
+  vim_themes = "${my.config.nixpkgs}/programs/neovim/themes";
 
   tokyo-night = pkgs.fetchFromGitHub {
     owner = "folke";
@@ -20,8 +22,9 @@ in
 
   extraConfig = ''
     source ${vim_folder}/settings.vim
-    silent! lua dofile("${vim_lua}/packer.lua")
+    lua dofile("${vim_lua}/packer.lua")
     source ${vim_themes}/tokyonight.vim
+    lua dofile("${vim_lua}/lsp.lua")
     source ${vim_plugins}/lsp.vim
   '';
 

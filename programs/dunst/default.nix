@@ -5,11 +5,11 @@ let
     ${pkgs.pulseaudio}/bin/paplay ${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/window-attention.oga
   '';
 
-  colorschemes = import ~/.config/nixpkgs/config/colorschemes.nix;
+  my = import ~/.config/nixpkgs/config;
 in
   {
     enable = true;
-    settings = with colorschemes.tokyonight; {
+    settings = with my.config.colorscheme; {
       global = {
       ### DISPLAY ###
       geometry = "300x5-30+20";

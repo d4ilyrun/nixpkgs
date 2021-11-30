@@ -19,7 +19,7 @@ let
   ws9 = "9";
   ws0 = "0";
 
-  colorschemes = import ~/.config/nixpkgs/config/colorschemes.nix;
+  my = import ~/.config/nixpkgs/config;
 in
 {
   
@@ -39,7 +39,7 @@ in
     
     keybindings = lib.mkOptionDefault {
       "${modifier}+Return" = "exec ${term}";
-      "${modifier}+d" = "exec i3-dmenu-desktop";
+      "${modifier}+d" = "exec rofi -show combi -show-icons";
       "${modifier}+Shift+q" = "kill";
 
       # Custom workspaces names
@@ -94,7 +94,9 @@ in
       Escape = "mode \"default\"";
     };
 
-    bars = [ ]; # Handled by polybar
+    bars = [
+      { statusCommand = "${pkgs.i3blocks}/bin/i3blocks -c ~/.config/nixpkgs/programs/i3blocks/config"; }
+    ];
 
     startup = [
       { command = "${pkgs.feh}/bin/feh --bg-scale ${wallpaper}"; always = true; }
@@ -104,7 +106,7 @@ in
 
     window.border = 3;
 
-    colors = with colorschemes.tokyonight; {
+    colors = with my.config.colorscheme; {
       background = primary.background;
 
       focused = {

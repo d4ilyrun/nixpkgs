@@ -53,5 +53,3 @@ nnoremap <C-t><up>   :tabr<CR>      " first tab
 nnoremap <C-t><down> :tabl<CR>      " last tab
 nnoremap <C-t><left> :tabp<CR>      " previous tab
 nnoremap <C-t><right> :tabn<CR> " next tab
-
-
