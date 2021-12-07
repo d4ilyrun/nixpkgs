@@ -1,5 +1,6 @@
+{ my, ... }:
+
 let
-  my = import ~/.config/nixpkgs/config;
   dir = "${my.config.nixpkgs}/programs/fish";
 in
 {

@@ -1,11 +1,9 @@
-{ pkgs, ... }:
+{ my, pkgs, ... }:
 let
   soundNotification = pkgs.writeScript "play-notification-sound.sh" ''
     #!/bin/sh
     ${pkgs.pulseaudio}/bin/paplay ${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/window-attention.oga
   '';
-
-  my = import ~/.config/nixpkgs/config;
 in
   {
     enable = true;

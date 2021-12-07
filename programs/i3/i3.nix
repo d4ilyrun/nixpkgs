@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ my, pkgs, lib, ... }:
 
 let
   wallpaper = builtins.fetchurl {
@@ -18,8 +18,6 @@ let
   ws8 = "8";
   ws9 = "9";
   ws0 = "0";
-
-  my = import ~/.config/nixpkgs/config;
 in
 {
   

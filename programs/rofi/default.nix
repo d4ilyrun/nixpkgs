@@ -1,8 +1,7 @@
-{ pkgs, ...}:
+{ my, ... }:
 
 let
   config = "carbonized";
-  my = import ~/.config/nixpkgs/config;
   path = "${my.config.nixpkgs}/programs/rofi";
 in
   {

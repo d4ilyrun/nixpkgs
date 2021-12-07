@@ -1,8 +1,5 @@
-{pkgs, ...}:
-#~/.config/nixpkgs/programs/alacritty/default-settings.nix
-let
-  my = import ~/.config/nixpkgs/config;
-in
+{ my, pkgs, ...}:
+
 {
   enable = true;
 

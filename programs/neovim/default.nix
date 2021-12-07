@@ -1,6 +1,5 @@
-{ pkgs, ... }:
+{ my, pkgs, ... }:
 let
-  my = import ~/.config/nixpkgs/config;
 
   vim_folder = "${my.config.nixpkgs}/programs/neovim";
   vim_plugins = "${my.config.nixpkgs}/programs/neovim/plugins";

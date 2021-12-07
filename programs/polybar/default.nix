@@ -1,7 +1,6 @@
-{ pkgs, ... }:
+{ my, pkgs, ... }:
 
 let
-  my = import ~/.config/nixpkgs/config;
   dir = "${my.config.nixpkgs}/programs/polybar";
 
   # Config HERE
