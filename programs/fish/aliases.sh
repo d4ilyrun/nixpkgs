@@ -1,7 +1,7 @@
 # tree and ls
-alias ll="ls -l"
-alias la="ls -a"
-alias lla="ls -al"
+alias ll="ls -l --color=auto"
+alias la="ls -a --color=auto"
+alias lla="ls -al --color=auto"
 
 # navigation
 #.. = ' c d ..';

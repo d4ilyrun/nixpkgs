@@ -2,10 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec -a "$0" "$@"
+  '';
 in
 {
   imports =
@@ -36,7 +42,7 @@ in
   # Set up locales (timezone and keyboard layout)
   # Select internationalisation properties.
   time.timeZone = "Europe/Paris";
-  i18n.defaultLocale = "fr_FR.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
     keyMap = "fr";
@@ -64,11 +70,7 @@ in
       lightdm.enable = true;
       defaultSession = "none+i3";
     };  
-
-    desktopManager = {
-      xterm.enable = false;
-    };
-
+	
     windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
@@ -122,22 +124,11 @@ in
     refind
     git
     vim 
-    alacritty
-    fish
     curl
+    fish
     nvidia-offload
   ];
-  
-  fonts = { 
-    fontconfig.enable = true;
-    fonts = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
-      pkgs.roboto-mono
-      pkgs.iosevka
-      pkgs.material-design-icons
-      pkgs.weather-icons
-    ];
-  };
+
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;

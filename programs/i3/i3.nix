@@ -95,13 +95,14 @@ in
     };
 
     bars = [
-      { statusCommand = "${pkgs.i3blocks}/bin/i3blocks -c ~/.config/nixpkgs/programs/i3blocks/config"; }
+      # { statusCommand = "${pkgs.i3blocks}/bin/i3blocks -c ~/.config/nixpkgs/programs/i3blocks/config"; }
     ];
 
     startup = [
       { command = "${pkgs.feh}/bin/feh --bg-scale ${wallpaper}"; always = true; }
       { command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}"; always = true; }
       { command = "${pkgs.i3-gaps}/bin/i3-msg workspace ${ws1}"; always = false; }
+      { command = "systemctl --user restart polybar"; always = true; }
     ];
 
     window.border = 3;

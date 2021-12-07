@@ -8,6 +8,6 @@
   imports = [
     ./machine/desktop.nix
     ./user/leo.nix
-    ./config/laptop/index.nix
+    ./config/laptop
   ];
 }

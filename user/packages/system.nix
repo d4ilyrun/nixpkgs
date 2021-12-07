@@ -25,7 +25,6 @@
     # i3
     dmenu
     rofi
-    polybar
     betterlockscreen
   ];
 }

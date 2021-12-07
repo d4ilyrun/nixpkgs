@@ -9,6 +9,8 @@ in
     homeDirectory = "/home/leo";
     sessionVariables = {
       PATH = "/home/leo/.npm-packages/bin/:$PATH";
+      NIXOS_CONFIG="/home/leo/.config/nixpkgs/configuration.nix";
+      NIXOS_CONFIG_DIR="/home/leo/.config/nixpkgs/";
     };
   };
 
@@ -38,5 +40,4 @@ in
     userEmail = "leo@duboin.com";
     userName = "Léo Duboin";
   };
-
 }
