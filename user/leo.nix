@@ -37,7 +37,7 @@ in
 
   programs.git = {
     enable = true;
-    userEmail = "leo@duboin.com";
+    userEmail = "leo.duboin@epita.fr";
     userName = "Léo Duboin";
   };
 }

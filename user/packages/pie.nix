@@ -2,6 +2,9 @@
 
 {
   home.packages = with pkgs; [
+    # SCHOOL
+    teams
+
     # ACDC
     # ocaml
     opam ocaml
@@ -10,8 +13,8 @@
     xorg.libX11
 
     # CSharp
-    dotnet-netcore
-    dotnet-sdk
+    dotnetCorePackages.sdk_5_0
+    jetbrains.rider
   ]
   ++ ( with ocamlPackages; [
     graphics
