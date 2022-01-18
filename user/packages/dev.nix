@@ -2,6 +2,8 @@
 
 {
   home.packages = with pkgs; [
+    pre-commit
+
     # C/C++
     gcc clang-tools
     gnumake cmake

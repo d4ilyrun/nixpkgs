@@ -14,6 +14,7 @@ in
     fish = import "${programs}/fish" {inherit my; };
     starship = import "${programs}/starship" { inherit lib; };
     rofi = import "${programs}/rofi" { inherit my; };
+    git = import "${programs}/git" { inherit my pkgs; };
   };
 
   services = {

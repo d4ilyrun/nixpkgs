@@ -1,4 +1,3 @@
-# ~/.config/nixpkgs/user/vmware.nix
 { config, pkgs, ... }:
 
 let
@@ -29,15 +28,14 @@ in
     ./packages/system.nix
     ./packages/fonts.nix
     ./packages/dev.nix
-    ./packages/pie.nix
     ./packages/apps.nix
+    ./packages/pie.nix
+  ];
+
+  # HEAVY PACKAGES
+  home.packages = with pkgs; [
+    jetbrains.clion
   ];
 
   systemd.user.startServices = true;
-
-  programs.git = {
-    enable = true;
-    userEmail = "leo.duboin@epita.fr";
-    userName = "Léo Duboin";
-  };
 }

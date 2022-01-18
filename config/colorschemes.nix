@@ -1,8 +1,9 @@
 {
-  tokyonight = {
+  tokyonight = rec {
     primary = {
       background = "#24283b";
       foreground = "#c0caf5";
+      accent = normal.magenta;
     };
 
     normal = {
@@ -26,6 +27,12 @@
       cyan = "#7dcfff";
       white = "#c0caf5";
     };
+
+    polybar = {
+      background = normal.black;
+      foreground = primary.foreground;
+      foreground-dark = "#484848";
+    };
   };
 
   nord = {
@@ -40,7 +47,7 @@
       green = "#c3e88d";
       yellow = "#ffcb6b";
       blue = "#82aaff";
-      purple = "#c792ea";
+      magenta = "#c792ea";
       cyan = "#89ddff";
       white = "#d0d0d0";
     };
@@ -51,7 +58,7 @@
       green = "#ddffa7";
       yellow = "#ffe585";
       blue = "#9cc4ff";
-      purple = "#e1acff";
+      magenta = "#e1acff";
       cyan = "#a3f7ff";
       white = "#fefefe";
     };
@@ -59,6 +66,40 @@
     selection = {
       text = "#eceef0";
       background = "#607c8b";
+    };
+  };
+
+  dracula = {
+    primary = {
+      background = "#282a36";
+      foreground =  "#f8f8f2";
+    };
+    
+    selection = {
+      text = "CellForeground";
+      background = "#44475a";
+    };
+
+    normal = {
+      black = "#21222c";
+      red = "#ff5555";
+      green = "#50fa7b";
+      yellow = "#f1fa8c";
+      blue = "#bd93f9";
+      magenta = "#ff79c6";
+      cyan = "#8be9fd";
+      white = "#f8f8f2";
+    };
+
+    bright = {
+      black = "#6272a4";
+      red = "#ff6e6e";
+      green = "#69ff94";
+      yellow = "#ffffa5";
+      blue = "#d6acff";
+      magenta = "#ff92df";
+      cyan = "#a4ffff";
+      white = "#ffffff";
     };
   };
 }

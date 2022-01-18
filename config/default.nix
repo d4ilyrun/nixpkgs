@@ -1,10 +1,10 @@
 rec {
   colorschemes = import ./colorschemes.nix;
 
-  config = {
-    home = "/home/leo";
+  config = rec {
     username = "leo";
-    nixpkgs = "/home/leo/.config/nixpkgs";
+    home = "/home/${config.username}";
+    nixpkgs = "${config.home}/.config/nixpkgs";
 
     colorscheme_name = "tokyonight";
     colorscheme = colorschemes.tokyonight;
