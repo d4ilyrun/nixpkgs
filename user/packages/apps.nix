@@ -1,15 +1,17 @@
 { config, pkgs, ... }:
 
+let
+  spicetify = fetchTarball https://github.com/pietdevries94/spicetify-nix/archive/master.tar.gz;
+in
 {
-  home.packages = with pkgs; [
-    feh
-    dunst
-    scrot
-    firefox
-    discord
-    betterdiscordctl
-    lxappearance
-  ];
+    imports = [ (import "${spicetify}/module.nix") ];
+
+    home.packages = with pkgs; [
+        firefox
+        lxappearance
+        discord betterdiscordctl
+        spotify-unwrapped
+    ];
 }
 
 

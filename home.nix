@@ -2,12 +2,16 @@
 { config, pkgs, ... }:
 
 {
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+    nixpkgs.config.allowUnfree = true;
 
-  imports = [
-    ./machine/desktop.nix
-    ./user/leo.nix
-    ./config/laptop
-  ];
+    news.display = "silent";
+
+    # Let Home Manager install and manage itself.
+    programs.home-manager.enable = true;
+
+    imports = [
+        ./machine/desktop.nix
+        ./config/desktop
+        ./user/leo.nix
+    ];
 }

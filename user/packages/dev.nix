@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    # CLI
     pre-commit
 
     # C/C++
@@ -10,5 +11,9 @@
     gdb valgrind
     criterion
     man-pages
+    binutils
+
+    # Rust
+    rustup
   ];
 }

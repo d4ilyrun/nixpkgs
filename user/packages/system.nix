@@ -23,8 +23,7 @@
     scrot
 
     # i3
-    dmenu
-    rofi
+    dmenu rofi
     betterlockscreen
   ];
 }

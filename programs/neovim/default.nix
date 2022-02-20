@@ -1,5 +1,7 @@
-{ my, pkgs, ... }:
+{ config, lib, pkgs, ... }:
+
 let
+  my = import ../../config;
 
   vim_folder = "${my.config.nixpkgs}/programs/neovim";
   vim_plugins = "${my.config.nixpkgs}/programs/neovim/plugins";
@@ -14,40 +16,50 @@ let
   };
 
 in
-{
-  enable = true;
-  vimAlias = true;
-  viAlias = true;
+    {
+    # Packages needed for neovim to work
+    home.packages = with pkgs; [
+        rnix-lsp
+    ];
 
-  extraConfig = ''
-    source ${vim_folder}/settings.vim
-    lua dofile("${vim_lua}/packer.lua")
-    source ${vim_themes}/tokyonight.vim
-    lua dofile("${vim_lua}/lsp.lua")
-    source ${vim_plugins}/lsp.vim
-  '';
+    programs.neovim = {
+        enable = true;
+        vimAlias = true;
+        viAlias = true;
 
-  plugins = with pkgs.vimPlugins; [ 
-    packer-nvim
+        extraConfig = ''
+            source ${vim_folder}/settings.vim
+            lua dofile("${vim_lua}/packer.lua")
+            source ${vim_themes}/tokyonight.vim
+            lua dofile("${vim_lua}/lsp.lua")
+            source ${vim_plugins}/lsp.vim
+        '';
 
-    # StatusBar
-    # vim-airline
-    lualine-nvim
+        plugins = with pkgs.vimPlugins; [ 
+            packer-nvim
 
-    # Navigation
-    nvim-web-devicons
-    nerdtree
-    fzf-vim
+            # StatusBar
+            # vim-airline
+            lualine-nvim
 
-    # LSP
-    vim-polyglot
+            # Navigation
+            nvim-web-devicons
+            nerdtree
+            fzf-vim
 
-    # Completion
-    nvim-treesitter
+            # LSP
+            vim-polyglot
+            nvim-cmp
+            cmp-buffer
+            cmp-path
 
-    # Eyecandy
-    vim-css-color    # Color previewer
-    indentLine
-    # nord-vim
-  ];
+            # Completion
+            nvim-treesitter
+
+            # Eyecandy
+            vim-css-color    # Color previewer
+            indentLine
+            # nord-vim
+        ];
+    };
 }

@@ -3,6 +3,7 @@ rec {
 
   config = rec {
     username = "leo";
+    machine = "desktop";
     home = "/home/${config.username}";
     nixpkgs = "${config.home}/.config/nixpkgs";
 

@@ -8,17 +8,26 @@ in
 {
   xsession.windowManager.i3 = import "${programs}/i3/i3.nix" { inherit pkgs lib my; };
 
+  imports = [
+    "${programs}/battery.nix"
+    "${programs}/neovim"
+  ];
+
   programs = {
-    neovim  = import "${programs}/neovim" { inherit my pkgs; };
     alacritty  = import "${programs}/alacritty/default-settings.nix" { inherit my pkgs; };
     fish = import "${programs}/fish" {inherit my; };
     starship = import "${programs}/starship" { inherit lib; };
     rofi = import "${programs}/rofi" { inherit my; };
     git = import "${programs}/git" { inherit my pkgs; };
+    spicetify = import "${programs}/spicetify";
   };
 
   services = {
     dunst = import "${programs}/dunst" { inherit my pkgs; };
     polybar = import "${programs}/polybar" { inherit my pkgs; };
+
+    batteryNotifier = {
+      enable = true;
+    };
   };
 }

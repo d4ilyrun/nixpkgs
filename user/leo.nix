@@ -1,15 +1,14 @@
-{ config, pkgs, ... }:
+{ config, pkgs, my, ... }:
 
 let
   discord_url = https://discord.com/api/download?platform=linux&format=tar.gz;
+  my = import ../config/.;
 in
 {
   home = {
-    homeDirectory = "/home/leo";
-    sessionVariables = {
-      PATH = "/home/leo/.npm-packages/bin/:$PATH";
-      NIXOS_CONFIG="/home/leo/.config/nixpkgs/configuration.nix";
-      NIXOS_CONFIG_DIR="/home/leo/.config/nixpkgs/";
+    homeDirectory = my.config.home;
+    sessionVariables = rec {
+      PATH = "${my.config.home}/.npm-packages/bin/:$PATH";
     };
   };
 
@@ -24,17 +23,20 @@ in
   ];
 
   imports = [
-    ../programs/battery.nix
+    # Packages
     ./packages/system.nix
-    ./packages/fonts.nix
     ./packages/dev.nix
     ./packages/apps.nix
-    ./packages/pie.nix
+    ./packages/school.nix
+    ./packages/acdc.nix
+
+    # Fonts
+    ./packages/fonts.nix
   ];
 
   # HEAVY PACKAGES
   home.packages = with pkgs; [
-    jetbrains.clion
+      jetbrains.clion
   ];
 
   systemd.user.startServices = true;

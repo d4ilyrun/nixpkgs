@@ -1,62 +1,90 @@
 { config, pkgs, lib, ... }:
+
 let
+    cfg = config.services.batteryNotifier;
+    script = pkgs.writeTextFile {
+        name = "unit-script";
+        executable = true;
+        destination = "/bin/lowbatt-start";
+        text = ''
+            export battery_capacity=$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/${cfg.device}/capacity)
+            export battery_status=$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/${cfg.device}/status)
 
-  script = pkgs.writeShellScriptBin "lowbatt" ''
-    function notify() {
-      ${pkgs.libnotify}/bin/notify-send \
-        --urgency=$1 \
-        --hint=int:transient:1 \
-        --icon=battery_empty \
-        "$2" "$3"
-    }
-    
-    battery_capacity=$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/BAT0/capacity)
-    battery_status=$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/BAT0/status)
-    if [[ $battery_status = "Discharging" ]]; then
-        if [[ $battery_capacity -le 15 ]]; then
-        notify "critical" "Battery Low" "You should probably plug-in."
-        fi
-        if [[ $battery_capacity -le 5 ]]; then
-          notify "critical" "Battery Critically Low" "Computer will hibernate in 60 seconds."
-          sleep 60
-          battery_status=$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/BAT0/status)
-          if [[ $battery_status = "Discharging" ]]; then
-              systemctl hibernate
-          fi
-        fi
-    else
-      if [[ $battery_capacity -eq 87 ]]; then
-        notify "low" "Battery Charged" "You can unplug now"
-      fi
-    fi
-  '';
-
+            if [[ $battery_capacity -le ${builtins.toString cfg.notifyCapacity} && $battery_status = "Discharging" ]]; then
+                ${pkgs.libnotify}/bin/notify-send --urgency=critical --hint=int:transient:1 --icon=battery_empty "Battery Low" "You should probably plug-in."
+            fi
+            
+            if [[ $battery_capacity -le ${builtins.toString cfg.hibernateCapacity} && $battery_status = "Discharging" ]]; then
+                ${pkgs.libnotify}/bin/notify-send --urgency=critical --hint=int:transient:1 --icon=battery_empty "Battery Critically Low" "Computer will hibernate in 60 seconds."
+                sleep 60s
+                battery_status=$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/${cfg.device}/status)
+                if [[ $battery_status = "Discharging" ]]; then
+                    systemctl hibernate
+                fi
+            fi
+        '';
+    };
 in
-{
-  systemd.user.timers."lowbatt" = {
-    Unit = {
-      Description = "check battery level";
+
+with lib; {
+    options = {
+        services.batteryNotifier = {
+            enable = mkOption {
+                default = false;
+                type = with types; bool;
+                description = ''
+                    Whether to enable battery notifier.
+                '';
+            };
+            device = mkOption {
+                default = "BAT-0";
+                type = with types; str;
+                description = ''
+                    Device to monitor.
+                '';
+            };
+            notifyCapacity = mkOption {
+                default = 10;
+                type = with types; int;
+                description = ''
+                    Battery level at which to send a notifictation.
+                '';
+            };
+            hibernateCapacity = mkOption {
+                default = 5;
+                description = ''
+                    Battery level at which a hibernate unless connected shall be sent.
+                '';
+            };
+        };
     };
 
-    Timer = {
-      OnBootSec = "1m";
-      OnUnitInactiveSec = "3m";
-      Unit = "lowbatt.service";
-    };
+    config = mkIf cfg.enable {
+        systemd.user.timers."lowbatt" = {
+            Unit = {
+                description = "Check battery level";
+            };
 
-    Install = {
-      WantedBy = [ "timers.target" ];
-    };
-  };
+            Timer = {
+                OnBootSec = "1m";
+                OnUnitInactiveSec = "1m";
+                Unit = "lowbatt.service";
+            };
 
-  systemd.user.services."lowbatt" = {
-    Unit = {
-      Description = "battery level notifier";
-    };
+            Install = {
+                WantedBy = [ "timers.target" ];
+            };
+        };
 
-    Service = {
-      PassEnvironment = "DISPLAY";
-      ExecStart = "${script}/bin/lowbatt";
+        systemd.user.services."lowbatt" = {
+            Unit = {
+                Description = "battery level notifier";
+            };
+
+            Service = {
+                PassEnvironment = "DISPLAY";
+                ExecStart = "${script}/bin/lowbatt-start";
+            };
+        };
     };
-  };
 }

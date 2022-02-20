@@ -68,6 +68,7 @@ in
       # Screenshot
       "Print" = "exec scrot -e 'mv $f ~/Images/Screenshots/'";
       "${modifier}+Print" = "exec scrot -ub -e 'mv $f ~/Images/Screenshots/'";
+      "${modifier}+Shift+s" = "exec scrot -e 'mv $f ~/Images/Screenshots/'";
       
       # TODO: xbacklight
       # Brightness
@@ -75,8 +76,8 @@ in
       "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 5";
 
       # Audio
-      "XF86AudioLowerVolume" = "exec \"amixer -q sset Master 1%-\"";
-      "XF86AudioRaiseVolume" = "exec \"amixer -q sset Master 1%+\"";
+      "XF86AudioLowerVolume" = "exec \"amixer -q sset Master 10%-\"";
+      "XF86AudioRaiseVolume" = "exec \"amixer -q sset Master 10%+\"";
       "XF86AudioMute" = "exec \"amixer -q sset Master toggle\"";
 
       # Applications
@@ -101,6 +102,7 @@ in
       { command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}"; always = true; }
       { command = "${pkgs.i3-gaps}/bin/i3-msg workspace ${ws1}"; always = false; }
       { command = "systemctl --user restart polybar"; always = true; }
+      { command = "${pkgs.autorandr}/bin/autorandr -c"; always = false; }
     ];
 
     window.border = 3;
