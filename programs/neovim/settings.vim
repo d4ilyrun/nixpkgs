@@ -37,7 +37,8 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-au FileType Makefile set noexpandtab
+au FileType Makefile setlocal noexpandtab
+au FileType nix setlocal tabstop=2 shiftwidth=2 expandtab
 
 """""""""""""""""""""""""""""""""""""""
 " => Keymaps
