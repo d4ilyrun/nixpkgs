@@ -14,9 +14,10 @@ in
 
     shellAliases = {
       # tree and ls;
-      ll="ls -l --color=auto";
-      la="ls -a --color=auto";
-      lla="ls -al --color=auto";
+      ls="exa";
+      ll="exa -l --icons";
+      la="exa -a --icons";
+      lla="exa -al --icons";
 
       # Colorize grep output (good for log files);
       grep="grep --color=auto";
@@ -45,7 +46,7 @@ in
     };
 
     functions = {
-      hms = "home-manager switch --flake ${my.config.nixpkgs}#$argv[1] --impure";
+      hms = ''home-manager switch --flake ${my.config.nixpkgs}#$argv[1] --impure'';
       nrs = "sudo nixos-rebuild switch --flake ${my.config.nixpkgs}#$argv[1]";
     };
   }

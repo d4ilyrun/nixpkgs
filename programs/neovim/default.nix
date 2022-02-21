@@ -20,6 +20,7 @@ in
     # Packages needed for neovim to work
     home.packages = with pkgs; [
         rnix-lsp
+        python39Packages.pynvim
     ];
 
     programs.neovim = {
@@ -44,8 +45,8 @@ in
 
             # Navigation
             nvim-web-devicons
-            nerdtree
             fzf-vim
+            rnvimr
 
             # LSP
             vim-polyglot

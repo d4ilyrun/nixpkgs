@@ -19,17 +19,13 @@ in
     starship = import "${programs}/starship" { inherit lib; };
     rofi = import "${programs}/rofi" { inherit my; };
     git = import "${programs}/git" { inherit my pkgs; };
-    spicetify = import "${programs}/spicetify";
   };
 
   services = {
-    dunst = import "${programs}/dunst" { inherit my pkgs; };
     polybar = import "${programs}/polybar" { inherit my pkgs lib; };
 
     batteryNotifier = {
       enable = true;
     };
   };
-
-  xdg.configFile."lemonbar".source = "${my.config.nixpkgs}/programs/lemonbar";
 }

@@ -36,8 +36,16 @@ in
 
   # HEAVY PACKAGES
   home.packages = with pkgs; [
-      jetbrains.clion
+    jetbrains.clion
   ];
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = [ "ranger.desktop" ]; # Default file manager
+    };
+  };
+
   systemd.user.startServices = true;
+
 }

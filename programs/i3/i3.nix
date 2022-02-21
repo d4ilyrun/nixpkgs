@@ -1,9 +1,7 @@
 { my, pkgs, lib, ... }:
 
 let
-  wallpaper = builtins.fetchurl {
-    url = "https://free4kwallpapers.com/uploads/originals/2020/08/27/tokyo-night-wallpaper.jpg";
-  };
+  wallpaper = my.wallpapers.comfy-home;
 
   browser = "${pkgs.firefox}/bin/firefox";
   term = "${pkgs.alacritty}/bin/alacritty";
@@ -97,14 +95,6 @@ in
       # { statusCommand = "${pkgs.i3blocks}/bin/i3blocks -c ~/.config/nixpkgs/programs/i3blocks/config"; }
     ];
 
-    startup = [
-      { command = "${pkgs.feh}/bin/feh --bg-scale ${wallpaper}"; always = true; }
-      { command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}"; always = true; }
-      { command = "${pkgs.i3-gaps}/bin/i3-msg workspace ${ws1}"; always = false; }
-      { command = "systemctl --user restart polybar"; always = true; }
-      { command = "${pkgs.autorandr}/bin/autorandr -c"; always = false; }
-    ];
-
     window.border = 3;
 
     colors = with my.config.colorscheme; {
@@ -127,5 +117,12 @@ in
       };
     };
 
+    startup = [
+      { command = "${pkgs.feh}/bin/feh --bg-scale ${wallpaper}"; always = true; }
+      { command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}"; always = true; }
+      { command = "${pkgs.i3-gaps}/bin/i3-msg workspace ${ws1}"; always = false; }
+      { command = "systemctl --user restart polybar"; always = true; }
+      { command = "${pkgs.autorandr}/bin/autorandr -c"; always = false; }
+    ];
   };
 }

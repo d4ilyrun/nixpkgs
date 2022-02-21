@@ -16,6 +16,7 @@
     htop neofetch
     fzf tree
     file
+    exa
     
     # Applications
     feh

@@ -10,4 +10,6 @@ rec {
     colorscheme_name = "tokyonight";
     colorscheme = colorschemes.tokyonight;
   };
+
+  wallpapers = import "${config.nixpkgs}/config/wallpapers.nix";
 }
