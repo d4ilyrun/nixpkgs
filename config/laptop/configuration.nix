@@ -16,7 +16,7 @@ in
 {
   imports =
   [ # Include the results of the hardware scan.
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
   ];
 
   # Set environment variables
@@ -49,8 +49,13 @@ in
   };
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+	  systemd-boot.enable = true;
+	  efi = {
+		  canTouchEfiVariables = true;
+		  efiSysMountPoint = "/boot";
+	  };
+  };
 
   networking = {
     hostName = "leo";
@@ -88,25 +93,6 @@ in
 
   };
 
-  # NVIDIA STUFF
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.prime = {
-    offload.enable = true;
-    # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
-    intelBusId = "PCI:0:2:0";
-    # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
-    nvidiaBusId = "PCI:1:0:0";
-  };
-
-  specialisation = {
-    external-display.configuration = {
-      system.nixos.tags = [ "external-display" ];
-      hardware.nvidia.prime.offload.enable = lib.mkForce false;
-      hardware.nvidia.powerManagement.enable = lib.mkForce false;
-    };
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -116,7 +102,7 @@ in
 
   users.users.leo = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "video" ];
     shell = pkgs.fish;
   };
 
@@ -124,11 +110,11 @@ in
     refind
     git
     vim 
+    alacritty
     curl
     fish
     nvidia-offload
   ];
-
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -139,7 +125,6 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05"; # Did you read the comment?
-
+  system.stateVersion = "21.11"; # Did you read the comment?
 }
 

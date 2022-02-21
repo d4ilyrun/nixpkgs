@@ -11,7 +11,7 @@ in
         lxappearance
         discord betterdiscordctl
         spotify-unwrapped
-        ranger ueberzug
+        ranger ueberzug highlight
     ];
 }
 

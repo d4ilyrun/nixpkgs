@@ -17,7 +17,7 @@ in
     alacritty  = import "${programs}/alacritty/default-settings.nix" { inherit my pkgs; };
     fish = import "${programs}/fish" {inherit my; };
     starship = import "${programs}/starship" { inherit lib; };
-    rofi = import "${programs}/rofi" { inherit my; };
+    rofi = import "${programs}/rofi" { inherit my pkgs; };
     git = import "${programs}/git" { inherit my pkgs; };
     spicetify = import "${programs}/spicetify";
   };
@@ -30,6 +30,4 @@ in
       enable = true;
     };
   };
-
-  xdg.configFile."lemonbar".source = "${my.config.nixpkgs}/programs/lemonbar";
 }
