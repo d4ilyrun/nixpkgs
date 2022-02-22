@@ -77,7 +77,7 @@ cmp.setup {
 }
 
 require('lspkind').init({
-    with_text = true,
+    mode = 'text_symbol',
     preset = 'codicons',
 
     symbol_map = {

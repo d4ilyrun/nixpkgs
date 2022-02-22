@@ -8,9 +8,9 @@ colorscheme tokyonight
 let g:lightline = {'colorscheme': 'tokyonight'}
 
 lua << EOF
-require('lualine').setup {
-    options = {
-        theme = 'tokyonight'
-        }
-    }
+-- require('lualine').setup {
+--     options = {
+--         theme = 'tokyonight'
+--         }
+--     }
 EOF

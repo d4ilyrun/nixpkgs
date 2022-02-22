@@ -32,16 +32,18 @@ in
             source ${vim_folder}/settings.vim
             lua dofile("${vim_lua}/packer.lua")
             source ${vim_themes}/tokyonight.vim
+            " lua dofile("${vim_lua}/feline.lua")
+            lua dofile("${vim_lua}/galaxyline.lua")
             lua dofile("${vim_lua}/lsp.lua")
             source ${vim_plugins}/lsp.vim
         '';
 
         plugins = with pkgs.vimPlugins; [ 
+            # Packages
             packer-nvim
 
             # StatusBar
-            # vim-airline
-            lualine-nvim
+            #lualine-nvim
 
             # Navigation
             nvim-web-devicons
@@ -49,18 +51,19 @@ in
             rnvimr
 
             # LSP
+            nvim-treesitter
             vim-polyglot
             nvim-cmp
             cmp-buffer
             cmp-path
 
-            # Completion
-            nvim-treesitter
-
             # Eyecandy
             vim-css-color    # Color previewer
             indentLine
-            # nord-vim
-        ];
+
+        ] ++ ( with pkgs.nur.repos.m15a.vimExtraPlugins; [
+            tokyodark-nvim # FIXME: https://github.com/tiagovla/tokyodark.nvim/issues/14#issue-1144674199
+            # feline-nvim
+        ]);
     };
 }
