@@ -20,6 +20,7 @@ in
     rofi = import "${programs}/rofi" { inherit my pkgs; };
     git = import "${programs}/git" { inherit my pkgs; };
     spicetify = import "${programs}/spicetify";
+    firefox = import "${programs}/firefox" { inherit my pkgs lib; };
   };
 
   services = {
