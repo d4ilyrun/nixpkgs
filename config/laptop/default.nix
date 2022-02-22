@@ -21,6 +21,7 @@ in
     git = import "${programs}/git" { inherit my pkgs; };
     spicetify = import "${programs}/spicetify";
     firefox = import "${programs}/firefox" { inherit my pkgs lib; };
+    tmux = import "${programs}/tmux" { inherit pkgs my; };
   };
 
   services = {

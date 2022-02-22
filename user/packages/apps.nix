@@ -12,6 +12,7 @@ in
         discord betterdiscordctl
         spotify-unwrapped
         ranger ueberzug highlight
+        lazygit
     ];
 }
 

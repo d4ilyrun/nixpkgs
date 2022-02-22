@@ -17,6 +17,7 @@
     fzf tree
     file
     exa
+    tmux
     
     # Applications
     feh
