@@ -25,6 +25,7 @@
         "distribution.searchplugins.defaultLocale" = "en-US";
         "general.useragent.locale" = "en-US";
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true; # userChrome
+        "layout.css.backdrop-filter.enabled" = true; # blur style
       };
 
       userChrome = builtins.readFile "${my.config.nixpkgs}/programs/firefox/tokyo-night-fox/chrome/userChrome.css";
