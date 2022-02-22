@@ -43,6 +43,7 @@ in
 
       neofetch="neofetch --config ~/.config/nixpkgs/programs/neofetch/config.conf";
       nix-shell="nix-shell --command 'fish'";
+      dotfiles="cd ${my.config.nixpkgs}";
     };
 
     functions = {

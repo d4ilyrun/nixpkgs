@@ -12,8 +12,8 @@
 
   # Set environment variables
   environment.variables = {
-    NIXOS_CONFIG="$HOME/.config/nixpkgs/configuration/desktop/configuration.nix";
     NIXOS_CONFIG_DIR="$HOME/.config/nixpkgs/configuration/desktop/";
+    NIXOS_CONFIG="$NIXOS_CONFIG_DIR/configuration.nix";
   };
 
   # Nix settings, auto cleanup and enable flakes
@@ -95,20 +95,17 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     curl
     git
     fish
     refind
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  # Download patched fonts from nerd fonts to use glyphs in the terminal
+  fonts.fonts = with pkgs; [
+      (nerdfonts.override { fonts = [ "FiraCode" "UbuntuMono" "JetBrainsMono" ]; })
+  ];
 
   # List services that you want to enable:
 
