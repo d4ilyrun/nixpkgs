@@ -88,25 +88,6 @@ in
 
   };
 
-  # NVIDIA STUFF
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.prime = {
-    offload.enable = true;
-    # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
-    intelBusId = "PCI:0:2:0";
-    # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
-    nvidiaBusId = "PCI:1:0:0";
-  };
-
-  specialisation = {
-    external-display.configuration = {
-      system.nixos.tags = [ "external-display" ];
-      hardware.nvidia.prime.offload.enable = lib.mkForce false;
-      hardware.nvidia.powerManagement.enable = lib.mkForce false;
-    };
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -124,10 +105,14 @@ in
     refind
     git
     vim 
-    alacritty
     curl
     fish
     nvidia-offload
+  ];
+
+  # Download patched fonts from nerd fonts to use glyphs in the terminal
+  fonts.fonts = with pkgs; [
+      (nerdfonts.override { fonts = [ "FiraCode" "UbuntuMono" "JetBrainsMono" ]; })
   ];
 
   # Enable the OpenSSH daemon.
@@ -140,5 +125,6 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.11"; # Did you read the comment?
+
 }
 

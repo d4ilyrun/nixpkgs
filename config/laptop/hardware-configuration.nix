@@ -15,7 +15,7 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos";
+    { device = "/dev/disk/by-uuid/d74bc9e1-49fd-453a-8aeb-646a22fd91d9";
       fsType = "ext4";
     };
 
@@ -25,7 +25,7 @@
 
   # NVIDIA STUFF
 
-  services.xserver.videoDrivers = [ "nvidia" "intel" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia.prime = {
     offload.enable = true;
@@ -34,4 +34,5 @@
     # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
     nvidiaBusId = "PCI:1:0:0";
   };
+
 }

@@ -20,15 +20,21 @@
       size = 8.0;
 
       normal = {
-        family = "Fira Code";
+        family = "FiraCode Nerd Font";
+        #family = "JetBrainsMono Nerd Font";
+        #family = "UbuntuMono Nerd Font";
         style = "Regular";
       };
       bold = {
-        family = "Fira Code";
+        family = "FiraCode Nerd Font";
+        #family = "JetBrainsMono Nerd Font";
+        #family = "UbuntuMono Nerd Font";
         style = "Bold";
       };
       italic = {
-        family = "Fira Code";
+        family = "FiraCode Nerd Font";
+        #family = "JetBrainsMono Nerd Font";
+        #family = "UbuntuMono Nerd Font";
         style = "Italic";
       };
 
