@@ -8,25 +8,25 @@ let
   primary = "DisplayPort-0";
   secondary = "HDMI-A-0";
 in
-{
+  {
     imports = [
-        ../laptop
+      ../laptop
     ];
 
     home.packages = with pkgs; [ autorandr ];
 
     programs = {
-        autorandr = import "${programs}/autorandr/desktop.nix";
+      autorandr = import "${programs}/autorandr/desktop.nix";
     };
 
     # Changes from the default configuration (laptop)
 
     xsession.windowManager.i3.config = {
-        keybindings = lib.mkOptionDefault {
-            "Ctrl+${modifier}+Right" =  "move workspace to output ${secondary}";
-            "Ctrl+${modifier}+Left" = "move workspace to output ${primary}";
-        };
+      keybindings = lib.mkOptionDefault {
+        "Ctrl+${modifier}+Right" =  "move workspace to output ${secondary}";
+        "Ctrl+${modifier}+Left" = "move workspace to output ${primary}";
+      };
     };
-    
+
     programs.alacritty.settings.font.size = lib.mkForce 11.0;
-}
+  }

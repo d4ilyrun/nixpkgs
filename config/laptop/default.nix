@@ -1,12 +1,20 @@
 #~/.config/nixpkgs/config/desktop/index.nix
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, gaps ? {}, ... }:
 
 let
   my = import ../.;
   programs = "${my.config.nixpkgs}/programs";
+
+  default_gaps = {
+    inner = 3;
+    outer = 3;
+    smartGaps = true;
+  };
 in
 {
-  xsession.windowManager.i3 = import "${programs}/i3/i3.nix" { inherit pkgs lib my; };
+  xsession.windowManager.i3 = lib.attrsets.recursiveUpdate (import "${programs}/i3/i3.nix" { inherit pkgs lib my; }) {
+    config.gaps = default_gaps;
+  };
 
   imports = [
     "${programs}/battery.nix"
