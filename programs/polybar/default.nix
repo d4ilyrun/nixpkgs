@@ -6,7 +6,7 @@ let
   dir = "${my.config.nixpkgs}/programs/polybar";
 
   # Config HERE
-  network_interface = "wlp0s20f3";
+  network_interface = "wlp35s0";
   # Find theses names with $ls -1 /sys/class/power_supply/
   battery_name = "BAT1";
   battery_adapter = "ACAD";
@@ -76,15 +76,16 @@ in
 
         modules-left = "nixos i3";
         modules-center =  "xwindow";
-        modules-right =  "date powermenu";
+        modules-right =  "wireless-network filesystem date powermenu";
 
         font-0 = "Iosevka:size=13;1";
         font-1 = "Iosevka:size=6;1";
-        font-2 = "Font Awesome 5 Free Solid:style=Solid:size=12";
-        font-3 = "Font Awesome 5 Brands Regular:style=Regular:size=12";
-        font-4 = "Material Icons:style=Solid:size=13";
-        font-5 = "FiraCode Nerd Font:style=Retina,Regular:size=13";
-        font-6 = "Font Awesome 5 Free Regular:style=Solid:size=12";
+        font-2 = "Unifont:style=Regular,Regular:size=13";
+        font-3 = "Font Awesome 5 Free Solid:style=Solid:size=12";
+        font-4 = "Font Awesome 5 Brands Regular:style=Regular:size=12";
+        font-5 = "Material Icons:style=Solid:size=13";
+        font-6 = "FiraCode Nerd Font:style=Retina,Regular:size=13";
+        font-7 = "Font Awesome 5 Free Regular:style=Solid:size=12";
       };
     };
 
@@ -94,7 +95,7 @@ in
 
         pin-workspace = true;
 
-        ws-icon-0 = "0;ﭮ";
+        ws-icon-0 = "0;";
         ws-icon-1 = "1;";
         ws-icon-2 = "2;";
         ws-icon-3 = "3;";
@@ -122,7 +123,8 @@ in
         fomrat-margin = 1;
         format-spacing = 1;
 
-        label-open = "%{T5}%{F${color.red}}%{O-3}";
+        label-open = "%{O-3}";
+        label-open-foreground = color.red;
         label-close = "Close";
         label-close-foreground = color.green;
         label-separator = "|";
@@ -144,7 +146,10 @@ in
         type = "internal/date";
         interval = 1;
 
-        format = "%{F${color.white}} %{F${color.foreground}}<label>";
+        format = "%{T7} %{T-}<label>";
+        format-foreground = color.purple;
+        format-underline = color.purple;
+
         date = "";
         date-alt = "%d %b, %Y ";
         time = "%I:%M";
@@ -158,6 +163,44 @@ in
 
         content = "";
         content-foreground = color.cyan;
+      };
+
+      "module/wireless-network" = {
+        type = "internal/network";
+        interface = network_interface;
+
+        interval = 3.0;
+
+        format-packetloss = "%{T7}<ramp-signal>%{T-}<label-connected>";
+
+        label-connected = "%downspeed:9%";
+        label-connected-foreground = color.green;
+        label-connected-underline = color.green;
+
+        label-connected-alt = "%essid%%downspeed:9%";
+
+        ramp-signal-0 = "";
+        ramp-signal-0-foreground = color.green;
+        ramp-signal-1 = "直";
+        ramp-signal-1-foreground = color.yellow;
+        ramp-signal-2 = "睊";
+        ramp-signal-2-foreground = color.red;
+
+        label-disconnected = " not connected";
+        label-disconnected-foreground = color.red;
+        label-disconnected-underline = color.red;
+      };
+
+      "module/filesystem" = {
+        type = "internal/fs";
+        mount-0 = "/";
+
+        format-mounted = "<label-mounted>";
+        fixed-values = true;
+
+        label-mounted = " %free%";
+        label-mounted-foreground = color.yellow;
+        label-mounted-underline = color.yellow;
       };
     };
   }

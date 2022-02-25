@@ -2,42 +2,32 @@
 
 -- TODO: Find better colors
 local colors = {
-  bg = "#23272e",
+  bg = "#272b3b",
   fg = "#bbc2cf",
   fg_alt = "#5B6268",
-  yellow = "#ECBE7B",
-  cyan = "#46D9FF",
-  green = "#98be65",
+
   orange = "#da8548",
-  magenta = "#c678dd",
-  blue = "#51afef",
-  red = "#ff6c6b",
   violet = "#a9a1e1",
+
+  red = "#f7768e";
+  green = "#9ece6a";
+  yellow = "#e0af68";
+  blue = "#7aa2f7";
+  magenta = "#bb9af7";
+  cyan = "#7dcfff";
+  white = "#a9b1d6";
 }
-
-colors.get_color = function(color)
-  return function()
-    for theme_name, _ in pairs(colors) do
-      if vim.g.colors_name and vim.g.colors_name:find(theme_name, 1, true) then
-        return colors[theme_name][color]
-      end
-    end
-
-    return colors.default[color]
-  end
-end
-
 
 -- CONDITIONS
 
 local condition = {}
 
 condition.buffer_not_empty = function()
-  local buffer_lines = vim.api.nvim_buf_get_lines(0, 0, vim.fn.line("$"), true)
-  if buffer_lines[1] == "" and #buffer_lines == 1 then
-    return false
-  end
-  return true
+    local buffer_lines = vim.api.nvim_buf_get_lines(0, 0, vim.fn.line("$"), true)
+    if buffer_lines[1] == "" and #buffer_lines == 1 then
+        return false
+    end
+    return true
 end
 
 condition.check_git_workspace = function()
@@ -75,7 +65,6 @@ condition.check_active_lsp = function()
 end
 
 
-local color = colors["doom-one"];
 local gl = require("galaxyline")
 local gls = gl.section
 gl.short_line_list = { "NvimTree", "vista", "dbui", "packer" }

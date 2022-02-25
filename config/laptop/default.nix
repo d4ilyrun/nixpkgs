@@ -6,9 +6,9 @@ let
   programs = "${my.config.nixpkgs}/programs";
 
   default_gaps = {
-    inner = 3;
-    outer = 3;
-    smartGaps = true;
+    inner = 5;
+    outer = 5;
+    smartGaps = false;
   };
 in
 {

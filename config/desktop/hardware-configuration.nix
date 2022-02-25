@@ -15,11 +15,18 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/d74bc9e1-49fd-453a-8aeb-646a22fd91d9";
+    { device = "/dev/disk/by-label";
       fsType = "ext4";
     };
 
-  swapDevices = [ ];
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-label/boot";
+      fsType = "vfat";
+    };
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  swapDevices =
+    [ { device = "/dev/disk/by-label/swap"; }
+    ];
+
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

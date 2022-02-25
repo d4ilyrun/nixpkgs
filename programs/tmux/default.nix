@@ -10,5 +10,6 @@
   extraConfig = with my.config.colorscheme; ''
   set -g status-bg magenta
   set -g status-fg black
+  set -g mouse on
   '';
 }
