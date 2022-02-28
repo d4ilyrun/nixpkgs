@@ -8,7 +8,7 @@ if [ -z "$@" ]; then
     echo -en "Shutdown\0icon\x1fsystem-shutdown\n"
 else
     if [ "$1" = "Shutdown" ]; then
-        sudo shutdown now
+        sudo poweroff
     elif [ "$1" = "Logout" ]; then
         i3-msg exit
     elif [ "$1" = "Reboot" ]; then

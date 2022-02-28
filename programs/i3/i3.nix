@@ -6,6 +6,10 @@ let
   browser = "${pkgs.firefox}/bin/firefox";
   term = "${pkgs.alacritty}/bin/alacritty";
 
+  scripts = "${my.config.nixpkgs}/programs/i3/scripts";
+  volume = "bash ${scripts}/volume.sh";
+  light = "bash ${scripts}/light.sh";
+
   ws1 = "1";
   ws2 = "2";
   ws3 = "3";
@@ -35,7 +39,7 @@ in
     
     keybindings = lib.mkOptionDefault {
       "${modifier}+Return" = "exec ${term}";
-      "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal alacritty";
+      "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal ${term}";
       "${modifier}+Shift+d" = "exec rofi -show window";
       "${modifier}+Shift+q" = "kill";
       "${modifier}+e" = "exec EDITOR='/usr/bin/env nvim' alacritty -e ranger"; # file explorer
@@ -72,15 +76,19 @@ in
       "${modifier}+Print" = "exec scrot -ub -e 'mv $f ~/Images/Screenshots/'";
       "${modifier}+Shift+s" = "exec scrot -s -e 'mv $f ~/Images/Screenshots/'";
       
-      # TODO: xbacklight
-      # Brightness
-      "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 5";
-      "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 5";
+      # Light
+      "XF86MonBrightnessUp" = "exec ${light} dec";
+      "XF86MonBrightnessDown" = "exec ${light} inc";
+      "Shift+XF86MonBrightnessUp" = "exec ${light} dec 1";
+      "Shift+XF86MonBrightnessDown" = "exec ${light} inc 1";
 
       # Audio
-      "XF86AudioLowerVolume" = "exec \"amixer -q sset Master 10%-\"";
-      "XF86AudioRaiseVolume" = "exec \"amixer -q sset Master 10%+\"";
-      "XF86AudioMute" = "exec \"amixer -q sset Master toggle\"";
+      "XF86AudioLowerVolume" = "exec ${volume} down";
+      "XF86AudioRaiseVolume" = "exec ${volume} up";
+      "XF86AudioMute" = "exec ${volume} mute";
+      "Shift+XF86AudioLowerVolume" = "exec ${volume} down 1";
+      "Shift+XF86AudioRaiseVolume" = "exec ${volume} up 1";
+      "Shift+XF86AudioMute" = "exec ${volume} mute";
 
       # Applications
       "${modifier}+n" = "exec ${browser}";

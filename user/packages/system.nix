@@ -17,6 +17,7 @@
     tmux
     
     # Applications
+    pulseaudio-ctl light
     dunst libnotify
     scrot
 

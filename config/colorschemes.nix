@@ -103,10 +103,11 @@
     };
   };
 
-  tokyodark = {
+  tokyodark = rec {
     primary = {
       background = "#11121D";
       foreground = "#a9b1d6";
+      accent = normal.magenta;
     };
     normal = {
       black = "#32344a";
@@ -127,6 +128,6 @@
       magenta = "#bb9af7";
       cyan = "#0db9d7";
       white = "#acb0d0";
-  };
+    };
   };
 }
