@@ -8,7 +8,7 @@ rec {
     nixpkgs = "${config.home}/.config/nixpkgs";
 
     colorscheme_name = "tokyonight";
-    colorscheme = colorschemes.tokyonight;
+    colorscheme = colorschemes.tokyodark;
   };
 
   wallpapers = import "${config.nixpkgs}/config/wallpapers.nix";

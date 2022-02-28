@@ -1,23 +1,47 @@
-{ my, ... }:
+{ pkgs, lib, ... }:
 
 let
+  my = import ../../config/.;
   dir = "${my.config.nixpkgs}/programs/fish";
 in
+
   {
-    enable = true;
+    imports = [
+      ./bat.nix
+      ./fzf.nix
+    ];
 
-    shellInit = " \
-    source ${dir}/${my.config.colorscheme_name}.fish
-    set fish_greeting
-    set EDITOR /usr/bin/env nvim
-    ";
+    home.packages = with pkgs; [
+      starship
+      exa bat
+      neofetch
+    ];
 
-    shellAliases = {
-      # tree and ls;
+    programs.starship = import "${dir}/../starship" { inherit my pkgs lib; };
+
+    programs.fish = {
+      enable = true;
+
+      # FIXME: Deprecated buildFishPlugin, so install those packages through fisher for the time being
+      plugins = with pkgs.fishPlugins; [
+        #done
+        #forgit
+      ];
+
+      shellInit = " \
+      source ${dir}/themes/${my.config.colorscheme_name}.fish
+      source ${dir}/functions.fish
+      set fish_greeting
+      set EDITOR /usr/bin/env nvim
+      ";
+
+      shellAliases = {
+      # progam overrides;
       ls="exa";
       ll="exa -l --icons";
       la="exa -a --icons";
       lla="exa -al --icons";
+      cat="bat";
 
       # Colorize grep output (good for log files);
       grep="grep --color=auto";
@@ -50,4 +74,5 @@ in
       hms = ''home-manager switch --flake ${my.config.nixpkgs}#$argv[1] --impure'';
       nrs = "sudo nixos-rebuild switch --flake ${my.config.nixpkgs}#$argv[1]";
     };
+  };
   }
