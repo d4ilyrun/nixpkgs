@@ -35,8 +35,10 @@ in
     
     keybindings = lib.mkOptionDefault {
       "${modifier}+Return" = "exec ${term}";
-      "${modifier}+d" = "exec rofi -show combi -show-icons";
+      "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal alacritty";
+      "${modifier}+Shift+d" = "exec rofi -show window";
       "${modifier}+Shift+q" = "kill";
+      "${modifier}+Shift+e" = "exec rofi -modi 'Powermenu:~/.config/nixpkgs/programs/polybar/scripts/powermenu.sh' -show Powermenu";
 
       # Custom workspaces names
       "${modifier}+1" = "workspace ${ws1}";

@@ -76,7 +76,7 @@ in
 
         modules-left = "nixos i3";
         modules-center =  "xwindow";
-        modules-right =  "wireless-network filesystem date powermenu";
+        modules-right =  "wireless-network filesystem date";
 
         font-0 = "Iosevka:size=13;1";
         font-1 = "Iosevka:size=6;1";
@@ -117,24 +117,10 @@ in
       };
 
       "module/powermenu" = {
-        type = "custom/menu";
-        expand-right = true;
-
-        fomrat-margin = 1;
+        type = "custom/text";
+        content = "%{O-3}";
         format-spacing = 1;
-
-        label-open = "%{O-3}";
-        label-open-foreground = color.red;
-        label-close = "Close";
-        label-close-foreground = color.green;
-        label-separator = "|";
-
-        menu-0-0 = "Reboot";
-        menu-0-0-exec = "systemctl reboot";
-        menu-0-0-foreground = color.yellow;
-        menu-0-1 = "Power off";
-        menu-0-1-exec = "systemctl poweroff";
-        menu-0-1-foreground = color.red;
+        click-left = "rofi -modi 'Powermenu:~/.config/nixpkgs/programs/polybar/scripts/powermenu.sh' -show Powermenu";
       };
       
       "module/xwindow" = {

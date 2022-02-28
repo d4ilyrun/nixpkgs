@@ -1,19 +1,31 @@
-{ my, ... }:
+{ pkgs, ... }:
 
 let
-  config = "carbonized";
-  path = "${my.config.nixpkgs}/programs/rofi";
+  my = import ../../config;
+  theme = "dmenu";
+  defaultTerminal = "${pkgs.alacritty}/bin/alacritty";
 in
   {
-    enable = true;
+    xdg.configFile."rofi/${theme}.rasi".source = "${my.config.nixpkgs}/programs/rofi/${theme}.rasi";
+    xdg.configFile."rofi/powermenu.rasi".source = "${my.config.nixpkgs}/programs/rofi/powermenu.rasi";
 
-    configPath = "${path}/${config}.rasi";
+    programs.rofi = {
+      inherit theme;
+      enable = true;
+      terminal = defaultTerminal;
 
-    extraConfig = with my.config.colorscheme; {
-      bg = primary.background;
-      fg = primary.background;
-      button = "#9e9e95";
-      background-color = primary.background;
-      text-color = primary.foreground;
+      extraConfig = {
+        modi = "drun,run,window";
+        font = "JetBrainsMono Nerd Font Medium 13";
+
+        display-window = "";
+        display-run = "";
+        display-drun = "";
+        drun-display-format = "{name}";
+        
+        show-icons = true;
+        sidebar-mode = false;
+      };
+
     };
-}
+  }

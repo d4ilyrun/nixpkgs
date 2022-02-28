@@ -1,13 +1,12 @@
-configuration {
-    modi: "window,run,drun";
-    /*theme: "clean";*/
-    show-icons: true;
-    font: "Hack Nerd Font 10";
-}
-
-@import "colors.rasi"
+@import "/dev/null"
 
 * {
+    selected-foreground:  rgba(0, 0, 0, 100%);
+    background:           #1f243aa0; 
+    background-solid:     #1f243aff; 
+    selected-background:  #fe6c5a; /*#f9b578; *rgba(0, 0, 0, 40%);*/
+    red:                  rgba ( 220, 50, 47, 100 % );
+    blue:                 rgba ( 38, 139, 210, 100 % );
 }
 
 #window {
@@ -84,3 +83,5 @@ element-text, element-icon {
     horizontal-align: 0.5;
     vertical-align: 0.5;
 }
+
+/* vim: ft=css
