@@ -32,7 +32,7 @@ in
       source ${dir}/themes/${my.config.colorscheme_name}.fish
       source ${dir}/functions.fish
       set fish_greeting
-      set EDITOR /usr/bin/env nvim
+      set fzf_preview_dir_cmd exa -al --color=always --icons
       ";
 
       shellAliases = {
@@ -41,7 +41,7 @@ in
       ll="exa -l --icons";
       la="exa -a --icons";
       lla="exa -al --icons";
-      cat="bat";
+      cat="bat --theme ansi";
 
       # Colorize grep output (good for log files);
       grep="grep --color=auto";
