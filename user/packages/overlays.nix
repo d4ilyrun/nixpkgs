@@ -1,3 +1,6 @@
+let
+  discord_url = https://discord.com/api/download?platform=linux&format=tar.gz;
+in
 [
     (import (builtins.fetchTarball {
       url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;

@@ -1,7 +1,6 @@
 { config, pkgs, my, ... }:
 
 let
-  discord_url = https://discord.com/api/download?platform=linux&format=tar.gz;
   my = import ../config/.;
 in
 {
@@ -12,21 +11,14 @@ in
     };
   };
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-      inherit pkgs;
+  nixpkgs = {
+    overlays = import ./packages/overlays.nix;
+    config.packageOverrides = pkgs: {
+      nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+        inherit pkgs;
+      };
     };
   };
-
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    }))
-
-    (self: super: { discord = super.discord.overrideAttrs (_: { 
-      src = builtins.fetchTarball discord_url; 
-    });})
-  ];
 
   imports = [
     # Packages
@@ -50,6 +42,10 @@ in
     defaultApplications = {
       "inode/directory" = [ "ranger.desktop" ]; # Default file manager
     };
+  };
+
+  programs = {
+    git = import "${my.config.nixpkgs}/programs/git" { inherit my pkgs; };
   };
 
   systemd.user.startServices = true;

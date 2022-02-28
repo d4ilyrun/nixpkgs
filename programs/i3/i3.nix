@@ -38,28 +38,30 @@ in
       "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal alacritty";
       "${modifier}+Shift+d" = "exec rofi -show window";
       "${modifier}+Shift+q" = "kill";
+      "${modifier}+e" = "exec EDITOR='/usr/bin/env nvim' alacritty -e ranger"; # file explorer
       "${modifier}+Shift+e" = "exec rofi -modi 'Powermenu:~/.config/nixpkgs/programs/polybar/scripts/powermenu.sh' -show Powermenu";
+
 
       # Custom workspaces names
       "${modifier}+1" = "workspace ${ws1}";
-      "${modifier}+Shift+1" = "move container to workspace ${ws1}";
       "${modifier}+2" = "workspace ${ws2}";
-      "${modifier}+Shift+2" = "move container to workspace ${ws2}";
       "${modifier}+3" = "workspace ${ws3}";
-      "${modifier}+Shift+3" = "move container to workspace ${ws3}";
       "${modifier}+4" = "workspace ${ws4}";
-      "${modifier}+Shift+4" = "move container to workspace ${ws4}";
       "${modifier}+5" = "workspace ${ws5}";
-      "${modifier}+Shift+5" = "move container to workspace ${ws5}";
       "${modifier}+6" = "workspace ${ws6}";
-      "${modifier}+Shift+6" = "move container to workspace ${ws6}";
       "${modifier}+7" = "workspace ${ws7}";
-      "${modifier}+Shift+7" = "move container to workspace ${ws7}";
       "${modifier}+8" = "workspace ${ws8}";
-      "${modifier}+Shift+8" = "move container to workspace ${ws8}";
       "${modifier}+9" = "workspace ${ws9}";
-      "${modifier}+Shift+9" = "move container to workspace ${ws9}";
       "${modifier}+0" = "workspace ${ws0}";
+      "${modifier}+Shift+1" = "move container to workspace ${ws1}";
+      "${modifier}+Shift+2" = "move container to workspace ${ws2}";
+      "${modifier}+Shift+3" = "move container to workspace ${ws3}";
+      "${modifier}+Shift+4" = "move container to workspace ${ws4}";
+      "${modifier}+Shift+5" = "move container to workspace ${ws5}";
+      "${modifier}+Shift+6" = "move container to workspace ${ws6}";
+      "${modifier}+Shift+7" = "move container to workspace ${ws7}";
+      "${modifier}+Shift+8" = "move container to workspace ${ws8}";
+      "${modifier}+Shift+9" = "move container to workspace ${ws9}";
       "${modifier}+Shift+0" = "move container to workspace ${ws0}";
 
       # Lock
@@ -68,7 +70,7 @@ in
       # Screenshot
       "Print" = "exec scrot -e 'mv $f ~/Images/Screenshots/'";
       "${modifier}+Print" = "exec scrot -ub -e 'mv $f ~/Images/Screenshots/'";
-      "${modifier}+Shift+s" = "exec scrot -e 'mv $f ~/Images/Screenshots/'";
+      "${modifier}+Shift+s" = "exec scrot -s -e 'mv $f ~/Images/Screenshots/'";
       
       # TODO: xbacklight
       # Brightness
@@ -85,19 +87,27 @@ in
     };
 
     modes.resize = {
-      Left = "resize shrink width 3 px or 3 ppt";
-      Down = "resize grow height 3 px or 3 ppt";
-      Up = "resize shrink height 3 px or 3 ppt";
-      Right = "resize grow width 3 px or 3 ppt";
+      Left = "resize shrink width 5 px or 5 ppt";
+      Down = "resize grow height 5 px or 5 ppt";
+      Up = "resize shrink height 5 px or 5 ppt";
+      Right = "resize grow width 5 px or 5 ppt";
+
+      ShiftUp = "resize shrink height 2 px or 2 ppt";
+      ShiftDown = "resize grow height 2 px or 2 ppt";
+      ShiftLeft = "resize shrink width 2 px or 2 ppt";
+      ShiftRight = "resize grow width 2 px or 2 ppt";
 
       Escape = "mode \"default\"";
     };
 
-    bars = [
-      # { statusCommand = "${pkgs.i3blocks}/bin/i3blocks -c ~/.config/nixpkgs/programs/i3blocks/config"; }
-    ];
-
     window.border = 3;
+
+    assigns = {
+      "${ws0}" = [ 
+        { class = "Spotify"; }
+        { class = "discord"; }
+      ];
+    };
 
     colors = with my.config.colorscheme; {
       background = primary.background;
@@ -126,5 +136,7 @@ in
       { command = "systemctl --user restart polybar"; always = true; }
       { command = "${pkgs.autorandr}/bin/autorandr -c"; always = false; }
     ];
+
+    bars = [];
   };
 }

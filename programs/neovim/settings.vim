@@ -2,7 +2,7 @@
 " => Settings
 """""""""""""""""""""""""""""""""""""""
 let mapleader = ","			    " Leader key
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 set number relativenumber		" Line numbering
 set nohlsearch                  " No highlight
 set ignorecase                  " Case Insensitive search
@@ -15,7 +15,7 @@ set encoding=UTF-8
 " => File explorer   
 """""""""""""""""""""""""""""""""""""""
 :nnoremap <C-e> :RnvimrToggle<CR>
-:nnoremap <C-p> :FZF<CR>
+:nnoremap <C-p> :Files<CR>
 
 """""""""""""""""""""""""""""""""""""""
 " => Theme

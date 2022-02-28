@@ -7,21 +7,17 @@ let
   vim_plugins = "${my.config.nixpkgs}/programs/neovim/plugins";
   vim_lua = "${my.config.nixpkgs}/programs/neovim/lua";
   vim_themes = "${my.config.nixpkgs}/programs/neovim/themes";
-
-  tokyo-night = pkgs.fetchFromGitHub {
-    owner = "folke";
-    repo = "tokyonight.nvim";
-    rev = "2981e4bd0919305675d8d665f9a20281bb33ed06";
-    sha256 = "15kv5g1srqsayryf3x469sl2bgaq69ni31imp7yi7dfvmzlxf6q1";
-  };
-
 in
     {
     # Packages needed for neovim to work
     home.packages = with pkgs; [
         rnix-lsp
-        python39Packages.pynvim
+        python39Packages.pynvim # TODO: lern how to add pytohn packages on a user level
     ];
+
+    home.sessionVariables = rec {
+        EDITOR = "${pkgs.neovim}/bin/neovim";
+    };
 
     programs.neovim = {
         enable = true;
@@ -29,13 +25,13 @@ in
         viAlias = true;
 
         extraConfig = ''
-            source ${vim_folder}/settings.vim
-            lua dofile("${vim_lua}/packer.lua")
-            source ${vim_themes}/tokyonight.vim
-            " lua dofile("${vim_lua}/feline.lua")
-            lua dofile("${vim_lua}/galaxyline.lua")
-            lua dofile("${vim_lua}/lsp.lua")
-            source ${vim_plugins}/lsp.vim
+        source ${vim_folder}/settings.vim
+        lua dofile("${vim_lua}/packer.lua")
+        source ${vim_themes}/tokyonight.vim
+        " lua dofile("${vim_lua}/feline.lua")
+        lua dofile("${vim_lua}/galaxyline.lua")
+        lua dofile("${vim_lua}/lsp.lua")
+        source ${vim_plugins}/lsp.vim
         '';
 
         plugins = with pkgs.vimPlugins; [ 

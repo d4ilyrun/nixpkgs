@@ -19,16 +19,15 @@ in
   imports = [
     "${programs}/battery.nix"
     "${programs}/neovim"
+    "${programs}/fish"
+    "${programs}/rofi"
   ];
 
+  # Standalone programs (don't need to download other configurations or change system-wide configurations)
   programs = {
     alacritty  = import "${programs}/alacritty/default-settings.nix" { inherit my pkgs; };
-    fish = import "${programs}/fish" {inherit my; };
-    starship = import "${programs}/starship" { inherit lib; };
-    rofi = import "${programs}/rofi" { inherit my pkgs; };
-    git = import "${programs}/git" { inherit my pkgs; };
-    spicetify = import "${programs}/spicetify";
     firefox = import "${programs}/firefox" { inherit my pkgs lib; };
+    spicetify = import "${programs}/spicetify";
     tmux = import "${programs}/tmux" { inherit pkgs my; };
   };
 

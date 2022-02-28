@@ -10,17 +10,13 @@
   home.packages = with pkgs; [
     # CLI/terminal
     alacritty fish
-    wget curl
+    curl
     killall
-    starship
-    htop neofetch
+    htop
     fzf tree
-    file
-    exa
     tmux
     
     # Applications
-    feh
     dunst libnotify
     scrot
 
