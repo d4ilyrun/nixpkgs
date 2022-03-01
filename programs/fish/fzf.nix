@@ -1,9 +1,12 @@
+let
+  my = import ../../config;
+in
 {
   programs.fzf = {
     enable = true;
 
     defaultCommand = "";
-    defaultOptions = [
+    defaultOptions = with my.config.colorscheme.primary; [
       "--height 40%"
       "--layout=reverse --border"
     ];

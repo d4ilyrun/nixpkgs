@@ -15,23 +15,19 @@ in
         python39Packages.pynvim # TODO: lern how to add pytohn packages on a user level
     ];
 
-    home.sessionVariables = rec {
-        EDITOR = "${pkgs.neovim}/bin/neovim";
-    };
-
     programs.neovim = {
         enable = true;
         vimAlias = true;
         viAlias = true;
 
         extraConfig = ''
+        lua path = "${vim_lua}"
+        let g:vim_plugins_path="${vim_plugins}"
+
         source ${vim_folder}/settings.vim
-        lua dofile("${vim_lua}/packer.lua")
         source ${vim_themes}/tokyonight.vim
-        " lua dofile("${vim_lua}/feline.lua")
-        lua dofile("${vim_lua}/galaxyline.lua")
-        lua dofile("${vim_lua}/lsp.lua")
-        source ${vim_plugins}/lsp.vim
+        source ${vim_plugins}/plugins.vim
+        lua dofile("${vim_lua}/plugins.lua")
         '';
 
         plugins = with pkgs.vimPlugins; [ 

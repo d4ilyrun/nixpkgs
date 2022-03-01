@@ -7,9 +7,5 @@
   clock24 = true;
   prefix = "C-x";
 
-  extraConfig = with my.config.colorscheme; ''
-  set -g status-bg magenta
-  set -g status-fg black
-  set -g mouse on
-  '';
+  extraConfig = builtins.readFile "${my.config.nixpkgs}/programs/tmux/tokyodark.conf";
 }

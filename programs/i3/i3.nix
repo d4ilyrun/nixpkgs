@@ -42,9 +42,11 @@ in
       "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal ${term}";
       "${modifier}+Shift+d" = "exec rofi -show window";
       "${modifier}+Shift+q" = "kill";
+
+      # Rofi menu selection
       "${modifier}+e" = "exec EDITOR='/usr/bin/env nvim' alacritty -e ranger"; # file explorer
       "${modifier}+Shift+e" = "exec rofi -modi 'Powermenu:~/.config/nixpkgs/programs/polybar/scripts/powermenu.sh' -show Powermenu";
-
+      "${modifier}+comma" = "exec rofi -show-emoji";
 
       # Custom workspaces names
       "${modifier}+1" = "workspace ${ws1}";

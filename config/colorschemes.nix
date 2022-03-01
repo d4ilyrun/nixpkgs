@@ -73,6 +73,7 @@
     primary = {
       background = "#282a36";
       foreground =  "#f8f8f2";
+      accent = "#ff5555";
     };
 
     selection = {

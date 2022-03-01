@@ -2,8 +2,12 @@
 " lua dofile("/home/leo/.config/nixpkgs/programs/neovim/lua/lsp.lua")
 
 " syntax higlighting
+" assembly
 au BufNew,BufRead *.S set ft=nasm
 au BufNew,BufRead *.asm set ft=nasm
+" assembly
+au BufNew,BufRead *.tig set ft=tiger
+au BufNew,BufRead *.tih set ft=tiger
 
 " LSP config (the mappings used in the default file don't quite work right)
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>

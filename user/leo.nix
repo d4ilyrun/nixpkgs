@@ -8,6 +8,7 @@ in
     homeDirectory = my.config.home;
     sessionVariables = rec {
       PATH = "${my.config.home}/.npm-packages/bin/:$PATH";
+      EDITOR = "nvim";
     };
   };
 
