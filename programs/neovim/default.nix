@@ -56,7 +56,7 @@ in
 
             # Eyecandy
             nvim-treesitter
-            vim-css-color    # Color previewer
+            (plugin "norcalli/nvim-colorizer.lua") # color-previewer
             indentLine
 
             # CMP

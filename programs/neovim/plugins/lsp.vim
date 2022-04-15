@@ -17,7 +17,7 @@ au BufNew,BufRead *.asm set ft=nasm
 " nnoremap <silent> <C-Down> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 " Use tabs to complete
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 set signcolumn=yes

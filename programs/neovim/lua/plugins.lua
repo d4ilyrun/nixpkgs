@@ -7,6 +7,7 @@ local plugins = {
     'lsp', 'lspsaga',
     'cmp',
     'which-key',
+    'treesitter',
 }
 
 for _,plugin in ipairs(plugins) do
