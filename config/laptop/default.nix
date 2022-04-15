@@ -37,6 +37,7 @@ in
 
     batteryNotifier = {
       enable = true;
+      device = "BAT-1";
     };
   };
 }

@@ -143,10 +143,9 @@ in
       { command = "${pkgs.feh}/bin/feh --bg-scale ${wallpaper}"; always = true; }
       { command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}"; always = true; }
       { command = "${pkgs.i3-gaps}/bin/i3-msg workspace ${ws1}"; always = false; }
-      { command = "systemctl --user restart polybar"; always = true; }
+      { command = "killall i3bar && systemctl --user restart polybar"; always = true; }
       { command = "${pkgs.autorandr}/bin/autorandr -c"; always = false; }
+      { command = "bash ${scripts}/capslock_remap.sh"; always = true; }
     ];
-
-    bars = [];
   };
 }

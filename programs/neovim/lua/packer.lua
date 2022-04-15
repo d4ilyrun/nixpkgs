@@ -3,11 +3,7 @@ vim.api.nvim_command('packadd packer.nvim')
 return require('packer').startup(function()
     -- Themes
     use 'folke/tokyonight.nvim'
-
-    -- LSP
-    use 'neovim/nvim-lspconfig'
-    use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-    use 'hrsh7th/cmp-nvim-lsp'
+    use 'justinmk/vim-syntax-extra'
 
     -- Snippets
     use 'L3MON4D3/LuaSnip' -- Snippets plugin

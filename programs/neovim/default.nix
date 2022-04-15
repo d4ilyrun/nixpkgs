@@ -7,6 +7,20 @@ let
   vim_plugins = "${my.config.nixpkgs}/programs/neovim/plugins";
   vim_lua = "${my.config.nixpkgs}/programs/neovim/lua";
   vim_themes = "${my.config.nixpkgs}/programs/neovim/themes";
+
+  # installs a vim plugin from git with a given tag / branch
+  pluginGit = ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "${lib.strings.sanitizeDerivationName repo}";
+    version = ref;
+    src = builtins.fetchGit {
+      url = "https://github.com/${repo}.git";
+      ref = ref;
+    };
+  };
+
+    # always installs latest version
+  plugin = pluginGit "HEAD";
+
 in
     {
     # Packages needed for neovim to work
@@ -34,24 +48,27 @@ in
             # Packages
             packer-nvim
 
-            # StatusBar
-            #lualine-nvim
-
             # Navigation
             nvim-web-devicons
             fzf-vim
             rnvimr
 
-            # LSP
-            nvim-treesitter
-            vim-polyglot
-            nvim-cmp
-            cmp-buffer
-            cmp-path
-
             # Eyecandy
             vim-css-color    # Color previewer
             indentLine
+
+            # LSP
+            nvim-treesitter
+            vim-polyglot
+            (plugin "neovim/nvim-lspconfig")
+            (plugin "hrsh7th/nvim-cmp")
+            (plugin "hrsh7th/cmp-nvim-lsp")
+            (plugin "hrsh7th/cmp-cmdline")
+            (plugin "hrsh7th/nvim-compe")
+            (plugin "hrsh7th/cmp-buffer")
+            (plugin "hrsh7th/cmp-path")
+            (plugin "hrsh7th/cmp-emoji")
+            (plugin "ojroques/nvim-lspfuzzy")
 
         ] ++ ( with pkgs.nur.repos.m15a.vimExtraPlugins; [
             tokyodark-nvim # FIXME: https://github.com/tiagovla/tokyodark.nvim/issues/14#issue-1144674199

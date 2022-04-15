@@ -15,6 +15,7 @@
     htop
     fzf tree
     tmux
+    xorg.xmodmap
     
     # Applications
     pulseaudio-ctl light
