@@ -21,6 +21,7 @@
     pulseaudio-ctl light
     dunst libnotify
     scrot
+    xsel
 
     # i3
     dmenu rofi

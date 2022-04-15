@@ -52,14 +52,14 @@ in
             nvim-web-devicons
             fzf-vim
             rnvimr
+            (plugin "folke/which-key.nvim")
 
             # Eyecandy
+            nvim-treesitter
             vim-css-color    # Color previewer
             indentLine
 
-            # LSP
-            nvim-treesitter
-            vim-polyglot
+            # CMP
             (plugin "neovim/nvim-lspconfig")
             (plugin "hrsh7th/nvim-cmp")
             (plugin "hrsh7th/cmp-nvim-lsp")
@@ -69,6 +69,11 @@ in
             (plugin "hrsh7th/cmp-path")
             (plugin "hrsh7th/cmp-emoji")
             (plugin "ojroques/nvim-lspfuzzy")
+
+            # Snippets
+            (plugin "L3MON4D3/LuaSnip")
+            (plugin "saadparwaiz1/cmp_luasnip")
+            (plugin "tami5/lspsaga.nvim")
 
         ] ++ ( with pkgs.nur.repos.m15a.vimExtraPlugins; [
             tokyodark-nvim # FIXME: https://github.com/tiagovla/tokyodark.nvim/issues/14#issue-1144674199

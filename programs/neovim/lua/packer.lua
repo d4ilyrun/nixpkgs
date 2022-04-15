@@ -6,15 +6,7 @@ return require('packer').startup(function()
     use 'justinmk/vim-syntax-extra'
 
     -- Snippets
-    use 'L3MON4D3/LuaSnip' -- Snippets plugin
     use 'onsails/lspkind-nvim'
-    use { -- go to refrencese through fzf
-        'ojroques/nvim-lspfuzzy',
-        requires = {
-            {'junegunn/fzf'},
-            {'junegunn/fzf.vim'},  -- to enable preview (optional)
-        },
-    }
 
     -- Git
     use {
