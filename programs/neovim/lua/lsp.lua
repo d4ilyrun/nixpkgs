@@ -19,10 +19,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- luasnip setup
 local luasnip = require 'luasnip'
 
--- nvim-cmp setup
 require('lspkind').init({
-    mode = 'text_symbol',
-    preset = 'codicons',
+    mode = 'symbol_text',
+    preset = 'default',
 
     symbol_map = {
       -- Classic

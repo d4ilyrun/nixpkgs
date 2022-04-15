@@ -39,8 +39,8 @@ in
         let g:vim_plugins_path="${vim_plugins}"
 
         source ${vim_folder}/settings.vim
-        source ${vim_themes}/tokyonight.vim
         source ${vim_plugins}/plugins.vim
+        source ${vim_themes}/tokyonight.vim
         lua dofile("${vim_lua}/plugins.lua")
         '';
 
@@ -74,6 +74,8 @@ in
             (plugin "L3MON4D3/LuaSnip")
             (plugin "saadparwaiz1/cmp_luasnip")
             (plugin "tami5/lspsaga.nvim")
+            (plugin "mortepau/codicons.nvim")
+            (plugin "onsails/lspkind-nvim")
 
         ] ++ ( with pkgs.nur.repos.m15a.vimExtraPlugins; [
             tokyodark-nvim # FIXME: https://github.com/tiagovla/tokyodark.nvim/issues/14#issue-1144674199

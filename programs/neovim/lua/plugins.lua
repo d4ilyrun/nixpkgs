@@ -4,7 +4,7 @@ end
 
 local plugins = {
     'galaxyline',
-    'lsp',
+    'lsp', 'lspsaga',
     'cmp',
     'which-key',
 }

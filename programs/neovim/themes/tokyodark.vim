@@ -7,9 +7,4 @@ syntax on
 colorscheme tokyodark
 
 lua << EOF
-require('lualine').setup {
-    options = {
-        theme = 'tokyodark'
-        }
-    }
 EOF

@@ -1,6 +1,8 @@
 local cmp = require 'cmp'
+local lspkind = require('lspkind')
+
 cmp.setup {
-    
+
     snippet = {
         expand = function(args)
             require('luasnip').lsp_expand(args.body)
@@ -16,24 +18,28 @@ cmp.setup {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
         },
-        ['<Tab>'] = function(fallback)
+
+        ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
-                vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
+                luasnip.expand_or_jump()
+            elseif has_words_before() then
+                cmp.complete()
             else
                 fallback()
             end
-        end,
-        ['<S-Tab>'] = function(fallback)
+        end, { "i", "s" }),
+
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
-                vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
+                luasnip.jump(-1)
             else
                 fallback()
             end
-        end,
+        end, { "i", "s" })
     },
 
     sources = {
@@ -45,13 +51,46 @@ cmp.setup {
     },
 
     formatting = {
-        with_text = true,
-        menu = {
-            buffer = "[buf]",
-            nvim_lsp = "[LSP]",
-            path = "[path]",
-            luasnip = "[snip]",
-        },
+        format = function(entry, vim_item)
+            local icons = {
+                Text = "",
+                Method = "",
+                Function = "",
+                Constructor = "",
+                Field = "ﰠ",
+                Variable = "",
+                Class = "ﴯ",
+                Interface = "",
+                Module = "",
+                Property = "ﰠ",
+                Unit = "塞",
+                Value = "",
+                Enum = "",
+                Keyword = "",
+                Snippet = "",
+                Color = "",
+                File = "",
+                Reference = "",
+                Folder = "",
+                EnumMember = "",
+                Constant = "",
+                Struct = "פּ",
+                Event = "",
+                Operator = "",
+                TypeParameter = "",
+            }
+
+            vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
+
+            vim_item.menu = ({
+                buffer = "[buf]",
+                nvim_lsp = "[LSP]",
+                path = "[path]",
+                luasnip = "[snip]",
+            })[entry.source.name]
+
+            return vim_item
+        end,
     },
 
     experimental = {
@@ -63,17 +102,17 @@ cmp.setup {
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
-  sources = {
-    { name = 'buffer' }
-  }
+    sources = {
+        { name = 'buffer' }
+    }
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-  sources = {
-    { name = 'path' },
-    { name = 'cmdline' }
-  }
+    sources = {
+        { name = 'path' },
+        { name = 'cmdline' }
+    }
 })
 
-
+require('lspfuzzy').setup {} -- go to references through fzf
