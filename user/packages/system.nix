@@ -20,6 +20,7 @@
     pulseaudio-ctl light
     dunst libnotify
     scrot
+    xsel xclip # clipboard
 
     # i3
     dmenu rofi

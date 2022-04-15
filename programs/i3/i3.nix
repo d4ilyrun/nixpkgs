@@ -9,6 +9,7 @@ let
   scripts = "${my.config.nixpkgs}/programs/i3/scripts";
   volume = "bash ${scripts}/volume.sh";
   light = "bash ${scripts}/light.sh";
+  screenshot = "bash ${scripts}/screenshot.sh";
 
   ws1 = "1";
   ws2 = "2";
@@ -74,9 +75,9 @@ in
       "${modifier}+Shift+x" = "exec betterlockscreen -l dimblur";
       
       # Screenshot
-      "Print" = "exec scrot -e 'mv $f ~/Images/Screenshots/'";
-      "${modifier}+Print" = "exec scrot -ub -e 'mv $f ~/Images/Screenshots/'";
-      "${modifier}+Shift+s" = "exec scrot -s -e 'mv $f ~/Images/Screenshots/'";
+      "Print" = "exec ${screenshot}";
+      "${modifier}+Print" = "exec ${screenshot} window";
+      "${modifier}+Shift+s" = "exec ${screenshot} area";
       
       # Light
       "XF86MonBrightnessUp" = "exec ${light} dec";

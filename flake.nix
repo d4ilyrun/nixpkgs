@@ -70,6 +70,8 @@
           ];
         };
       };
+
+      leo = self.homeConfigurations.desktop;
     };
   };
 }
