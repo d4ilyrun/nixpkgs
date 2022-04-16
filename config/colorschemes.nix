@@ -134,42 +134,66 @@
 
   onedark = rec {
     primary = {
-      background = "#1e2127";
-      foreground =  "#abb2bf";
+      background = normal.black;
+      foreground =  normal.white;
       accent = normal.red;
     };
 
     normal =  {
-      black = "#1e2127";
+      black = "#282C34";
       red = "#e06c75";
       green = "#98c379";
-      yellow = "#d19a66";
+      yellow = "#E5C07B";
       blue = "#61afef";
       magenta = "#c678dd";
       cyan = "#56b6c2";
-      white = "#828791";
+      white = "#ABB2BF";
     };
 
     bright = {
-      black = "#5c6370";
+      black = "#282C34";
       red = "#e06c75";
       green = "#98c379";
-      yellow = "#d19a66";
+      yellow = "#E5C07B";
       blue = "#61afef";
       magenta = "#c678dd";
       cyan = "#56b6c2";
-      white = "#e6efff";
+      white = "#ABB2BF";
+    };
+  };
+
+  catpuccin = rec {
+    primary = {
+      background = "#1E1D2F";
+      foreground = "#D9E0EE";
+      accent = primary.foreground;
     };
 
-    dim = {
-      black = "#1e2127";
-      red = "#e06c75";
-      green = "#98c379";
-      yellow = "#d19a66";
-      blue = "#61afef";
-      magenta = "#c678dd";
-      cyan = "#56b6c2";
-      white = "#828791";
+    cursor = {
+      text = "#1E1D2F";
+      cursor = "#F5E0DC";
+    };
+
+    normal = {
+      black = "#6E6C7E";
+      red = "#F28FAD";
+      green = "#ABE9B3";
+      yellow = "#FAE3B0";
+      blue = "#96CDFB";
+      magenta = "#F5C2E7";
+      cyan = "#89DCEB";
+      white = "#D9E0EE";
+    };
+
+    bright = {
+      black = "#988BA2";
+      red = "#F28FAD";
+      green = "#ABE9B3";
+      yellow = "#FAE3B0";
+      blue = "#96CDFB";
+      magenta = "#F5C2E7";
+      cyan = "#89DCEB";
+      white = "#D9E0EE";
     };
   };
 }

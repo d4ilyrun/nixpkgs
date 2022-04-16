@@ -71,7 +71,7 @@ in
     };
 
     functions = {
-      hms = ''home-manager switch --flake ${my.config.nixpkgs}#$argv[1] --impure'';
+      hms = ''home-manager switch --flake ${my.config.nixpkgs}#$argv[1] --impure --cores 12'';
       nrs = "sudo nixos-rebuild switch --flake ${my.config.nixpkgs}#$argv[1]";
     };
   };

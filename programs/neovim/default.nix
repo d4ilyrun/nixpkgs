@@ -21,6 +21,15 @@ let
     # always installs latest version
   plugin = pluginGit "HEAD";
 
+  pluginWithName = name: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = name;
+    version = "HEAD";
+    src = builtins.fetchGit {
+      url = "https://github.com/${repo}.git";
+      ref = "HEAD";
+    };
+  };
+
 in
     {
     # Packages needed for neovim to work
@@ -40,7 +49,7 @@ in
 
         source ${vim_folder}/settings.vim
         source ${vim_plugins}/plugins.vim
-        source ${vim_themes}/tokyonight.vim
+        source ${vim_themes}/${my.config.colorscheme_name}.vim
         lua dofile("${vim_lua}/plugins.lua")
         '';
 
@@ -76,6 +85,9 @@ in
             (plugin "tami5/lspsaga.nvim")
             (plugin "mortepau/codicons.nvim")
             (plugin "onsails/lspkind-nvim")
+
+            # themes
+            (pluginWithName "catppuccin" "catppuccin/nvim")
 
         ] ++ ( with pkgs.nur.repos.m15a.vimExtraPlugins; [
             tokyodark-nvim # FIXME: https://github.com/tiagovla/tokyodark.nvim/issues/14#issue-1144674199

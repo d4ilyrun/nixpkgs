@@ -40,7 +40,7 @@ in
     keybindings = lib.mkOptionDefault {
       "${modifier}+Return" = "exec ${term}";
       "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal ${term}";
-      "${modifier}+Shift+d" = "exec rofi -show window";
+      "${modifier}+Shift+d" = "exec rofi -sho-icons -show window";
       "${modifier}+Shift+q" = "kill";
 
       # Rofi menu selection
@@ -126,8 +126,8 @@ in
         background = primary.background;
         text = primary.foreground;
         border = primary.background;
-        childBorder = normal.magenta;
-        indicator = normal.magenta;
+        childBorder = primary.accent;
+        indicator = primary.accent;
       };
 
       unfocused = {
@@ -135,7 +135,7 @@ in
         text = primary.foreground;
         border = primary.background;
         childBorder = primary.background;
-        indicator = normal.magenta;
+        indicator = primary.background;
       };
     };
 
