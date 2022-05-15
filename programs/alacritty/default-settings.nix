@@ -47,7 +47,7 @@
 
     shell = {
       program = "${pkgs.fish}/bin/fish";
-      args = [ "-C" "neofetch" ];
+      # args = [ "-C" "neofetch" ];
     };
 
     key_bindings = [

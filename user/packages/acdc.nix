@@ -9,8 +9,9 @@
     xorg.libX11
 
     # CSharp
-    dotnetCorePackages.sdk_5_0
     jetbrains.rider
+    dotnetCorePackages.sdk_5_0
+    dotnetCorePackages.runtime_5_0
   ]
   ++ ( with ocamlPackages; [
     graphics

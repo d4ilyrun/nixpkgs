@@ -71,7 +71,17 @@
         };
       };
 
-      leo = self.homeConfigurations.desktop;
+      empty = home-manager.lib.homeManagerConfiguration {
+        inherit system username homeDirectory stateVersion;
+
+        configuration = {
+          programs.home-manager.enable = true;
+          nixpkgs.config.allowUnfree = true;
+          news.display = "silent";
+        };
+      };
+
+      leo = self.homeConfigurations.empty;
     };
   };
 }

@@ -10,16 +10,18 @@
   home.packages = with pkgs; [
     # CLI/terminal
     alacritty fish
-    curl
+    curl wget
+    fzf tree
     killall
     htop
-    fzf tree
     tmux
+    unzip
+    xorg.xmodmap
     
     # Applications
     pulseaudio-ctl light
     dunst libnotify
-    scrot
+    maim
     xsel xclip # clipboard
 
     # i3

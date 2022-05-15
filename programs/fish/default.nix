@@ -33,6 +33,10 @@ in
       source ${dir}/functions.fish
       set fish_greeting
       set fzf_preview_dir_cmd exa -al --color=always --icons
+
+      if [ ${my.config.colorscheme_name} = \"onedark\" ];
+        set_onedark
+      end
       ";
 
       shellAliases = {
@@ -71,8 +75,8 @@ in
     };
 
     functions = {
-      hms = ''home-manager switch --flake ${my.config.nixpkgs}#$argv[1] --impure'';
-      nrs = "sudo nixos-rebuild switch --flake ${my.config.nixpkgs}#$argv[1]";
+      hms = ''home-manager switch --flake ${my.config.nixpkgs}#$argv[1] --impure --cores 12'';
+      nrs = "sudo nixos-rebuild switch --impure --flake ${my.config.nixpkgs}#$argv[1]";
     };
   };
   }

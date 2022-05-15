@@ -9,7 +9,7 @@ local colors = {
   orange = "#da8548",
   violet = "#a9a1e1",
 
-  red = "#f7768e";
+  red = "#f7769e";
   green = "#9ece6a";
   yellow = "#e0af68";
   blue = "#7aa2f7";
@@ -31,7 +31,7 @@ condition.buffer_not_empty = function()
 end
 
 condition.check_git_workspace = function()
-  local get_git_dir = require("galaxyline.providers.vcs").get_git_dir
+  local get_git_dir = require("galaxyline.provider_vcs").get_git_dir
   if vim.bo.buftype == "terminal" then
     return false
   end
@@ -67,7 +67,7 @@ end
 
 local gl = require("galaxyline")
 local gls = gl.section
-gl.short_line_list = { "NvimTree", "vista", "dbui", "packer" }
+gl.short_line_list = { "NvimTree", "vista", "dbui", "packer", "dapui*", "dap-repl" }
 
 gls.left[1] = {
   RainbowRed = {
@@ -104,7 +104,8 @@ gls.left[2] = {
         t = colors.red,
       }
       vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()])
-      return "  "
+      -- return "  "
+      return " "
     end,
     highlight = { colors.red, colors.bg, "bold" },
   },
@@ -120,7 +121,7 @@ gls.left[4] = {
   FileIcon = {
     provider = "FileIcon",
     condition = condition.buffer_not_empty,
-    highlight = { require("galaxyline.providers.fileinfo").get_file_icon_color, colors.bg },
+    highlight = { require("galaxyline.provider_fileinfo").get_file_icon_color, colors.bg },
   },
 }
 

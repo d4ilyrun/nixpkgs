@@ -15,5 +15,6 @@
 
     # Rust
     rustup
+    rust-analyzer
   ];
 }

@@ -10,7 +10,7 @@
     return-youtube-dislikes
     ublock-origin
     videospeed
-    vim-vixen
+    # vim-vixen
   ];
 
   profiles = {
@@ -19,7 +19,7 @@
       isDefault = true;
       
       settings = {
-        "browser.startup.homepage" = "https://nixos.org";
+        "browser.startup.homepage" = "https://search.nixos.org/packages";
         "browser.search.region" = "US";
         "browser.search.isUS" = true;
         "distribution.searchplugins.defaultLocale" = "en-US";

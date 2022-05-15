@@ -39,7 +39,7 @@ for i in $(seq $2); do
     fi
 
     for i in $(seq $subinc); do
-        light $opt "$subchange"
+        sudo light $opt "$subchange"
         sleep "$delay"
     done
         

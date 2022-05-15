@@ -10,6 +10,12 @@ in
       PATH = "${my.config.home}/.npm-packages/bin/:$PATH";
       EDITOR = "nvim";
     };
+
+    keyboard = {
+      layout = "fr,fr";
+      variant = ",bepo";
+      options = "eurosign:e,grp:win_shift_toggle";
+    };
   };
 
   nixpkgs = {

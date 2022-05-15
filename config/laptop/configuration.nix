@@ -4,15 +4,6 @@
 
 { config, pkgs, lib, ... }:
 
-let
-  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
-    export __NV_PRIME_RENDER_OFFLOAD=1
-    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-    export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    export __VK_LAYER_NV_optimus=NVIDIA_only
-    exec -a "$0" "$@"
-  '';
-in
 {
   imports =
   [ # Include the results of the hardware scan.
@@ -21,8 +12,8 @@ in
 
   # Set environment variables
   environment.variables = {
-    NIXOS_CONFIG="$HOME/.config/nixpkgs/configuration.nix";
-    NIXOS_CONFIG_DIR="$HOME/.config/nixpkgs/";
+    NIXOS_CONFIG="$HOME/.config/nixpkgs/config/laptop/configuration.nix";
+    NIXOS_CONFIG_DIR="$HOME/.config/nixpkgs/config/laptop";
   };
 
   # Nix settings, auto cleanup and enable flakes
@@ -45,7 +36,7 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "fr";
+    useXkbConfig = true;
   };
 
   # Use the systemd-boot EFI boot loader.
@@ -67,10 +58,12 @@ in
     enable = true;
 
     displayManager = { 
-      lightdm.enable = true;
       defaultSession = "none+i3";
+      lightdm = {
+        enable = true;
+      };
     };  
-	
+
     windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
@@ -83,49 +76,46 @@ in
     layout = "fr";
     xkbOptions = "eurosign:e";
 
-    # Enable touchpad support (enabled default in most desktopManager).
+# Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
-
   };
 
-  # Enable CUPS to print documents.
+# Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound.
+# Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.bluetooth.enable = true;
 
   users.users.leo = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = pkgs.fish;
   };
 
   environment.systemPackages = with pkgs; [
     refind
-    git
-    vim 
-    curl
-    fish
-    nvidia-offload
+      git
+      vim 
+      curl
+      fish
   ];
 
-  # Download patched fonts from nerd fonts to use glyphs in the terminal
+# Download patched fonts from nerd fonts to use glyphs in the terminal
   fonts.fonts = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" "UbuntuMono" "JetBrainsMono" ]; })
+    (nerdfonts.override { fonts = [ "FiraCode" "UbuntuMono" "JetBrainsMono" ]; })
   ];
 
-  # Enable the OpenSSH daemon.
+# Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+# This value determines the NixOS release from which the default
+# settings for stateful data, like file locations and database versions
+# on your system were taken. It‘s perfectly fine and recommended to leave
+# this value at the release version of the first install of this system.
+# Before changing this value read the documentation for this option
+# (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.11"; # Did you read the comment?
-
 }
 

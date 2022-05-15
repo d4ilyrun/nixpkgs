@@ -8,7 +8,7 @@ let
 
   scripts = "${my.config.nixpkgs}/programs/i3/scripts";
   volume = "bash ${scripts}/volume.sh";
-  light = "bash ${scripts}/light.sh";
+  light = "bash ${scripts}/backlight.sh";
   screenshot = "bash ${scripts}/screenshot.sh";
 
   ws1 = "1";
@@ -33,15 +33,17 @@ in
     terminal = term;
 
     gaps = {
-      inner = 3;
+      inner = 6;
       outer = 3;
       smartGaps = true;
     };
     
+    defaultWorkspace = ws1;
+
     keybindings = lib.mkOptionDefault {
       "${modifier}+Return" = "exec ${term}";
       "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal ${term}";
-      "${modifier}+Shift+d" = "exec rofi -show window";
+      "${modifier}+Shift+d" = "exec rofi -sho-icons -show window";
       "${modifier}+Shift+q" = "kill";
 
       # Rofi menu selection
@@ -70,14 +72,17 @@ in
       "${modifier}+Shift+8" = "move container to workspace ${ws8}";
       "${modifier}+Shift+9" = "move container to workspace ${ws9}";
       "${modifier}+Shift+0" = "move container to workspace ${ws0}";
+      "${modifier}+Shift+h" = "move scratchpad";
 
       # Lock
       "${modifier}+Shift+x" = "exec betterlockscreen -l dimblur";
       
       # Screenshot
-      "Print" = "exec ${screenshot}";
-      "${modifier}+Print" = "exec ${screenshot} window";
-      "${modifier}+Shift+s" = "exec ${screenshot} area";
+      "Shift+Print" = "exec --no-startup-id maim --select \"${my.config.home}/Images/Screenshots/$(date)\"";
+      # Clipboard Screenshot
+      "Print" = "exec --no-startup-id maim | xclip -selection clipboard -t image/png";
+      "${modifier}+Print" = "exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png";
+      "${modifier}+Shift+s" = "exec --no-startup-id maim --select | xclip -selection clipboard -t image/png";
       
       # Light
       "XF86MonBrightnessUp" = "exec ${light} dec";
@@ -92,6 +97,9 @@ in
       "Shift+XF86AudioLowerVolume" = "exec ${volume} down 1";
       "Shift+XF86AudioRaiseVolume" = "exec ${volume} up 1";
       "Shift+XF86AudioMute" = "exec ${volume} mute";
+
+      # Hide/Show polybar
+      "${modifier}+Shift+BackSpace" = "exec polybar-msg cmd toggle";
 
       # Applications
       "${modifier}+n" = "exec ${browser}";
@@ -127,8 +135,8 @@ in
         background = primary.background;
         text = primary.foreground;
         border = primary.background;
-        childBorder = normal.magenta;
-        indicator = normal.magenta;
+        childBorder = primary.accent;
+        indicator = primary.accent;
       };
 
       unfocused = {
@@ -136,18 +144,18 @@ in
         text = primary.foreground;
         border = primary.background;
         childBorder = primary.background;
-        indicator = normal.magenta;
+        indicator = primary.background;
       };
     };
+
+    bars = [];
 
     startup = [
       { command = "${pkgs.feh}/bin/feh --bg-scale ${wallpaper}"; always = true; }
       { command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}"; always = true; }
-      { command = "${pkgs.i3-gaps}/bin/i3-msg workspace ${ws1}"; always = false; }
-      { command = "systemctl --user restart polybar"; always = true; }
       { command = "${pkgs.autorandr}/bin/autorandr -c"; always = false; }
+      { command = "bash ${scripts}/capslock_remap.sh"; always = true; }
+      { command = "systemctl --user restart polybar"; always = true; }
     ];
-
-    bars = [];
   };
 }

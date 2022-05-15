@@ -1,4 +1,8 @@
-{ my, pkgs, lib, ... }:
+{ my
+, pkgs
+, lib
+, network ? "wlp35s0"
+,  ... }:
 
 with my.config.colorscheme;
 
@@ -6,7 +10,6 @@ let
   dir = "${my.config.nixpkgs}/programs/polybar";
 
   # Config HERE
-  network_interface = "wlp35s0";
   # Find theses names with $ls -1 /sys/class/power_supply/
   battery_name = "BAT1";
   battery_adapter = "ACAD";
@@ -153,7 +156,7 @@ in
 
       "module/wireless-network" = {
         type = "internal/network";
-        interface = network_interface;
+        interface = network;
 
         interval = 3.0;
 
