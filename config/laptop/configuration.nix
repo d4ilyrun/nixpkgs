@@ -57,16 +57,30 @@
   services.xserver = {
     enable = true;
 
+    windowManager = {
+      i3 = {
+        enable = true;
+        package = pkgs.i3-gaps;
+      };
+
+      awesome = {
+        enable = true;
+        luaModules = with pkgs.luaPackages; [
+          luarocks # is the package manager for Lua modules
+        ];
+      };
+    };
+
     displayManager = { 
       defaultSession = "none+i3";
+      startx.enable = true;
       lightdm = {
         enable = true;
       };
-    };  
-
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps;
+      autoLogin = {
+        enable = false;
+        user = "leo";
+      };
     };
 
     desktopManager = {
@@ -96,10 +110,10 @@
 
   environment.systemPackages = with pkgs; [
     refind
-      git
-      vim 
-      curl
-      fish
+    git
+    vim
+    curl
+    fish
   ];
 
 # Download patched fonts from nerd fonts to use glyphs in the terminal

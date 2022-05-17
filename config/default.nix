@@ -1,5 +1,7 @@
 rec {
+
   colorschemes = import ./colorschemes.nix;
+  wallpapers = import "${config.nixpkgs}/config/wallpapers.nix";
 
   config = rec {
     username = "leo";
@@ -9,7 +11,7 @@ rec {
 
     colorscheme_name = "catpuccin";
     colorscheme = colorschemes.catpuccin;
-  };
 
-  wallpapers = import "${config.nixpkgs}/config/wallpapers.nix";
+    wallpaper = wallpapers.comfy-home;
+  };
 }

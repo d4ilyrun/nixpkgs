@@ -44,6 +44,7 @@ in
       "${modifier}+Return" = "exec ${term}";
       "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal ${term}";
       "${modifier}+Shift+d" = "exec rofi -sho-icons -show window";
+      "${modifier}+Shift+w" = "exec ${my.config.nixpkgs}/programs/rofi/network/rofi-network-manager.sh";
       "${modifier}+Shift+q" = "kill";
 
       # Rofi menu selection

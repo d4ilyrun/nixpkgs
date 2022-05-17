@@ -21,6 +21,7 @@ in
     "${programs}/neovim"
     "${programs}/fish"
     "${programs}/rofi"
+    (import "${programs}/awesome" { inherit my lib pkgs; })
   ];
 
   # Standalone programs (don't need to download other configurations or change system-wide configurations)

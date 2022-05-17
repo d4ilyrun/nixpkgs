@@ -154,15 +154,19 @@ in
         content-foreground = color.cyan;
       };
 
-      "module/wireless-network" = {
+      "module/wireless-network" = 
+      let
+        rofi = "${my.config.nixpkgs}/programs/rofi";
+      in
+      {
         type = "internal/network";
         interface = network;
 
         interval = 3.0;
 
-        format-packetloss = "%{T7}<ramp-signal>%{T-}<label-connected>";
-
-        label-connected = "%downspeed:9%";
+        #format-connected = "%{T7}<ramp-signal>%{T-}<label-connected>";
+        format-connected = "%{T7}<ramp-signal>%{T-} <label-connected>";
+        label-connected = "%essid%";
         label-connected-foreground = color.green;
         label-connected-underline = color.green;
 
@@ -171,10 +175,11 @@ in
         ramp-signal-0 = "";
         ramp-signal-0-foreground = color.green;
         ramp-signal-1 = "直";
-        ramp-signal-1-foreground = color.yellow;
+        ramp-signal-1-foreground = color.green;
         ramp-signal-2 = "睊";
         ramp-signal-2-foreground = color.red;
 
+        format-disconnected = "%{A1:/usr/bin/env bash ${rofi}/network/rofi-network-manager.sh:}<label-disconnected>%{A}";
         label-disconnected = " not connected";
         label-disconnected-foreground = color.red;
         label-disconnected-underline = color.red;
