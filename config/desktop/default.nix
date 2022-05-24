@@ -7,16 +7,26 @@ let
   modifier = "Mod4";
   primary = "DisplayPort-0";
   secondary = "HDMI-A-0";
+
+  my_gaps = {
+    inner = 8;
+    smartGaps = false;
+  };
 in
   {
     imports = [
-      ../laptop
+      # Minimal configuration
+      ../minimal
+
+      (import "${programs}/polybar" { inherit my pkgs lib; network = "wlp35s0"; })
+      (import "${programs}/i3/i3.nix" { inherit my pkgs lib my_gaps; })
     ];
 
     home.packages = with pkgs; [ autorandr ];
 
     programs = {
       autorandr = import "${programs}/autorandr/desktop.nix";
+      spicetify = import "${programs}/spicetify";
     };
 
     # Changes from the default configuration (laptop)
@@ -28,5 +38,5 @@ in
       };
     };
 
-    programs.alacritty.settings.font.size = lib.mkForce 11.0;
+    programs.alacritty.settings.font.size = lib.mkForce 12.0;
   }

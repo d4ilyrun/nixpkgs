@@ -1,7 +1,7 @@
 { my
 , pkgs
 , lib
-, network ? "wlp35s0"
+, network ? "wlan0"
 ,  ...
 }:
 

@@ -1,5 +1,9 @@
 with import <nixpkgs>;
 
+# Sources:
+# - wallhaven.cc
+# - pixiv
+
 with builtins; {
 
   # Light
@@ -22,11 +26,14 @@ with builtins; {
       url = "https://free4kwallpapers.com/uploads/originals/2020/08/27/tokyo-night-wallpaper.jpg";
       sha256 = "03vzh46wi4l5jm65n9303n89pgvg5r5w0ynhzsbp7cfminfx6qjz";
     };
+
+    koucha_wine = builtins.fetchurl { url = "https://i.pximg.net/img-master/img/2017/04/20/20/54/41/62494474_p0_master1200.jpg"; };
   };
 
   vertical = {
     anime = {
       yellow_beret = builtins.fetchurl { url = "https://w.wallhaven.cc/full/pk/wallhaven-pky7ym.jpg"; };
+      koucha_bench = builtins.fetchurl { url = "https://pbs.twimg.com/media/DiIUpziUcAAJe24.jpg"; };
     };
   };
 }
