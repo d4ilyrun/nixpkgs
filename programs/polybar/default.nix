@@ -22,15 +22,17 @@ color = with normal; {
   background = primary.background;
   purple = magenta;
 };
+
+unstable = import <unstable> {};
+
 in
 {
-  home.packages = with pkgs; [
-  ];
+  home.packages = [ ];
 
   services.polybar = {
     enable = true;
 
-    package = pkgs.polybar.override {
+    package = unstable.polybar.override {
       i3GapsSupport = true;
       alsaSupport = true;
       iwSupport = true;
@@ -85,7 +87,7 @@ in
 
         modules-left = "nixos i3 xwindow";
         modules-center =  "mpris-tail";
-        modules-right =  "pulseaudio alsa battery wireless-network filesystem date";
+        modules-right =  "kb pulseaudio alsa battery wireless-network filesystem date";
 
         font-0 = "Iosevka:size=13;1";
         font-1 = "Iosevka:size=6;1";
@@ -104,25 +106,18 @@ in
 
         pin-workspace = true;
 
-        ws-icon-0 = "0;";
-        ws-icon-1 = "1;";
-        ws-icon-2 = "2;";
-        ws-icon-3 = "3;";
+        ws-icon = [ "0;" "1;" "2;" "3;" ];
         ws-icon-default = " ";
 
         format = "<label-state>";
         format-margin = 0;
 
-        label-focused = "%icon%:%name% ";
-        label-focused-foreground = color.green;
-
-        label-unfocused = "%icon%:%name% ";
-
-        label-visible = "%icon%:%name% ";
-        label-visible-foreground = color.purple;
-
-        label-urgent = "%icon%:%name% ";
-        label-urgent-foreground = color.red;
+        label = {
+          unfocused = "%icon%:%name% ";
+          focused = { text = "%icon%:%name% "; foreground = color.green; };
+          visible = { text = "%icon%:%name% "; foreground = color.purple; };
+          urgent = { text = "%icon%:%name% "; foreground = color.red; };
+        };
       };
 
       "module/powermenu" = {
@@ -311,6 +306,28 @@ in
 
         ramp.volume = [ "🔈" "🔉" "🔊"];
         click.right = "pavucontrol";
+      };
+
+      "module/kb" = {
+        type = "internal/xkeyboard";
+        blacklist = [ "num lock" "scroll lock" ];
+
+        format = { text = "<label-indicator> <label-layout>"; foreground = bright.black; };
+
+        label = {
+          layout = { text = "%icon%"; };
+          indicator = { text = "%icon%"; };
+        };
+
+        layout.icon = [
+          "fr;AZERTY"
+          "fr;bepo;BEPO"
+        ];
+
+        indicator.icon = [
+          "caps lock;-CL;"
+          "num lock;-NL;"
+        ];
       };
     };
   };
