@@ -2,7 +2,6 @@
 
 let
   python-with-my-packages = pkgs.python3.withPackages (p: with p; [
-      dbus-python
   ]);
 in
 {

@@ -2,6 +2,7 @@
 
 let
   my = import ../config/.;
+  my_pkgs = import ./packages/overlays.nix;
 in
 {
   home = {
@@ -14,16 +15,14 @@ in
     keyboard = {
       layout = "fr,fr";
       variant = ",bepo";
-      options = "eurosign:e,grp:win_shift_toggle";
+      options = "eurosign:e,grp:win_space_toggle";
     };
   };
 
-  nixpkgs = {
-    overlays = import ./packages/overlays.nix;
+  nixpkgs = with my_pkgs; {
+    inherit overlays;
     config.packageOverrides = pkgs: {
-      nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-        inherit pkgs;
-      };
+      nur = import overrides.nur { inherit pkgs; };
     };
   };
 
