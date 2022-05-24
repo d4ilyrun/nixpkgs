@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 
+let
+  python-with-my-packages = pkgs.python3.withPackages (p: with p; [
+      dbus-python
+  ]);
+in
 {
   home.packages = with pkgs; [
     # CLI
@@ -16,5 +21,8 @@
     # Rust
     rustup
     rust-analyzer
+
+    # Python + packages
+    python-with-my-packages
   ];
 }

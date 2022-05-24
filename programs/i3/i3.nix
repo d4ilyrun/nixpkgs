@@ -1,7 +1,7 @@
 { my, pkgs, lib, ... }:
 
 let
-  wallpaper = my.wallpapers.comfy-home;
+  wallpaper = my.config.wallpaper;
 
   browser = "${pkgs.firefox}/bin/firefox";
   term = "${pkgs.alacritty}/bin/alacritty";
@@ -98,6 +98,11 @@ in
       "Shift+XF86AudioLowerVolume" = "exec ${volume} down 1";
       "Shift+XF86AudioRaiseVolume" = "exec ${volume} up 1";
       "Shift+XF86AudioMute" = "exec ${volume} mute";
+
+      # Play/Pause
+      "XF86AudioPlay" = "exec playerctl play-pause";
+      "XF86AudioNext" = "exec playerctl next";
+      "XF86AudioPrev" = "exec playerctl previous";
 
       # Hide/Show polybar
       "${modifier}+Shift+BackSpace" = "exec polybar-msg cmd toggle";

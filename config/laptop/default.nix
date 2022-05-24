@@ -22,6 +22,7 @@ in
     "${programs}/fish"
     "${programs}/rofi"
     (import "${programs}/awesome" { inherit my lib pkgs; })
+    (import "${programs}/polybar" { inherit my pkgs lib; network = "wlp0s20f3"; })
   ];
 
   # Standalone programs (don't need to download other configurations or change system-wide configurations)
@@ -34,7 +35,6 @@ in
 
   services = {
     dunst = import "${programs}/dunst" { inherit my pkgs; };
-    polybar = import "${programs}/polybar" { inherit my pkgs lib; network = "wlp0s20f3"; };
 
     batteryNotifier = {
       enable = true;

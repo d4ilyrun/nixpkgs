@@ -23,6 +23,7 @@
     dunst libnotify
     maim
     xsel xclip # clipboard
+    playerctl
 
     # i3
     dmenu rofi

@@ -2,40 +2,46 @@
 , pkgs
 , lib
 , network ? "wlp35s0"
-,  ... }:
+,  ...
+}:
 
 with my.config.colorscheme;
 
 let
-  dir = "${my.config.nixpkgs}/programs/polybar";
+dir = "${my.config.nixpkgs}/programs/polybar";
 
-  # Config HERE
-  # Find theses names with $ls -1 /sys/class/power_supply/
-  battery_name = "BAT1";
-  battery_adapter = "ACAD";
-  monitor_name = "eDP-1";
+# Config HERE
+# Find theses names with $ls -1 /sys/class/power_supply/
+battery_name = "BAT1";
+battery_adapter = "ACAD";
+monitor_name = "eDP-1";
 
-  color = with normal; {
-    inherit black red green yellow blue cyan white;
-    foreground = primary.foreground;
-    background = primary.background;
-    purple = magenta;
-  };
+color = with normal; {
+  inherit black red green yellow blue cyan white;
+  foreground = primary.foreground;
+  background = primary.background;
+  purple = magenta;
+};
 in
-  {
+{
+  home.packages = with pkgs; [
+  ];
+
+  services.polybar = {
     enable = true;
 
     package = pkgs.polybar.override {
       i3GapsSupport = true;
       alsaSupport = true;
+      iwSupport = true;
     };
 
     script = ''
       killall -q polybar
       while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
-      echo "" > /tmp/polybar.log
-      PATH=$PATH:${pkgs.i3}/bin polybar example >> /tmp/polybar.log 2>&1 &
-    '';
+        echo "" > /tmp/polybar.log
+          PATH=$PATH:${pkgs.i3}/bin polybar example >> /tmp/polybar.log 2>&1 &
+          '';
 
     config = {
       "global/wm" = {
@@ -77,9 +83,9 @@ in
 
         module-margin = 1;
 
-        modules-left = "nixos i3";
-        modules-center =  "xwindow";
-        modules-right =  "wireless-network filesystem date";
+        modules-left = "nixos i3 xwindow";
+        modules-center =  "mpris-tail";
+        modules-right =  "pulseaudio alsa battery wireless-network filesystem date";
 
         font-0 = "Iosevka:size=13;1";
         font-1 = "Iosevka:size=6;1";
@@ -125,10 +131,11 @@ in
         format-spacing = 1;
         click-left = "rofi -modi 'Powermenu:~/.config/nixpkgs/programs/polybar/scripts/powermenu.sh' -show Powermenu";
       };
-      
+
       "module/xwindow" = {
         type = "internal/xwindow";
         label = "%title:0:25:...%";
+        label-foreground = bright.black;
       };
 
       "module/date" =  {
@@ -155,8 +162,12 @@ in
       };
 
       "module/wireless-network" = 
-      let
+        let
         rofi = "${my.config.nixpkgs}/programs/rofi";
+      nmcli-polybar = pkgs.writeShellApplication {
+        name = "nmcli-polybar";
+        text = "${rofi}/network/rofi-network-manager.sh";
+      };
       in
       {
         type = "internal/network";
@@ -164,25 +175,25 @@ in
 
         interval = 3.0;
 
-        #format-connected = "%{T7}<ramp-signal>%{T-}<label-connected>";
-        format-connected = "%{T7}<ramp-signal>%{T-} <label-connected>";
+#format-connected = "%{T7}<ramp-signal>%{T-}<label-connected>";
         label-connected = "%essid%";
+        format-connected = "%{T7}<ramp-signal>%{T-} %{A2:${nmcli-polybar}/bin/nmcli-polybar:}<label-connected>%{A}";
+        format-connected-foreground = color.green;
+        format-connected-underline = color.green;
         label-connected-foreground = color.green;
-        label-connected-underline = color.green;
 
         label-connected-alt = "%essid%%downspeed:9%";
 
-        ramp-signal-0 = "";
-        ramp-signal-0-foreground = color.green;
-        ramp-signal-1 = "直";
-        ramp-signal-1-foreground = color.green;
-        ramp-signal-2 = "睊";
-        ramp-signal-2-foreground = color.red;
+        ramp-signal = [
+        { text = ""; foreground = color.green; }
+        { text = "直"; foreground = color.green; }
+        { text = "睊"; foreground = color.red; }
+        ];
 
-        format-disconnected = "%{A1:/usr/bin/env bash ${rofi}/network/rofi-network-manager.sh:}<label-disconnected>%{A}";
         label-disconnected = " not connected";
-        label-disconnected-foreground = color.red;
-        label-disconnected-underline = color.red;
+        format-disconnected = "%{A1:${nmcli-polybar}/bin/nmcli-polybar:}<label-disconnected>%{A}";
+        format-disconnected-foreground = color.red;
+        format-disconnected-underline = color.red;
       };
 
       "module/filesystem" = {
@@ -192,10 +203,115 @@ in
         format-mounted = "<label-mounted>";
         fixed-values = true;
 
-        label-mounted = " %free%";
-        label-mounted-foreground = color.yellow;
-        label-mounted-underline = color.yellow;
+        label.mounted = { text = " %free%"; foreground = color.yellow; underline = color.yellow; };
+      };
+
+      "module/battery" = rec {
+        type = "internal/battery";
+        full-at = 99;
+        low-at = 15;
+
+        battery = battery_name;
+        adapter = "ACAD1";
+
+        format-charging = "<animation-charging> <label-charging>";
+        format-discharging = "<ramp-capacity> <label-discharging>";
+        format-low = "<animation-discharging> <label-low>";
+        format-full = " <label-full>";
+
+        label-charging = "%percentage%%";
+        label-discharging = label-charging;
+        label-low = "BATTERY LOW";
+        label-full = "Full";
+
+        format = rec {
+          charging = { foreground = color.cyan; underline = charging.foreground; };
+          discharging = { foreground = charging.foreground; underline = charging.foreground; };
+          full = { foreground = charging.foreground; underline = charging.foreground; };
+        };
+
+        label = {
+          low = rec { text = "BATTERY LOW"; foreground = color.red; underline = foreground; };
+        };
+
+        animation-charging = ["" "" "" "" "" ];
+        animation-charging-framerate = 750;
+
+        ramp-capacity = animation-charging;
+
+        animation-low-0 = "";
+        animation-low-1 = " ";
+        animation-low-framerate = 200;
+      };
+
+      "module/mpris-tail" =
+        let
+        mpris-python = pkgs.python3.withPackages (p: with p; [
+            dbus-python pygobject3 gst-python
+        ]);
+      mpris = pkgs.writeShellApplication {
+        name = "mpris";
+        runtimeInputs = [mpris-python];
+        text = "${dir}/scripts/player-mpris-tail.py";
+      };
+      in
+      {
+        type = "custom/script";
+        exec = "${mpris}/bin/mpris -f '{icon} {:artist:t5:{artist}:}{:artist: - :}{:t4:{title}:}'";
+        tail = true;
+
+        click-left = "${mpris}/bin/mpris previous &";
+        click-right = "${mpris}/bin/mpris next &";
+        click-middle = "${mpris}/bin/mpris play-pause &";
+      };
+
+      "module/alsa" = rec {
+        type = "internal/alsa";
+
+        master-soundcard = 0;
+        speaker-soundcard = 1;
+        headphone-soundcard = "default";
+
+        master-mixer = "Master";
+        speaker-mixer = "Speaker";
+        headphone-mixer = "Headphone";
+
+        headphone-id = 1;
+
+        mapped = true;
+
+        format = {
+          muted = "🔇 <label-muted>";
+          volume = rec {
+            text = "<ramp-volume> <label-volume>";
+            foreground = color.red;
+            underline = foreground;
+          };
+        };
+
+        label.muted = { text = "Muted"; foreground = bright.black; };
+        ramp.volume = [ "🔈" "🔉" "🔊"];
+      };
+
+      "module/pulseaudio" = rec {
+        type = "internal/pulseaudio";
+        use-ui-max = true;
+        sink = "alsa_output.pci-0000_00_1f.3.analog-stereo";
+
+        format = {
+          muted = "🔇 <label-muted>";
+          volume = rec {
+            text = "<ramp-volume> <label-volume>";
+            foreground = color.red;
+            underline = foreground;
+          };
+        };
+
+        label.muted = { text = "Muted"; foreground = bright.black; };
+
+        ramp.volume = [ "🔈" "🔉" "🔊"];
+        click.right = "pavucontrol";
       };
     };
-  }
-
+  };
+}

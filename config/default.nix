@@ -12,6 +12,6 @@ rec {
     colorscheme_name = "catpuccin";
     colorscheme = colorschemes.catpuccin;
 
-    wallpaper = wallpapers.comfy-home;
+    wallpaper = wallpapers.anime.sangatsu;
   };
 }

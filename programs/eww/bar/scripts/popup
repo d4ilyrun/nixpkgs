@@ -2,7 +2,7 @@
 
 calendar(){
 LOCK_FILE="$HOME/.cache/eww-calendar.lock"
-EWW_BIN=$(which eww)
+EWW_BIN="$HOME/.local/bin/eww"
 
 run() {
     ${EWW_BIN} -c $HOME/.config/eww/bar open calendar
@@ -19,7 +19,7 @@ if [[ ! -f "$LOCK_FILE" ]]; then
     touch "$LOCK_FILE"
     run
 else
-    ${EWW_BIN} -c $HOME/.config/nixpkgs/programs/eww/bar close calendar
+    ${EWW_BIN} -c $HOME/.config/eww/bar close calendar
     rm "$LOCK_FILE"
 fi
 }
