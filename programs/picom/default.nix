@@ -1,4 +1,4 @@
-{pkgs}:
+{ pkgs }:
 
 {
   home.packages = [ pkgs.picom ];
@@ -7,13 +7,14 @@
     enable = true;
     experimentalBackends = false;
 
-    fade = false;
+    fade = true;
     fadeDelta = 4;
-    blur=false;
+
+    blur=true;
 
     shadow = true;
     shadowOffsets = [ (-5) (-5) ];
-    shadowOpacity = "0.5";
+    shadowOpacity = "0.7";
     shadowExclude = [
       "! name~=''"
       "name = 'Notification'"
@@ -26,7 +27,6 @@
 
     extraOptions = ''
     shadow-radius = 12;
-    blur-background = false;
     '';
   };
 }
