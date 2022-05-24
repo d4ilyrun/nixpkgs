@@ -33,9 +33,9 @@ in
     terminal = term;
 
     gaps = {
-      inner = 6;
-      outer = 3;
-      smartGaps = true;
+      inner = 15;
+      outer = 0;
+      smartGaps = false;
     };
     
     defaultWorkspace = ws1;

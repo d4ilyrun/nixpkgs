@@ -26,7 +26,7 @@ with builtins; {
 
   vertical = {
     anime = {
-      yellow_beret = builtins.fetchurl { url = "https://w.wallhaven.cc/full/pk/wallhaven-pky7ym.jpg"; }
+      yellow_beret = builtins.fetchurl { url = "https://w.wallhaven.cc/full/pk/wallhaven-pky7ym.jpg"; };
     };
   };
 }

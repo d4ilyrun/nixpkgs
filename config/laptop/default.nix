@@ -23,6 +23,7 @@ in
     "${programs}/rofi"
     (import "${programs}/awesome" { inherit my lib pkgs; })
     (import "${programs}/polybar" { inherit my pkgs lib; network = "wlp0s20f3"; })
+    (import "${programs}/picom" { inherit pkgs; })
   ];
 
   # Standalone programs (don't need to download other configurations or change system-wide configurations)
