@@ -1,8 +1,5 @@
-# https://github.com/pietdevries94/spicetify-nix
+{ my, pkgs }:
 
 {
-    # FIXME
-    enable = false;
-    theme = "Dribbblish";
-    colorScheme = "horizon";
+  home.packages = [ pkgs.spotify-unwrapped ];
 }

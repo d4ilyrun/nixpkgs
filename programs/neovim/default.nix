@@ -73,7 +73,6 @@ in
             (plugin "glepnir/galaxyline.nvim")
             (plugin "norcalli/nvim-colorizer.lua") # color-previewer
             (plugin "lukas-reineke/indent-blankline.nvim")
-            (plugin "ellisonleao/glow.nvim") # Markdown previewer
 
             # LSP
             (plugin "neovim/nvim-lspconfig")

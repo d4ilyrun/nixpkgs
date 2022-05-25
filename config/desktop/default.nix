@@ -18,6 +18,7 @@ in
       # Minimal configuration
       ../minimal
 
+      (import "${programs}/spicetify" { inherit my pkgs; })
       (import "${programs}/polybar" { inherit my pkgs lib; network = "wlp35s0"; })
       (import "${programs}/i3/i3.nix" { inherit my pkgs lib my_gaps; })
     ];
@@ -26,7 +27,6 @@ in
 
     programs = {
       autorandr = import "${programs}/autorandr/desktop.nix";
-      spicetify = import "${programs}/spicetify";
     };
 
     # Changes from the default configuration (laptop)

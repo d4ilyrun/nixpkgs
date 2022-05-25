@@ -2,7 +2,7 @@
 
 let
   my = import ../config/.;
-  my_pkgs = import ./packages/overlays.nix;
+  my_pkgs = import "${my.config.nixpkgs}/user/overlays";
 in
 {
   home = {
