@@ -18,6 +18,7 @@ in
     # TODO: change it to an import function
     "${programs}/battery.nix"
 
+    (import "${programs}/spicetify" { inherit my pkgs; })
     (import "${programs}/awesome" { inherit my lib pkgs; })
     (import "${programs}/polybar" { inherit my pkgs lib; network = "wlp0s20f3"; })
     (import "${programs}/i3/i3.nix" { inherit my pkgs lib my_gaps; })
@@ -25,7 +26,6 @@ in
 
   # Standalone programs (don't need to download other configurations or change system-wide configurations)
   programs = {
-    spicetify = import "${programs}/spicetify";
   };
 
   services = {
