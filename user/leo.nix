@@ -1,8 +1,8 @@
 { config, pkgs, my, ... }:
 
 let
-  my = import ../config/.;
-  my_pkgs = import "${my.config.nixpkgs}/user/overlays";
+  my = import ../config;
+  my_pkgs = import "${my.config.nixpkgs}/pkgs/overlays";
 in
 {
   home = {
@@ -26,16 +26,16 @@ in
     };
   };
 
-  imports = [
+  imports = with my.config; [
     # Packages
-    ./packages/system.nix
-    ./packages/dev.nix
-    ./packages/apps.nix
-    ./packages/school.nix
-    ./packages/acdc.nix
+    "${nixpkgs}/pkgs/system.nix"
+    "${nixpkgs}/pkgs/dev.nix"
+    "${nixpkgs}/pkgs/apps.nix"
+    "${nixpkgs}/pkgs/school.nix"
+    "${nixpkgs}/pkgs/acdc.nix"
 
     # Fonts
-    ./packages/fonts.nix
+    "${nixpkgs}/pkgs/fonts.nix"
   ];
 
   # HEAVY PACKAGES
