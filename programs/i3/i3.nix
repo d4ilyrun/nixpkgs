@@ -12,6 +12,9 @@ let
   light = "bash ${scripts}/backlight.sh";
   screenshot = "bash ${scripts}/screenshot.sh";
 
+  # Rofi
+  powermenu = import "${my.config.nixpkgs}/programs/rofi/powermenu" { inherit my pkgs; };
+
   ws1 = "1";
   ws2 = "2";
   ws3 = "3";
@@ -45,7 +48,8 @@ in
 
         # Rofi menu selection
         "${modifier}+e" = "exec EDITOR='/usr/bin/env nvim' alacritty -e ranger"; # file explorer
-        "${modifier}+Shift+e" = "exec rofi -modi 'Powermenu:~/.config/nixpkgs/programs/polybar/scripts/powermenu.sh' -show Powermenu";
+        #"${modifier}+Shift+e" = "exec rofi -modi 'Powermenu:~/.config/nixpkgs/programs/polybar/scripts/powermenu.sh' -show Powermenu";
+        "${modifier}+Shift+e" = "exec ${powermenu}";
         "${modifier}+comma" = "exec rofi -show-emoji";
 
         # Custom workspaces names

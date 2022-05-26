@@ -5,28 +5,27 @@ let
   theme = "catpuccin";
   defaultTerminal = "${pkgs.alacritty}/bin/alacritty";
 in
-  {
-    xdg.configFile."rofi/${theme}.rasi".source = "${my.config.nixpkgs}/programs/rofi/${theme}.rasi";
-    xdg.configFile."rofi/powermenu.rasi".source = "${my.config.nixpkgs}/programs/rofi/powermenu.rasi";
+{
+  xdg.configFile."rofi/${theme}.rasi".source = "${my.config.nixpkgs}/programs/rofi/${theme}.rasi";
 
-    programs.rofi = {
-      inherit theme;
-      enable = true;
-      terminal = defaultTerminal;
+  programs.rofi = {
+    inherit theme;
+    enable = true;
+    terminal = defaultTerminal;
 
-      extraConfig = {
-        modi = "drun,run,window";
-        font = "JetBrainsMono Nerd Font Medium 13";
+    extraConfig = {
+      modi = "drun,run,window";
+      font = "JetBrainsMono Nerd Font Medium 13";
 
-        display-window = " ";
-        display-run = " ";
-        display-drun = " ";
-        display-power = "Powermenu: ";
-        drun-display-format = " {name}";
-        
-        show-icons = true;
-        sidebar-mode = false;
-      };
+      display-window = " ";
+      display-run = " ";
+      display-drun = " ";
+      display-power = "Powermenu: ";
+      drun-display-format = " {name}";
 
+      show-icons = true;
+      sidebar-mode = false;
     };
-  }
+
+  };
+}
