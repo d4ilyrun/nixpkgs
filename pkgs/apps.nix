@@ -2,7 +2,6 @@
 
 {
     home.packages = with pkgs; [
-        firefox
         discord betterdiscordctl
         lazygit
         feh zathura

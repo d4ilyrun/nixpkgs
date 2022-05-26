@@ -4,6 +4,7 @@
 let
   my = import ../.;
   programs = "${my.config.nixpkgs}/programs";
+
   modifier = "Mod4";
   primary = "DisplayPort-0";
   secondary = "HDMI-A-0";

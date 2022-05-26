@@ -5,6 +5,10 @@ let
   my = import ../.;
   programs = "${my.config.nixpkgs}/programs";
 
+  modifier = "Mod4";
+  primary = "eDP-1";
+  secondary = "HDMI-1-0";
+
   my_gaps = {
     inner = 6;
     smartGaps = false;
@@ -24,14 +28,21 @@ in
     (import "${programs}/i3/i3.nix" { inherit my pkgs lib my_gaps; })
   ];
 
-  # Standalone programs (don't need to download other configurations or change system-wide configurations)
   programs = {
+    autorandr = import "${programs}/autorandr/laptop.nix";
   };
 
   services = {
     batteryNotifier = {
       enable = true;
       device = "BAT1";
+    };
+  };
+
+  xsession.windowManager.i3.config = {
+    keybindings = lib.mkOptionDefault {
+      "Ctrl+${modifier}+Right" =  "move workspace to output ${secondary}";
+      "Ctrl+${modifier}+Left" = "move workspace to output ${primary}";
     };
   };
 }

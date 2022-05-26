@@ -2,9 +2,19 @@
   description = "My system config.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    nixpkgs = {
+     type = "github";
+     owner = "NixOs";
+     repo = "nixpkgs";
+     ref = "release-22.05";
+    };
+
     home-manager = {
-      url = "github:nix-community/home-manager";
+      type = "github";
+      owner = "nix-community";
+      repo = "home-manager";
+     ref = "release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
