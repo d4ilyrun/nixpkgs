@@ -10,78 +10,78 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: 
-  let
-    system = "x86_64-linux";
-    username = "leo";
-    homeDirectory = "/home/${username}";
-    stateVersion = "21.11";
+  outputs = { self, nixpkgs, home-manager, ... }:
+    let
+      system = "x86_64-linux";
+      username = "leo";
+      homeDirectory = "/home/${username}";
+      stateVersion = "21.11";
 
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-      overlays = [];
-    };
-
-    lib = nixpkgs.lib;
-  in
-  {
-    nixosConfigurations = {
-      desktop = lib.nixosSystem {
+      pkgs = import nixpkgs {
         inherit system;
-        modules = [
-          ./config/desktop/configuration.nix
-        ];
+        config.allowUnfree = true;
+        overlays = [ ];
       };
 
-      laptop = lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./config/laptop/configuration.nix
-        ];
-      };
-    };
+      lib = nixpkgs.lib;
+    in
+    {
+      nixosConfigurations = {
+        desktop = lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./config/desktop/configuration.nix
+          ];
+        };
 
-    homeConfigurations = {
-      desktop = home-manager.lib.homeManagerConfiguration {
-        inherit system username homeDirectory stateVersion;
-
-        configuration = {
-          programs.home-manager.enable = true;
-          nixpkgs.config.allowUnfree = true;
-          news.display = "silent";
-          imports = [
-            ./user/leo.nix
-            ./config/desktop
+        laptop = lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./config/laptop/configuration.nix
           ];
         };
       };
 
-      laptop = home-manager.lib.homeManagerConfiguration {
-        inherit system username homeDirectory stateVersion;
+      homeConfigurations = {
+        desktop = home-manager.lib.homeManagerConfiguration {
+          inherit system username homeDirectory stateVersion;
 
-        configuration = {
-          programs.home-manager.enable = true;
-          nixpkgs.config.allowUnfree = true;
-          news.display = "silent";
-          imports = [
-            ./user/leo.nix
-            ./config/laptop
-          ];
+          configuration = {
+            programs.home-manager.enable = true;
+            nixpkgs.config.allowUnfree = true;
+            news.display = "silent";
+            imports = [
+              ./user/leo.nix
+              ./config/desktop
+            ];
+          };
         };
-      };
 
-      empty = home-manager.lib.homeManagerConfiguration {
-        inherit system username homeDirectory stateVersion;
+        laptop = home-manager.lib.homeManagerConfiguration {
+          inherit system username homeDirectory stateVersion;
 
-        configuration = {
-          programs.home-manager.enable = true;
-          nixpkgs.config.allowUnfree = true;
-          news.display = "silent";
+          configuration = {
+            programs.home-manager.enable = true;
+            nixpkgs.config.allowUnfree = true;
+            news.display = "silent";
+            imports = [
+              ./user/leo.nix
+              ./config/laptop
+            ];
+          };
         };
-      };
 
-      leo = self.homeConfigurations.empty;
+        empty = home-manager.lib.homeManagerConfiguration {
+          inherit system username homeDirectory stateVersion;
+
+          configuration = {
+            programs.home-manager.enable = true;
+            nixpkgs.config.allowUnfree = true;
+            news.display = "silent";
+          };
+        };
+
+        leo = self.homeConfigurations.empty;
+      };
     };
-  };
 }

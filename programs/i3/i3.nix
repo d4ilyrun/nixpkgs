@@ -23,7 +23,7 @@ let
   ws9 = "9";
   ws0 = "0";
 in
-{ 
+{
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
@@ -45,7 +45,7 @@ in
 
         # Rofi menu selection
         "${modifier}+e" = "exec EDITOR='/usr/bin/env nvim' alacritty -e ranger"; # file explorer
-          "${modifier}+Shift+e" = "exec rofi -modi 'Powermenu:~/.config/nixpkgs/programs/polybar/scripts/powermenu.sh' -show Powermenu";
+        "${modifier}+Shift+e" = "exec rofi -modi 'Powermenu:~/.config/nixpkgs/programs/polybar/scripts/powermenu.sh' -show Powermenu";
         "${modifier}+comma" = "exec rofi -show-emoji";
 
         # Custom workspaces names
@@ -124,9 +124,9 @@ in
       window.border = 3;
 
       assigns = {
-        "${ws0}" = [ 
-        { class = "Spotify"; }
-        { class = "discord"; }
+        "${ws0}" = [
+          { class = "Spotify"; }
+          { class = "discord"; }
         ];
       };
 
@@ -150,14 +150,15 @@ in
         };
       };
 
-      bars = [];
+      bars = [ ];
 
       startup = [
-      { command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaper} ${wallpaper_2}"; always = true; }
-      { command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}"; always = true; }
-      { command = "${pkgs.autorandr}/bin/autorandr -c"; always = false; }
-      { command = "bash ${scripts}/capslock_remap.sh"; always = true; }
-      { command = "systemctl --user restart polybar"; always = true; }
+        { command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaper} ${wallpaper_2}"; always = true; }
+        { command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}"; always = true; }
+        { command = "${pkgs.autorandr}/bin/autorandr -c"; always = false; }
+        { command = "bash ${scripts}/capslock_remap.sh"; always = true; }
+        { command = "systemctl --user restart polybar"; always = true; }
+        { command = "setxkbmap -layout fr,fr -variant ,bepo -option grp:win_space_toggle,eurosigne:e"; always = true; }
       ];
     };
   };
