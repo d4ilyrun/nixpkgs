@@ -158,7 +158,7 @@ in
         { command = "${pkgs.autorandr}/bin/autorandr -c"; always = false; }
         { command = "bash ${scripts}/capslock_remap.sh"; always = true; }
         { command = "systemctl --user restart polybar"; always = true; }
-        { command = "setxkbmap -layout fr,fr -variant ,bepo -option grp:win_space_toggle,eurosigne:e"; always = true; }
+        { command = "setxkbmap -layout fr,fr -variant ,bepo_afnor -option grp:win_space_toggle,eurosigne:e"; always = true; }
       ];
     };
   };

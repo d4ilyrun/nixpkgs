@@ -5,8 +5,8 @@ let
     spotify-unwrapped = super.callPackage "${my.config.nixpkgs}/pkgs/overlays/spicetify.nix" {
       inherit (super) spotify-unwrapped;
       config = {
-        theme = "Glaze";
-        colorScheme = "base";
+        theme = "Bloom";
+        colorScheme = "dark";
 
         extensions = [
           (builtins.fetchUrl "https://raw.githubusercontent.com/CharlieS1103/spicetify-extensions/main/adblock/adblock.js")
