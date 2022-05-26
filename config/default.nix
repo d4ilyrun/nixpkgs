@@ -3,7 +3,7 @@ rec {
   colorschemes = import ./colorschemes.nix;
   wallpapers = import "${config.nixpkgs}/config/wallpapers.nix";
 
-  config = rec {
+  config = {
     username = "leo";
     machine = "desktop";
     home = "/home/${config.username}";

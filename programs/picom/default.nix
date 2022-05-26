@@ -24,6 +24,7 @@
     ];
 
     vSync = false;
+    backend = "xrender";
 
     extraOptions = ''
     shadow-radius = 12;

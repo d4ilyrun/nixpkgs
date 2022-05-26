@@ -2,26 +2,21 @@
   description = "My system config.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
-
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-21.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }: 
   let
-    system = "x86_64-linux";
-    username = "leo";
-    homeDirectory = "/home/${username}";
-    stateVersion = "21.11";
+    my = import ./config;
 
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-      overlays = [];
-    };
+    system = "x86_64-linux";
+    username = my.config.username;
+    homeDirectory = my.config.home;
+    stateVersion = "22.05";
 
     lib = nixpkgs.lib;
   in
@@ -44,7 +39,9 @@
 
     homeConfigurations = {
       desktop = home-manager.lib.homeManagerConfiguration {
-        inherit system username homeDirectory stateVersion;
+        inherit system username homeDirectory;
+
+        stateVersion = "21.11";
 
         configuration = {
           programs.home-manager.enable = true;
