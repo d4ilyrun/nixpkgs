@@ -23,10 +23,27 @@
       "class_g = 'Firefox' && argb"
     ];
 
-    vSync = false;
+    opacityRule = [
+      "100:class_g = 'Alacritty' && focused"
+      "90:class_g = 'Alacritty' && !focused"
+    ];
+
+    vSync = true;
 
     extraOptions = ''
     shadow-radius = 12;
+
+    blur: {
+      method = "dual_kawase";
+      # method = "kernel";
+      strength = 1.5;
+      deviation = 1.0;
+      # kernel = "11x11gaussian";
+      background = true;
+      background-frame = false;
+      background-fixed = true;
+      # kern = "3x3box";
+    }
     '';
   };
 }
