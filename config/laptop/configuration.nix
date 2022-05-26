@@ -6,14 +6,15 @@
 
 {
   imports =
-  [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
+    [
+      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
 
   # Set environment variables
   environment.variables = {
-    NIXOS_CONFIG="$HOME/.config/nixpkgs/config/laptop/configuration.nix";
-    NIXOS_CONFIG_DIR="$HOME/.config/nixpkgs/config/laptop";
+    NIXOS_CONFIG = "$HOME/.config/nixpkgs/config/laptop/configuration.nix";
+    NIXOS_CONFIG_DIR = "$HOME/.config/nixpkgs/config/laptop";
   };
 
   # Nix settings, auto cleanup and enable flakes
@@ -71,7 +72,7 @@
       };
     };
 
-    displayManager = { 
+    displayManager = {
       defaultSession = "none+i3";
       startx.enable = true;
       lightdm = {
@@ -90,14 +91,14 @@
     layout = "fr";
     xkbOptions = "eurosign:e";
 
-# Enable touchpad support (enabled default in most desktopManager).
+    # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
   };
 
-# Enable CUPS to print documents.
+  # Enable CUPS to print documents.
   services.printing.enable = true;
 
-# Enable sound.
+  # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.bluetooth.enable = true;
@@ -116,20 +117,25 @@
     fish
   ];
 
-# Download patched fonts from nerd fonts to use glyphs in the terminal
+  # Download patched fonts from nerd fonts to use glyphs in the terminal
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "UbuntuMono" "JetBrainsMono" ]; })
   ];
 
-# Enable the OpenSSH daemon.
+  # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-# This value determines the NixOS release from which the default
-# settings for stateful data, like file locations and database versions
-# on your system were taken. It‘s perfectly fine and recommended to leave
-# this value at the release version of the first install of this system.
-# Before changing this value read the documentation for this option
-# (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  services.logind.extraConfig = ''
+    # don’t shutdown when power button is short-pressed
+    HandlePowerKey=ignore
+  '';
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.11"; # Did you read the comment?
 }
 
