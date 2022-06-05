@@ -38,7 +38,7 @@
     pager.commit = false;
 
     push.default = "simple";
-    pull.ff = "only";
+    pull = { ff = "only"; rebase = true; };
 
     init.defaultBranch = "master";
   };

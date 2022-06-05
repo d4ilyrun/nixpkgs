@@ -4,7 +4,8 @@ let
   booleanToString = boolean: if boolean then "1" else "0";
   listToString = list: builtins.concatStringsSep "|" list;
 
-  themes = "${fetchTarball "https://github.com/morpheusthewhite/spicetify-themes/archive/master.tar.gz"}/${config.theme}";
+  themes_rev = "2bd000a8911567d067c9e93002728e5f209267e2";
+  themes = "${fetchTarball "https://github.com/morpheusthewhite/spicetify-themes/archive/${themes_rev}.tar.gz"}/${config.theme}";
 
   configFile = (formats.ini { }).generate "config-xpui.ini" {
     AdditionalOptions = {

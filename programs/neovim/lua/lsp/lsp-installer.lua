@@ -22,6 +22,11 @@ lsp_installer.on_server_ready(function(server)
             }
         }
         opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
+    elseif server.name == "tsserver" then
+        local jsonls_opts = {
+            cmd = { home .. "/.nix-profile/bin/typescript-language-server", "--stdio", "--tsserver-path=tsserver" }
+        }
+        opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
     end
 
     -- This setup() function will take the provided server configuration and decorate it with the necessary properties

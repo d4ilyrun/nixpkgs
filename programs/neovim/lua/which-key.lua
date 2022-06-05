@@ -13,12 +13,13 @@ local opts = {
 
 local keymaps = {
     f = {
-        name = "File", -- optional group name
+        name = "Telescope", -- optional group name
         f = { "<cmd>Telescope find_files<cr>", "Find File" },
         o = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
         b = { "<cmd>Telescope buffers<cr>", "Switch Buffer" },
-        g = { "<cmd>Telescope live_gep<cr>", "Find Text in Workspace" },
+        g = { "<cmd>Telescope live_grep<cr>", "Find Text in Workspace" },
         r = { "<cmd>Telescope resume<cr>", "Resume Last Search" },
+        t = { "<cmd>TodoTelescope<cr>", "Find Todo's"},
     },
 
     g = {
@@ -42,6 +43,12 @@ local keymaps = {
             b = {"<cmd>Gitsigns undo_stage_buffer<cr>", "Buffer"},
         },
 
+        t = {
+            name = "Trouble",
+            r = {"<cmd>TroubleToggle workspace_diagnostics<cr>", "Find Diagnostics"},
+            d = {"<cmd>TodoTrouble<cr>", "Find Todo's"},
+        },
+
         b = { "<cmd>Telescope git_branches<cr>", "Branches" },
         s = { "<cmd>Telescope git_status<cr>", "Status" },
 
@@ -56,6 +63,7 @@ local keymaps = {
         d = { "<cmd>Bdelete<cr>", "Delete Current Buffer" },
         D = { "<cmd>bufdo bwipeout<cr>", "Delete All Buffers" },
         l = { "<cmd>Telescope buffers<cr>", "List Active Buffers" },
+        c = { "<cmd>Centerpad<cr>", "Center Buffer" },
         s = {
             name = "Sort Buffers",
             d = { "<cmd>BufferLineSortByDirectory<cr>", "By Directory" },

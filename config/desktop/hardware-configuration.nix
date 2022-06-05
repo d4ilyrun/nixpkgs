@@ -4,29 +4,39 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 
+let
+  v4l2loopback-dc = config.boot.kernelPackages.callPackage ./modules/v4l2loopback-dc.nix { };
+  droidcam = pkgs.callPackage ./modules/droidcam.nix { 
+    kernel = pkgs.linuxPackages;
+  };
+in
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+
+  boot.extraModulePackages = [ v4l2loopback-dc ];
+  environment.systemPackages = [ droidcam ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/0412975b-8410-46be-9942-1569b2a3e6b5";
+    {
+      device = "/dev/disk/by-uuid/0412975b-8410-46be-9942-1569b2a3e6b5";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/66B7-06BA";
+    {
+      device = "/dev/disk/by-uuid/66B7-06BA";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/bb3541d3-cc1a-49cc-91a6-50c0059cf4a4"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/bb3541d3-cc1a-49cc-91a6-50c0059cf4a4"; }];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

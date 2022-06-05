@@ -13,7 +13,9 @@ local plugins = {
     'nvim-tree',
     'startup',
     'telescope',
+    'todo',
     'treesitter',
+    'trouble',
     'which-key',
 }
 

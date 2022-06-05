@@ -10,7 +10,11 @@
     fade = true;
     fadeDelta = 4;
 
-    blur=true;
+    blur = true;
+    blurExclude = [
+      "window_type = 'dock'"
+      "class_g = 'slop'"
+    ];
 
     shadow = true;
     shadowOffsets = [ (-5) (-5) ];
@@ -31,19 +35,19 @@
     vSync = true;
 
     extraOptions = ''
-    shadow-radius = 12;
+      shadow-radius = 12;
 
-    blur: {
-      method = "dual_kawase";
-      # method = "kernel";
-      strength = 1.5;
-      deviation = 1.0;
-      # kernel = "11x11gaussian";
-      background = true;
-      background-frame = false;
-      background-fixed = true;
-      # kern = "3x3box";
-    }
+      blur: {
+        method = "dual_kawase";
+        # method = "kernel";
+        strength = 1.5;
+        deviation = 1.0;
+        # kernel = "11x11gaussian";
+        background = true;
+        background-frame = false;
+        background-fixed = true;
+        # kern = "3x3box";
+      }
     '';
   };
 }
