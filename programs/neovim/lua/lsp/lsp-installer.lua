@@ -5,8 +5,8 @@ local lsp_installer = require("nvim-lsp-installer")
 lsp_installer.on_server_ready(function(server)
     local opts = {
         on_attach = function(client)
-            client.resolved_capabilities.document_formatting = false
-            client.resolved_capabilities.document_range_formatting = false
+            client.server_capabilities.document_formatting = false
+            client.server_capabilities.document_range_formatting = false
         end
     }
 
@@ -22,9 +22,14 @@ lsp_installer.on_server_ready(function(server)
             }
         }
         opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
+    elseif server.name == "pyright" then
+        local jsonls_opts = {
+            cmd = { home .. "/.nix-profile/bin/pyright-langserver", "--stdio" }
+        }
+        opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
     elseif server.name == "tsserver" then
         local jsonls_opts = {
-            cmd = { home .. "/.nix-profile/bin/typescript-language-server", "--stdio", "--tsserver-path=tsserver" }
+            cmd = { home .. "/.nix-profile/bin/typescript-language-server", "--stdio" }
         }
         opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
     end

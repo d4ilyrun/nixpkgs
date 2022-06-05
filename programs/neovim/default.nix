@@ -36,6 +36,7 @@ in
   home.packages = with pkgs; [
     rnix-lsp
     nodePackages.pyright
+    nodePackages.typescript-language-server
     sumneko-lua-language-server
     glow
     ripgrep
