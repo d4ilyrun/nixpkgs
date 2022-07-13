@@ -2,10 +2,10 @@
   description = "My system config.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-21.11";
+      url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -15,7 +15,7 @@
       system = "x86_64-linux";
       username = "leo";
       homeDirectory = "/home/${username}";
-      stateVersion = "21.11";
+      stateVersion = "22.05";
 
       pkgs = import nixpkgs {
         inherit system;
