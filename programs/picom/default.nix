@@ -48,6 +48,10 @@
         background-fixed = true;
         # kern = "3x3box";
       }
+
+      unredir-if-possible = false;
+      backend = "xrender"; # try "glx" if xrender doesn't help
+
     '';
   };
 }

@@ -3,7 +3,8 @@
 
 let
   my = import ../.;
-  programs = "${my.config.nixpkgs}/programs";
+  nixpkgs = my.config.nixpkgs;
+  programs = "${nixpkgs}/programs";
 
   my_gaps = {
     inner = 6;
@@ -37,7 +38,7 @@ in
   # Standalone programs (don't need to download other configurations or change system-wide configurations)
   programs = { };
 
-  home.packages = [
+  home.packages = with pkgs; [
     jetbrains.clion
   ];
 
