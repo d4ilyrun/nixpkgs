@@ -16,7 +16,7 @@ in
 
   # Standalone programs (don't need to download other configurations or change system-wide configurations)
   programs = {
-    alacritty  = import "${programs}/alacritty/default-settings.nix" { inherit my pkgs; };
+    alacritty = import "${programs}/alacritty/default-settings.nix" { inherit my pkgs; };
     firefox = import "${programs}/firefox" { inherit my pkgs lib; };
     tmux = import "${programs}/tmux" { inherit pkgs my; };
   };

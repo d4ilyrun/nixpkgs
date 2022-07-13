@@ -6,14 +6,15 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
   # Set environment variables
   environment.variables = {
-    NIXOS_CONFIG_DIR="$HOME/.config/nixpkgs/configuration/desktop/";
-    NIXOS_CONFIG="$NIXOS_CONFIG_DIR/configuration.nix";
+    NIXOS_CONFIG_DIR = "$HOME/.config/nixpkgs/configuration/desktop/";
+    NIXOS_CONFIG = "$NIXOS_CONFIG_DIR/configuration.nix";
   };
 
   # Nix settings, auto cleanup and enable flakes
@@ -64,11 +65,11 @@
   services.xserver = {
     enable = true;
 
-    displayManager = { 
+    displayManager = {
       lightdm.enable = true;
       defaultSession = "none+i3";
-    };  
-	
+    };
+
     windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
@@ -105,7 +106,7 @@
 
   # Download patched fonts from nerd fonts to use glyphs in the terminal
   fonts.fonts = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" "UbuntuMono" "JetBrainsMono" ]; })
+    (nerdfonts.override { fonts = [ "FiraCode" "UbuntuMono" "JetBrainsMono" ]; })
   ];
 
   # List services that you want to enable:
@@ -130,7 +131,7 @@
       output = "HDMI-A-0";
       monitorConfig = ''
         Option "Rotate" "left"
-        option "RightOf" "DisplayPort-0"
+        option "LeftOf" "DisplayPort-0"
       '';
     }
   ];
@@ -142,6 +143,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.11"; # Did you read the comment?
-
 }
 

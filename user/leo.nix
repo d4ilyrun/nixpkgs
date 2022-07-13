@@ -26,34 +26,9 @@ in
     };
   };
 
-  imports = with my.config; [
-    # Packages
-    "${nixpkgs}/pkgs/system.nix"
-    "${nixpkgs}/pkgs/dev.nix"
-    "${nixpkgs}/pkgs/apps.nix"
-    "${nixpkgs}/pkgs/school.nix"
-    "${nixpkgs}/pkgs/acdc.nix"
-
-    # Fonts
-    "${nixpkgs}/pkgs/fonts.nix"
-  ];
-
-  # HEAVY PACKAGES
-  home.packages = with pkgs; [
-    jetbrains.clion
-  ];
-
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "inode/directory" = [ "ranger.desktop" ]; # Default file manager
-    };
-  };
-
   programs = {
     git = import "${my.config.nixpkgs}/programs/git" { inherit my pkgs; };
   };
 
   systemd.user.startServices = true;
-
 }

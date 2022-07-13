@@ -3,7 +3,9 @@
 
 let
   my = import ../.;
-  programs = "${my.config.nixpkgs}/programs";
+  nixpkgs = my.config.nixpkgs;
+  programs = "${nixpkgs}/programs";
+
   modifier = "Mod4";
   primary = "DisplayPort-0";
   secondary = "HDMI-A-0";
@@ -14,7 +16,17 @@ let
   };
 in
 {
-  imports = [
+  imports = with pkgs; [
+    # Packages
+    "${nixpkgs}/pkgs/system.nix"
+    "${nixpkgs}/pkgs/dev.nix"
+    "${nixpkgs}/pkgs/apps.nix"
+    "${nixpkgs}/pkgs/school.nix"
+    "${nixpkgs}/pkgs/acdc.nix"
+
+    # Fonts
+    "${nixpkgs}/pkgs/fonts.nix"
+
     # Minimal configuration
     ../minimal
 
@@ -24,6 +36,7 @@ in
   ];
 
   home.packages = with pkgs; [
+    jetbrains.clion
     autorandr
   ];
 
