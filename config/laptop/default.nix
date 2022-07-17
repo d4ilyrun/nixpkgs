@@ -12,6 +12,8 @@ let
   };
 in
 {
+  nixpkgs.config.allowUnfree = true;
+
   imports = [
     # Packages
     "${nixpkgs}/pkgs/system.nix"
