@@ -117,6 +117,7 @@
     vim
     curl
     fish
+    spotify
   ];
 
   # Download patched fonts from nerd fonts to use glyphs in the terminal
