@@ -4,31 +4,34 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+    initrd.kernelModules = [ ];
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+  };
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos";
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/nixos";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-label/BOOT";
+    "/boot" = {
+      device = "/dev/disk/by-label/BOOT";
       fsType = "vfat";
     };
-
-  swapDevices =
-    [ { device = "/dev/disk/by-label/swap"; }
-    ];
+  };
+  swapDevices = [
+    { device = "/dev/disk/by-label/swap"; }
+  ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # NVIDIA STUFF
 
@@ -36,10 +39,7 @@
 
   hardware.nvidia.prime = {
     offload.enable = true;
-    # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
     intelBusId = "PCI:0:2:0";
-    # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
     nvidiaBusId = "PCI:1:0:0";
   };
-
 }

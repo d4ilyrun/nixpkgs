@@ -26,60 +26,33 @@
       lib = nixpkgs.lib;
     in
     {
-      nixosConfigurations = {
-        desktop = lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./config/desktop/configuration.nix
-          ];
-        };
-
-        laptop = lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./config/laptop/configuration.nix
-          ];
-        };
+      nixosConfigurations =
+      let
+        systemConfig = modules: lib.nixosSystem { inherit system modules; };
+      in
+      {
+        desktop = systemConfig [ ./config/desktop/configuration.nix ];
+        laptop = systemConfig [ ./config/laptop/configuration.nix ];
+        yaka = systemConfig [ ./config/yaka/configuration.nix ];
       };
 
-      homeConfigurations = {
-        desktop = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations =
+      let
+        homeConfig = imports: home-manager.lib.homeManagerConfiguration {
           inherit system username homeDirectory stateVersion;
-
           configuration = {
-            programs.home-manager.enable = true;
-            nixpkgs.config.allowUnfree = true;
-            news.display = "silent";
-            imports = [
-              ./user/leo.nix
-              ./config/desktop
-            ];
-          };
-        };
-
-        laptop = home-manager.lib.homeManagerConfiguration {
-          inherit system username homeDirectory stateVersion;
-
-          configuration = {
-            programs.home-manager.enable = true;
-            nixpkgs.config.allowUnfree = true;
-            news.display = "silent";
-            imports = [
-              ./user/leo.nix
-              ./config/laptop
-            ];
-          };
-        };
-
-        empty = home-manager.lib.homeManagerConfiguration {
-          inherit system username homeDirectory stateVersion;
-
-          configuration = {
+            inherit imports;
             programs.home-manager.enable = true;
             nixpkgs.config.allowUnfree = true;
             news.display = "silent";
           };
         };
+      in
+      {
+        desktop = homeConfig [ ./user/leo.nix ./config/desktop ];
+        laptop = homeConfig [ ./user/leo.nix ./config/laptop ];
+        yaka = homeConfig [ ./user/leo.nix ./config/yaka ];
+        empty = homeConfig [ ];
 
         leo = self.homeConfigurations.empty;
       };

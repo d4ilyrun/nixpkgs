@@ -3,7 +3,8 @@
 
 let
   my = import ../.;
-  programs = "${my.config.nixpkgs}/programs";
+  nixpkgs = my.config.nixpkgs;
+  programs = "${nixpkgs}/programs";
 
   my_gaps = {
     inner = 6;
@@ -17,7 +18,6 @@ in
     "${nixpkgs}/pkgs/dev.nix"
     "${nixpkgs}/pkgs/apps.nix"
     "${nixpkgs}/pkgs/school.nix"
-    "${nixpkgs}/pkgs/acdc.nix"
 
     # Fonts
     "${nixpkgs}/pkgs/fonts.nix"
@@ -29,7 +29,6 @@ in
     "${programs}/battery.nix"
 
     (import "${programs}/spicetify" { inherit my pkgs; })
-    #(import "${programs}/awesome" { inherit my lib pkgs; })
     (import "${programs}/polybar" { inherit my pkgs lib; network = "wlp0s20f3"; })
     (import "${programs}/i3/i3.nix" { inherit my pkgs lib my_gaps; })
   ];
@@ -37,8 +36,8 @@ in
   # Standalone programs (don't need to download other configurations or change system-wide configurations)
   programs = { };
 
-  home.packages = [
-    jetbrains.clion
+  home.packages = with pkgs; [
+    miru
   ];
 
   services = {
