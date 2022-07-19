@@ -34,10 +34,13 @@ in
   ];
 
   # Standalone programs (don't need to download other configurations or change system-wide configurations)
-  programs = { };
+  programs = {
+    autorandr = import "${programs}/autorandr/laptop.nix";
+  };
 
   home.packages = with pkgs; [
     miru
+    autorandr
   ];
 
   services = {

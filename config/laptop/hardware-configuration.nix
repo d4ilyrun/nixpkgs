@@ -3,6 +3,15 @@
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, modulesPath, ... }:
 
+let
+  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec "$@"
+  '';
+in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -10,8 +19,10 @@
 
   boot = {
     initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-    initrd.kernelModules = [ ];
-    kernelModules = [ "kvm-intel" ];
+    initrd.kernelModules = [ "nvidia-uvm" "nvidia" "nvidia_modeset" "nvidia_drm" ];
+    kernelParams = [ "nvidia-drm.modeset=1" ];
+    kernelModules = [ "kvm-intel" "nvidia-uvm" "nvidia" "nvidia_modeset" "nvidia_drm" ];
+    blacklistedKernelModules = [ "nouveau" ];
     extraModulePackages = [ ];
   };
 
@@ -31,15 +42,23 @@
   ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # NVIDIA STUFF
 
+  environment.systemPackages = [ nvidia-offload ];
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  hardware.nvidia.prime = {
-    offload.enable = true;
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:1:0:0";
+  hardware = {
+    opengl = {
+      enable = true;
+    };
+    nvidia = {
+      modesetting.enable = true;
+      prime = {
+        sync.enable = true;
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
+    };
   };
 }
