@@ -65,13 +65,6 @@
         enable = true;
         package = pkgs.i3-gaps;
       };
-
-      awesome = {
-        enable = true;
-        luaModules = with pkgs.luaPackages; [
-          luarocks # is the package manager for Lua modules
-        ];
-      };
     };
 
     displayManager = {
@@ -117,7 +110,7 @@
     vim
     curl
     fish
-    spotify
+    docker
   ];
 
   # Download patched fonts from nerd fonts to use glyphs in the terminal
@@ -132,6 +125,8 @@
     # don’t shutdown when power button is short-pressed
     HandlePowerKey=ignore
   '';
+
+  virtualisation.docker.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

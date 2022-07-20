@@ -6,6 +6,10 @@ let
   nixpkgs = my.config.nixpkgs;
   programs = "${nixpkgs}/programs";
 
+  modifier = "Mod4";
+  primary = "eDP-1-1";
+  secondary = "HDMI-0";
+
   my_gaps = {
     inner = 6;
     smartGaps = false;
@@ -41,12 +45,21 @@ in
   home.packages = with pkgs; [
     miru
     autorandr
+    arandr
   ];
 
   services = {
     batteryNotifier = {
       enable = true;
       device = "BAT1";
+      notifyCapacity = 100;
+    };
+  };
+
+  xsession.windowManager.i3.config = {
+    keybindings = lib.mkOptionDefault {
+      "Ctrl+${modifier}+Up" = "move workspace to output ${secondary}";
+      "Ctrl+${modifier}+Down" = "move workspace to output ${primary}";
     };
   };
 }

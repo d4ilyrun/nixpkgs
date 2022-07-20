@@ -9,6 +9,7 @@ local plugins = {
     'gitsigns',
     'glow',
     'indent-blankline',
+    'notify',
     'null-ls',
     'nvim-tree',
     'startup',

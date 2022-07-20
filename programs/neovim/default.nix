@@ -78,6 +78,7 @@ in
       (plugin "norcalli/nvim-colorizer.lua") # color-previewer
       (plugin "lukas-reineke/indent-blankline.nvim")
       (plugin "smithbm2316/centerpad.nvim")
+      (plugin "rcarriga/nvim-notify")
 
       # LSP
       (plugin "neovim/nvim-lspconfig")
@@ -114,7 +115,7 @@ in
       glow-nvim
 
       # themes
-      (pluginWithName "catpuccin" "catppuccin/nvim")
+      (plugin "catppuccin/nvim")
       (plugin "joshdick/onedark.vim")
       (plugin "tiagovla/tokyodark.nvim")
     ];

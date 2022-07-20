@@ -8,6 +8,7 @@ in
   home.packages = with pkgs; [
     # CLI
     pre-commit
+    docker
 
     # C/C++
     gcc clang-tools

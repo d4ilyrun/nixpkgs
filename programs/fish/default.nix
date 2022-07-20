@@ -45,6 +45,7 @@ in
       ll="exa -l --icons";
       la="exa -a --icons";
       lla="exa -al --icons";
+      tree="exa --tree --icons";
       cat="bat --theme ansi";
 
       # Colorize grep output (good for log files);

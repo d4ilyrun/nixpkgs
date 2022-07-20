@@ -22,7 +22,6 @@ in
     "${nixpkgs}/pkgs/dev.nix"
     "${nixpkgs}/pkgs/apps.nix"
     "${nixpkgs}/pkgs/school.nix"
-    "${nixpkgs}/pkgs/acdc.nix"
 
     # Fonts
     "${nixpkgs}/pkgs/fonts.nix"
@@ -36,7 +35,6 @@ in
   ];
 
   home.packages = with pkgs; [
-    jetbrains.clion
     autorandr
   ];
 
