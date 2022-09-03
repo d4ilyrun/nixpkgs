@@ -46,8 +46,8 @@ in
 
   xsession.windowManager.i3.config = {
     keybindings = lib.mkOptionDefault {
-      "Ctrl+${modifier}+Right" = "move workspace to output ${secondary}";
-      "Ctrl+${modifier}+Left" = "move workspace to output ${primary}";
+      "Ctrl+${modifier}+Left" = "move workspace to output ${secondary}";
+      "Ctrl+${modifier}+Right" = "move workspace to output ${primary}";
     };
   };
 

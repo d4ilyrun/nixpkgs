@@ -32,15 +32,15 @@ require("bufferline").setup{
 
     highlights = {
         modified = {
-            guifg = { attribute = "fg", highlight = "TabLine" },
-            guibg = { attribute = "bg", highlight = "TabLine" },
+            fg = { attribute = "fg", highlight = "TabLine" },
+            bg = { attribute = "bg", highlight = "TabLine" },
         },
         modified_selected = {
-            guifg = { attribute = "fg", highlight = "Normal" },
-            guibg = { attribute = "bg", highlight = "Normal" },
+            fg = { attribute = "fg", highlight = "Normal" },
+            bg = { attribute = "bg", highlight = "Normal" },
         },
         modified_visible = {
-            guifg = { attribute = "fg", highlight = "TabLine" },
-            guibg = { attribute = "bg", highlight = "TabLine" },
+            fg = { attribute = "fg", highlight = "TabLine" },
+            bg = { attribute = "bg", highlight = "TabLine" },
         }, },
     }

@@ -107,8 +107,11 @@ in
       (plugin "rcarriga/nvim-dap-ui")
       (plugin "nvim-telescope/telescope-dap.nvim")
       (plugin "Shatur/neovim-cmake")
-      (plugin "danymat/neogen")
+      # (plugin "danymat/neogen")
       (plugin "lewis6991/gitsigns.nvim")
+      (plugin "nvim-neotest/neotest")
+      (plugin "alfaix/neotest-gtest")
+      (plugin "antoinemadec/FixCursorHold.nvim")
 
       # Media files
       (plugin "marioortizmanero/adoc-pdf-live.nvim") # PDF viewer

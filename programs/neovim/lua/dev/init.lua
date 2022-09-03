@@ -6,6 +6,7 @@ local plugins = {
     'cmake',
     'dap',
     'dapui',
+    'neotest',
 }
 
 for _,plugin in ipairs(plugins) do

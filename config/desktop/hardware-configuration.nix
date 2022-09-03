@@ -4,12 +4,6 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 
-let
-  v4l2loopback-dc = config.boot.kernelPackages.callPackage ./modules/v4l2loopback-dc.nix { };
-  droidcam = pkgs.callPackage ./modules/droidcam.nix { 
-    kernel = pkgs.linuxPackages;
-  };
-in
 {
   imports =
     [
@@ -19,9 +13,6 @@ in
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
-
-  boot.extraModulePackages = [ v4l2loopback-dc ];
-  environment.systemPackages = [ droidcam ];
 
   fileSystems."/" =
     {
