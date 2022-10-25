@@ -5,30 +5,47 @@
 
 
 {
-  imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot = {
+    initrd = {
+      availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+      kernelModules = [ ];
+    };
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/0412975b-8410-46be-9942-1569b2a3e6b5";
+    kernelModules = [ "amdgpu" "kvm-amd" ];
+  };
+
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/nixos";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/66B7-06BA";
+    "/boot" = {
+      device = "/dev/disk/by-label/boot";
       fsType = "vfat";
     };
+  };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/bb3541d3-cc1a-49cc-91a6-50c0059cf4a4"; }];
+  swapDevices = [
+    { device = "/dev/disk/by-label/swap"; }
+  ];
 
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware = {
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [ amdvlk ];
+    };
+  };
+
+  services.xserver = {
+    videoDrivers = [ "amdgpu" ];
+  };
 }
 
