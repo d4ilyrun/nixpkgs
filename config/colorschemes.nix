@@ -72,7 +72,7 @@
   dracula = {
     primary = {
       background = "#282a36";
-      foreground =  "#f8f8f2";
+      foreground = "#f8f8f2";
       accent = "#ff5555";
     };
 
@@ -135,11 +135,11 @@
   onedark = rec {
     primary = {
       background = normal.black;
-      foreground =  normal.white;
+      foreground = normal.white;
       accent = normal.red;
     };
 
-    normal =  {
+    normal = {
       black = "#282C34";
       red = "#e06c75";
       green = "#98c379";

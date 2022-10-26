@@ -3,209 +3,209 @@ let
   soundNotification = pkgs.writeScript "play-notification-sound.sh" ''
     #!/bin/sh
     ${pkgs.pulseaudio}/bin/paplay ${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/window-attention.oga
-    '';
+  '';
 in
-  {
-    enable = true;
-    settings = with my.config.colorscheme; {
-      global = {
+{
+  enable = true;
+  settings = with my.config.colorscheme; {
+    global = {
 
-        # --- Display --- #
+      # --- Display --- #
 
-        # The monitor to be displayed to
-        monitor = 0;
-        follow = "none";
+      # The monitor to be displayed to
+      monitor = 0;
+      follow = "none";
 
-        width = 300;
-        # height = 260;
-        origin = "top-right";
-        offset = "30x60";
+      width = 300;
+      # height = 260;
+      origin = "top-right";
+      offset = "30x60";
 
-        progress_bar = "true";
-        progress_bar_height = 10;
-        progress_bar_frame_width = 1;
-        progress_bar_min_width = 150;
-        progress_bar_max_width = 300;
-
-
-        # Show how many messages are hidden
-        indicate_hidden = "yes";
-
-        # Shrink window if it's smaller than the width.
-        shrink = "no";
-
-        # The transparency of the window.
-        transparency = 1;
-
-        # Draw a line between multiple notifications
-        separator_height = 4;
-
-        separator_color = "#1e2137aa";
-
-        # Set notification padding
-        padding = 16;
-        horizontal_padding = 16;
-
-        # Disable frame (border)
-        frame_width = 1;
-
-        # Sort messages by urgency.
-        sort = "no";
-
-        # Disable idle time
-        idle_threshold = 0;
+      progress_bar = "true";
+      progress_bar_height = 10;
+      progress_bar_frame_width = 1;
+      progress_bar_min_width = 150;
+      progress_bar_max_width = 300;
 
 
-        # --- Text --- #
+      # Show how many messages are hidden
+      indicate_hidden = "yes";
 
-        # Set the font
-        # font = Noto Sans 11"";
-        font = "Hack Nerd Font 11";
+      # Shrink window if it's smaller than the width.
+      shrink = "no";
 
-        # Set line height to font height
-        line_height = 0;
+      # The transparency of the window.
+      transparency = 1;
 
-        # Reference for markup and formatting:
-        #  <b>bold</b>
-        #  <i>italic</i>
-        #  <s>strikethrough</s>
-        #  <u>underline</u>
-        #  <https://developer.gnome.org/pango/stable/pango-Markup.html>.
-        #  %a appname
-        #  %s summary
-        #  %b body
-        #  %i iconname (including its path)
-        #  %I iconname (without its path)
-        #  %p progress value if set ([  0%] to [100%]) or nothing
-        #  %n progress value if set without any extra characters
-        #  %% Literal %
+      # Draw a line between multiple notifications
+      separator_height = 4;
 
-        markup = "full";
-        format = "<b>%a</b>\n%s";
+      separator_color = "#1e2137aa";
 
-        # Left align the text
-        alignment = "left";
+      # Set notification padding
+      padding = 16;
+      horizontal_padding = 16;
 
-        # Vertical alignment of message text and icon.
-        vertical_alignment = "center";
+      # Disable frame (border)
+      frame_width = 1;
 
-        # Show age of message if message is old
-        show_age_threshold = 120;
+      # Sort messages by urgency.
+      sort = "no";
 
-        # Wrap text if it doesn't fit in geometry
-        word_wrap = "yes";
-
-        # Where to place ellipses if word wrap is disabled
-        # ellipsize = "middle";
-
-        # Use newlines '\n' in notifications.
-        ignore_newline = "no";
-
-        # Don't stack together notifications
-        stack_duplicates = "false";
-
-        # Hide the count of stacked notifications
-        # hide_duplicate_count = "false";
-
-        # Display indicators for URLs (U) and actions (A).
-        show_indicators = "yes";
+      # Disable idle time
+      idle_threshold = 0;
 
 
-        # ---- Icons ---- #
+      # --- Text --- #
 
-        # Align icons left/right/off
-        icon_position = "left";
+      # Set the font
+      # font = Noto Sans 11"";
+      font = "Hack Nerd Font 11";
 
-        # Scale small icons up to this size, set to 0 to disable.
-        min_icon_size = 60;
+      # Set line height to font height
+      line_height = 0;
 
-        # Scale larger icons down to this size, set to 0 to disable
-        max_icon_size = 60;
+      # Reference for markup and formatting:
+      #  <b>bold</b>
+      #  <i>italic</i>
+      #  <s>strikethrough</s>
+      #  <u>underline</u>
+      #  <https://developer.gnome.org/pango/stable/pango-Markup.html>.
+      #  %a appname
+      #  %s summary
+      #  %b body
+      #  %i iconname (including its path)
+      #  %I iconname (without its path)
+      #  %p progress value if set ([  0%] to [100%]) or nothing
+      #  %n progress value if set without any extra characters
+      #  %% Literal %
 
-        # Paths to default icons.
-        icon_path = "/home/kai/.icons/Reversal-blue/apps/scalable:/usr/share/icons/Adwaita/256x256/legacy/";
+      markup = "full";
+      format = "<b>%a</b>\n%s";
+
+      # Left align the text
+      alignment = "left";
+
+      # Vertical alignment of message text and icon.
+      vertical_alignment = "center";
+
+      # Show age of message if message is old
+      show_age_threshold = 120;
+
+      # Wrap text if it doesn't fit in geometry
+      word_wrap = "yes";
+
+      # Where to place ellipses if word wrap is disabled
+      # ellipsize = "middle";
+
+      # Use newlines '\n' in notifications.
+      ignore_newline = "no";
+
+      # Don't stack together notifications
+      stack_duplicates = "false";
+
+      # Hide the count of stacked notifications
+      # hide_duplicate_count = "false";
+
+      # Display indicators for URLs (U) and actions (A).
+      show_indicators = "yes";
 
 
-        # --- History --- #
+      # ---- Icons ---- #
 
-        # Avoid timing out hidden notifications
-        sticky_history = "yes";
+      # Align icons left/right/off
+      icon_position = "left";
 
-        # Maximum amount of notifications kept in history
-        history_length = 100;
+      # Scale small icons up to this size, set to 0 to disable.
+      min_icon_size = 60;
 
+      # Scale larger icons down to this size, set to 0 to disable
+      max_icon_size = 60;
 
-        # --- Misc/Advanced --- #
-
-        dmenu = "${pkgs.dmenu}/bin/dmenu -p dunst:";
-
-        # Browser for opening urls in context menu.
-        browser = "${pkgs.firefox}/bin/firefox -new-tab";
-
-        # Always run rule-defined scripts, even if the notification is suppressed
-        always_run_script = "false";
-
-        # Define the title of the windows spawned by dunst
-        title = "Dunst";
-
-        # Define the class of the windows spawned by dunst
-        class = "Dunst";
-
-        # Define the corner radius of the notification window
-        corner_radius = 0;
-
-        # Don't gnore the dbus closeNotification message.
-        ignore_dbusclose = "false";
+      # Paths to default icons.
+      icon_path = "/home/kai/.icons/Reversal-blue/apps/scalable:/usr/share/icons/Adwaita/256x256/legacy/";
 
 
-        # --- Legacy --- #
+      # --- History --- #
 
-        # Use the Xinerama extension instead of RandR for multi-monitor support.
-        force_xinerama = "false";
+      # Avoid timing out hidden notifications
+      sticky_history = "yes";
 
-        # --- Mouse --- #
-        mouse_left_click = "close_current";
-        mouse_middle_click = "do_action, close_current";
-        mouse_right_click = "close_all";
-      };
+      # Maximum amount of notifications kept in history
+      history_length = 100;
 
-      shortcuts = {
-        close = "alt+space";
-        close_all = "alt+shift+space";
-      };
 
-      urgency_low = {
-        background = primary.background;
-        foreground = primary.foreground;
-        frame_color = primary.foreground;
-        highlight = primary.accent;
-        timeout = 8;
-      };
+      # --- Misc/Advanced --- #
 
-      urgency_normal = {
-        background = primary.background;
-        foreground = primary.foreground;
-        frame_color = primary.foreground;
-        timeout = 8;
-      };
+      dmenu = "${pkgs.dmenu}/bin/dmenu -p dunst:";
 
-      urgency_critical = {
-        background = primary.background;
-        foreground = primary.foreground;
-        frame_color = normal.red;
-        timeout = 0;
-        icon = "abrt";
-      };
+      # Browser for opening urls in context menu.
+      browser = "${pkgs.firefox}/bin/firefox -new-tab";
+
+      # Always run rule-defined scripts, even if the notification is suppressed
+      always_run_script = "false";
+
+      # Define the title of the windows spawned by dunst
+      title = "Dunst";
+
+      # Define the class of the windows spawned by dunst
+      class = "Dunst";
+
+      # Define the corner radius of the notification window
+      corner_radius = 0;
+
+      # Don't gnore the dbus closeNotification message.
+      ignore_dbusclose = "false";
+
+
+      # --- Legacy --- #
+
+      # Use the Xinerama extension instead of RandR for multi-monitor support.
+      force_xinerama = "false";
+
+      # --- Mouse --- #
+      mouse_left_click = "close_current";
+      mouse_middle_click = "do_action, close_current";
+      mouse_right_click = "close_all";
+    };
+
+    shortcuts = {
+      close = "alt+space";
+      close_all = "alt+shift+space";
+    };
+
+    urgency_low = {
+      background = primary.background;
+      foreground = primary.foreground;
+      frame_color = primary.foreground;
+      highlight = primary.accent;
+      timeout = 8;
+    };
+
+    urgency_normal = {
+      background = primary.background;
+      foreground = primary.foreground;
+      frame_color = primary.foreground;
+      timeout = 8;
+    };
+
+    urgency_critical = {
+      background = primary.background;
+      foreground = primary.foreground;
+      frame_color = normal.red;
+      timeout = 0;
+      icon = "abrt";
+    };
 
     # Spotify = {
     #   appname="notify-send";
     #   skip_display = true;
     # };
 
-      play_sound = {
-        summary = "nothing"; # TODO select only important ones
-        script = "${soundNotification}";
-      };
+    play_sound = {
+      summary = "nothing"; # TODO select only important ones
+      script = "${soundNotification}";
+    };
 
 
     # Every section that isn't one of the above is interpreted as a rules to
@@ -263,6 +263,6 @@ in
     # vim: ft=cfg
 
 
-    };
-  }
+  };
+}
 

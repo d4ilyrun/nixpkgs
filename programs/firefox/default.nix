@@ -20,7 +20,7 @@
     "${my.config.username}" = {
       name = my.config.username;
       isDefault = true;
-      
+
       settings = {
         "browser.startup.homepage" = "https://search.nixos.org/packages";
         "browser.search.region" = "US";
@@ -34,7 +34,7 @@
       userChrome = builtins.readFile "${my.config.nixpkgs}/programs/firefox/tokyo-night-fox/chrome/userChrome.css";
       userContent = builtins.readFile "${my.config.nixpkgs}/programs/firefox/tokyo-night-fox/chrome/userContent.css";
 
-      bookmarks = {};
+      bookmarks = { };
     };
   };
 }

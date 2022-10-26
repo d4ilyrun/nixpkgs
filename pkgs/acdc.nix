@@ -3,7 +3,8 @@
 {
   home.packages = with pkgs; [
     # ocaml
-    opam ocaml
+    opam
+    ocaml
     pkg-config
     bubblewrap
     xorg.libX11
@@ -13,7 +14,7 @@
     dotnetCorePackages.sdk_5_0
     dotnetCorePackages.runtime_5_0
   ]
-  ++ ( with ocamlPackages; [
+  ++ (with ocamlPackages; [
     graphics
     findlib
     batteries

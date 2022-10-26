@@ -54,33 +54,33 @@
     in
     {
       nixosConfigurations =
-      let
-        systemConfig = modules: lib.nixosSystem { inherit system modules pkgs; };
-      in
-      {
-        desktop = systemConfig [ ./config/desktop/configuration.nix ];
-        laptop = systemConfig [ ./config/laptop/configuration.nix ];
-        yaka = systemConfig [ ./config/yaka/configuration.nix ];
-      };
+        let
+          systemConfig = modules: lib.nixosSystem { inherit system modules pkgs; };
+        in
+        {
+          desktop = systemConfig [ ./config/desktop/configuration.nix ];
+          laptop = systemConfig [ ./config/laptop/configuration.nix ];
+          yaka = systemConfig [ ./config/yaka/configuration.nix ];
+        };
 
       homeConfigurations =
-      let
-        homeConfig = imports: home-manager.lib.homeManagerConfiguration {
-          inherit pkgs system username homeDirectory stateVersion;
-          configuration = {
-            inherit imports;
-            programs.home-manager.enable = true;
-            news.display = "silent";
+        let
+          homeConfig = imports: home-manager.lib.homeManagerConfiguration {
+            inherit pkgs system username homeDirectory stateVersion;
+            configuration = {
+              inherit imports;
+              programs.home-manager.enable = true;
+              news.display = "silent";
+            };
           };
-        };
-      in
-      {
-        desktop = homeConfig [ ./user/leo.nix ./config/desktop ];
-        laptop = homeConfig [ ./user/leo.nix ./config/laptop ];
-        yaka = homeConfig [ ./user/leo.nix ./config/yaka ];
-        empty = homeConfig [ ];
+        in
+        {
+          desktop = homeConfig [ ./user/leo.nix ./config/desktop ];
+          laptop = homeConfig [ ./user/leo.nix ./config/laptop ];
+          yaka = homeConfig [ ./user/leo.nix ./config/yaka ];
+          empty = homeConfig [ ];
 
-        "${username}" = self.homeConfigurations.empty;
-      };
+          "${username}" = self.homeConfigurations.empty;
+        };
     };
 }

@@ -27,7 +27,7 @@ in
       AddKeysToAgent yes
       IdentityFile ~/.ssh/default
       IdentitiesOnly yes
-      '';
+    '';
   };
 }
 

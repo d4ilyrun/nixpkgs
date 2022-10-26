@@ -1,6 +1,6 @@
 # TODO: see https://github.com/rycee/home-manager/issues/250 for instructions
 
-{ config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
@@ -20,7 +20,8 @@ let
 
     '';
   };
-in {
+in
+{
   options = {
     services.batteryNotifier = {
       enable = mkOption {

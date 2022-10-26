@@ -2,7 +2,7 @@
 
 {
   xsession.windowManager.bspwm = {
-    
+
     enable = true;
 
     settings = {
@@ -16,8 +16,7 @@
       focus_follows_pointer = true;
     };
 
-    rules = {
-    };
+    rules = { };
 
     startupPrograms = [
       "${pkgs.feh}/bin/feh --bg-scale ${my.config.wallpaper}"

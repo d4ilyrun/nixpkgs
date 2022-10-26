@@ -5,14 +5,14 @@ let
     ${pkgs.pulseaudio}/bin/paplay ${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/window-attention.oga
   '';
 in
-  {
-    enable = true;
-    settings = with my.config.colorscheme; {
-      global = {
+{
+  enable = true;
+  settings = with my.config.colorscheme; {
+    global = {
       ### DISPLAY ###
       geometry = "300x5-30+20";
       indicate_hidden = "yes";
-      follow="mouse";
+      follow = "mouse";
       shrink = "no";
 
       notification_height = 0;
@@ -147,6 +147,6 @@ in
     # vim: ft=cfg
 
 
-    };
-  }
+  };
+}
 
