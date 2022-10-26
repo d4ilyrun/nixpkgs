@@ -6,6 +6,8 @@ local setup = {
     },
 }
 
+which_key.setup(setup)
+
 local opts = {
     prefix = "<leader>",
     nowait = true,
@@ -55,7 +57,10 @@ local keymaps = {
         ["<M-cr>"] = { "<cmd>Lspsaga open_floaterm lazygit<cr>", "Lazygit" },
     },
 
-    c = { name = "Colorscheme", s = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" } },
+    c = {
+        name = "Colorscheme",
+        s = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" } ,
+    },
 
     t = {
         name = "Tabs/Buffers",
@@ -109,8 +114,8 @@ local keymaps = {
 
     ["<F1>"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     ["<M-cr>"] = { "<cmd>Lspsaga open_floaterm<cr>", "Floating Terminal" },
+    l = { "<cmd>!clang-format --style=file -i %<cr>", "Clang-format" },
 
 }
 
-which_key.setup(setup)
 which_key.register(keymaps, opts)
