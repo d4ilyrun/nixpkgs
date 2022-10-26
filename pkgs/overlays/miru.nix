@@ -4,7 +4,7 @@ with pkgs;
 
 stdenv.mkDerivation rec {
   pname = "miru";
-  version = "2.10.0";
+  version = "3.1.8";
 
   src = fetchurl {
     url = "https://github.com/ThaUnknown/miru/releases/download/v${version}/linux-x86_64-Miru-${version}.AppImage";

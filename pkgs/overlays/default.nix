@@ -1,19 +1,8 @@
 let
-  discord_url = https://discord.com/api/download?platform=linux&format=tar.gz;
+  overlay = (name: file: (self: super: {
+    "${name}" = super.callPackage file { inherit (super); };
+  }));
 in
-{
-  overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    }))
-
-    (self: super: {
-      discord = super.discord.overrideAttrs (_: { src = builtins.fetchTarball discord_url; });
-      miru = super.callPackage ./miru.nix { inherit (super); };
-    })
-  ];
-
-  overrides = {
-    nur = builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz";
-  };
-}
+[
+  (overlay "miru" ./miru.nix)
+]

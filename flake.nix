@@ -2,33 +2,60 @@
   description = "My system config.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
+    nixpkgs = {
+      type = "github";
+      owner = "NixOs";
+      repo = "nixpkgs";
+      ref = "nixos-21.11";
+    };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-21.11";
+      type = "github";
+      owner = "nix-community";
+      repo = "home-manager";
+      ref = "release-21.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nur = {
+      type = "github";
+      owner = "nix-community";
+      repo = "NUR";
+      ref = "master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # OVERLAYS
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    discord.url = "github:InternetUnexplorer/discord-overlay";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
     let
       system = "x86_64-linux";
-      username = "leo";
-      homeDirectory = "/home/${username}";
       stateVersion = "21.11";
 
+      my = import ./config;
+      username = my.config.username;
+      homeDirectory = my.config.home;
+
+      overlays = import ./pkgs/overlays;
+
+      lib = nixpkgs.lib;
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ ];
+        overlays = with inputs; [
+          neovim-nightly.overlay
+          discord.overlay
+          nur.overlay
+        ] ++ overlays;
       };
-
-      lib = nixpkgs.lib;
     in
     {
       nixosConfigurations =
       let
-        systemConfig = modules: lib.nixosSystem { inherit system modules; };
+        systemConfig = modules: lib.nixosSystem { inherit system modules pkgs; };
       in
       {
         desktop = systemConfig [ ./config/desktop/configuration.nix ];
@@ -39,11 +66,10 @@
       homeConfigurations =
       let
         homeConfig = imports: home-manager.lib.homeManagerConfiguration {
-          inherit system username homeDirectory stateVersion;
+          inherit pkgs system username homeDirectory stateVersion;
           configuration = {
             inherit imports;
             programs.home-manager.enable = true;
-            nixpkgs.config.allowUnfree = true;
             news.display = "silent";
           };
         };
@@ -54,7 +80,7 @@
         yaka = homeConfig [ ./user/leo.nix ./config/yaka ];
         empty = homeConfig [ ];
 
-        leo = self.homeConfigurations.empty;
+        "${username}" = self.homeConfigurations.empty;
       };
     };
 }
