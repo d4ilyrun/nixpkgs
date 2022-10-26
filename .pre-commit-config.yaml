@@ -1,0 +1,8 @@
+default_stages: [ commit, prepare-commit-msg ]
+
+repos:
+  - repo: "https://github.com/d4ilyrun/pre-commit-hooks"
+    rev: "v1.0.5"
+    hooks:
+      - id: shellcheck
+      - id: apply-nixpkgs-fmt
