@@ -125,7 +125,15 @@ in
         Escape = "mode \"default\"";
       };
 
-      window.border = 3;
+      window = {
+        border = 3;
+
+        commands = [
+          { command = "border pixel 3"; criteria = { class = "Google-chrome"; }; }
+          { command = "border pixel 3"; criteria = { class = "Alacritty"; }; }
+          { command = "border pixel 3"; criteria = { class = "^.*"; }; }
+        ];
+      };
 
       assigns = {
         "${ws0}" = [
@@ -157,6 +165,7 @@ in
       bars = [ ];
 
       startup = [
+        { command = "birdtray"; }
         { command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaper} ${wallpaper_2}"; always = true; }
         { command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}"; always = true; }
         { command = "${pkgs.autorandr}/bin/autorandr -c"; always = false; }
