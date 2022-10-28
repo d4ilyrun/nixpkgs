@@ -11,7 +11,7 @@ in
     "${programs}/fish"
     "${programs}/rofi"
 
-    (import "${programs}/picom" { inherit pkgs; })
+    # (import "${programs}/picom" { inherit pkgs; })
   ];
 
   # Standalone programs (don't need to download other configurations or change system-wide configurations)

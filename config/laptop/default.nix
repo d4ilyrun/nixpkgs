@@ -43,7 +43,7 @@ in
   };
 
   home.packages = with pkgs; [
-    miru
+    # miru
     autorandr
     arandr
   ];

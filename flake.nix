@@ -6,14 +6,14 @@
       type = "github";
       owner = "NixOs";
       repo = "nixpkgs";
-      ref = "nixos-21.11";
+      ref = "master";
     };
 
     home-manager = {
       type = "github";
       owner = "nix-community";
       repo = "home-manager";
-      ref = "release-21.11";
+      ref = "master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -26,14 +26,14 @@
     };
 
     # OVERLAYS
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    neovim.url = "github:nix-community/neovim-nightly-overlay";
     discord.url = "github:InternetUnexplorer/discord-overlay";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
     let
       system = "x86_64-linux";
-      stateVersion = "21.11";
+      stateVersion = "22.11";
 
       my = import ./config;
       username = my.config.username;
@@ -46,7 +46,7 @@
         inherit system;
         config.allowUnfree = true;
         overlays = with inputs; [
-          neovim-nightly.overlay
+          neovim.overlay
           discord.overlay
           nur.overlay
         ] ++ overlays;
@@ -65,13 +65,9 @@
 
       homeConfigurations =
         let
-          homeConfig = imports: home-manager.lib.homeManagerConfiguration {
-            inherit pkgs system username homeDirectory stateVersion;
-            configuration = {
-              inherit imports;
-              programs.home-manager.enable = true;
-              news.display = "silent";
-            };
+          homeConfig = imports: home-manager.lib.homeManagerConfiguration rec {
+            inherit pkgs;
+            modules = imports;
           };
         in
         {

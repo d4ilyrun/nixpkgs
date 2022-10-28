@@ -5,6 +5,9 @@ let
 in
 {
   home = {
+    inherit (my.config) username;
+
+    stateVersion = "22.11";
     homeDirectory = my.config.home;
     sessionVariables = rec {
       PATH = "${my.config.home}/.npm-packages/bin/:$PATH";
