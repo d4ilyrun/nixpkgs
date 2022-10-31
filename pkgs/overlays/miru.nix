@@ -4,12 +4,12 @@ with pkgs;
 
 stdenv.mkDerivation rec {
   pname = "miru";
-  version = "3.1.8";
+  version = "3.1.21";
 
   src = fetchurl {
-    url = "https://github.com/ThaUnknown/miru/releases/download/v${version}/linux-x86_64-Miru-${version}.AppImage";
-    sha256 = "sha256-dJB0+Gy4Eo3uYNwNXmiyZT+niU5fcVlMJ7/cihcgD4c=";
-    name = "${pname}-${version}.AppImage";
+    url = "https://github.com/ThaUnknown/miru/releases/download/v${version}/linux-Miru-${version}.AppImage";
+    sha256 = "sha256-zEuQZkhrA580+J3awu0C+oLhiLiMkmV/iNcM1PQoZJ4=";
+    name = "linux-${pname}-${version}.AppImage";
   };
 
   appimageContents = appimageTools.extractType2 {
