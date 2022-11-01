@@ -1,8 +1,7 @@
 #~/.config/nixpkgs/config/desktop/index.nix
-{ config, lib, pkgs, ... }:
+{ my, config, lib, pkgs, spicetify-nix ... }:
 
 let
-  my = import ../.;
   nixpkgs = my.config.nixpkgs;
   programs = "${nixpkgs}/programs";
 
@@ -32,7 +31,7 @@ in
     # TODO: change it to an import function
     "${programs}/battery.nix"
 
-    (import "${programs}/spicetify" { inherit my pkgs; })
+    (import "${programs}/spicetify" { inherit my pkgs spicetify-nix; })
     (import "${programs}/polybar" { inherit my pkgs lib; network = "wlp0s20f3"; })
     (import "${programs}/i3/i3.nix" { inherit my pkgs lib my_gaps; })
   ];

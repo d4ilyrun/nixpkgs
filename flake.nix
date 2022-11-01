@@ -28,6 +28,7 @@
     # OVERLAYS
     neovim.url = "github:nix-community/neovim-nightly-overlay";
     discord.url = "github:InternetUnexplorer/discord-overlay";
+    spicetify-nix.url = "github:the-argus/spicetify-nix";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
@@ -67,6 +68,7 @@
         let
           homeConfig = imports: home-manager.lib.homeManagerConfiguration rec {
             inherit pkgs;
+            extraSpecialArgs = { inherit my; inherit (inputs) spicetify-nix; };
             modules = imports;
           };
         in

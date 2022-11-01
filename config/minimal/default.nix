@@ -1,8 +1,7 @@
 #~/.config/nixpkgs/config/desktop/index.nix
-{ config, lib, pkgs, ... }:
+{ my, config, lib, pkgs, ... }:
 
 let
-  my = import ../.;
   programs = "${my.config.nixpkgs}/programs";
 in
 {
