@@ -6,7 +6,7 @@ let
   defaultTerminal = "${pkgs.alacritty}/bin/alacritty";
 in
 {
-  xdg.configFile."rofi/${theme}.rasi".source = "${my.config.nixpkgs}/programs/rofi/${theme}.rasi";
+  xdg.configFile."rofi/${theme}.rasi".source = "${my.config.nixpkgs}/applications/rofi/${theme}.rasi";
 
   programs.rofi = {
     inherit theme;

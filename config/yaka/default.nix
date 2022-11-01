@@ -4,7 +4,7 @@
 let
   my = import ../.;
   nixpkgs = my.config.nixpkgs;
-  programs = "${nixpkgs}/programs";
+  programs = "${nixpkgs}/applications";
 in
 {
   imports = [

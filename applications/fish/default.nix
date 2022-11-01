@@ -2,7 +2,7 @@
 
 let
   my = import ../../config/.;
-  dir = "${my.config.nixpkgs}/programs/fish";
+  dir = "${my.config.nixpkgs}/applications/fish";
 in
 
 {
@@ -71,7 +71,7 @@ in
       gpt = "git push --follow-tags";
       gtree = "tree -a -I \".git\"";
 
-      neofetch = "neofetch --config ~/.config/nixpkgs/programs/neofetch/config.conf";
+      neofetch = "neofetch --config ~/.config/nixpkgs/applications/neofetch/config.conf";
       nix-shell = "nix-shell --command 'fish'";
       dotfiles = "cd ${my.config.nixpkgs}";
     };

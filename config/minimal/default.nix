@@ -2,7 +2,7 @@
 { my, config, lib, pkgs, ... }:
 
 let
-  programs = "${my.config.nixpkgs}/programs";
+  programs = "${my.config.nixpkgs}/applications";
 in
 {
   imports = [

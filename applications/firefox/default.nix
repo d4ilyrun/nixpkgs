@@ -29,8 +29,8 @@
         "layout.css.backdrop-filter.enabled" = true; # blur style
       };
 
-      userChrome = builtins.readFile "${my.config.nixpkgs}/programs/firefox/tokyo-night-fox/chrome/userChrome.css";
-      userContent = builtins.readFile "${my.config.nixpkgs}/programs/firefox/tokyo-night-fox/chrome/userContent.css";
+      # userChrome = builtins.readFile "${my.config.nixpkgs}/applications/firefox/tokyo-night-fox/chrome/userChrome.css";
+      # userContent = builtins.readFile "${my.config.nixpkgs}/applications/firefox/tokyo-night-fox/chrome/userContent.css";
 
       bookmarks = { };
     };

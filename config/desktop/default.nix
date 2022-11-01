@@ -3,13 +3,13 @@
 
 let
   nixpkgs = my.config.nixpkgs;
-  programs = "${nixpkgs}/programs";
+  programs = "${nixpkgs}/applications";
 
   modifier = "Mod4";
   primary = "DisplayPort-0";
   secondary = "HDMI-A-0";
 
-  my_gaps = {
+  gaps = {
     inner = 8;
     smartGaps = false;
   };
@@ -30,7 +30,7 @@ in
 
     (import "${programs}/spicetify" { inherit my pkgs spicetify-nix; })
     (import "${programs}/polybar" { inherit my pkgs lib; network = "wlp35s0"; })
-    (import "${programs}/i3/i3.nix" { inherit my pkgs lib my_gaps; })
+    (import "${programs}/i3" { inherit my pkgs lib gaps; })
   ];
 
   home.packages = with pkgs; [

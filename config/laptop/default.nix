@@ -3,13 +3,13 @@
 
 let
   nixpkgs = my.config.nixpkgs;
-  programs = "${nixpkgs}/programs";
+  programs = "${nixpkgs}/applications";
 
   modifier = "Mod4";
   primary = "eDP-1-1";
   secondary = "HDMI-0";
 
-  my_gaps = {
+  gaps = {
     inner = 6;
     smartGaps = false;
   };
@@ -33,7 +33,7 @@ in
 
     (import "${programs}/spicetify" { inherit my pkgs spicetify-nix; })
     (import "${programs}/polybar" { inherit my pkgs lib; network = "wlp0s20f3"; })
-    (import "${programs}/i3/i3.nix" { inherit my pkgs lib my_gaps; })
+    (import "${programs}/i3" { inherit my pkgs lib gaps; })
   ];
 
   # Standalone programs (don't need to download other configurations or change system-wide configurations)

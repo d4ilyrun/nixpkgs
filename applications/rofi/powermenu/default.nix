@@ -1,7 +1,7 @@
 { my, pkgs }:
 
 let
-  dir = "${my.config.nixpkgs}/programs/rofi/powermenu";
+  dir = "${my.config.nixpkgs}/applications/rofi/powermenu";
   menu_theme = "card_rounded";
   lock_command = "${pkgs.betterlockscreen}/bin/betterlockscreen -l dimblur";
 in

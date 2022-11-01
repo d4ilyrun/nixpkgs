@@ -1,4 +1,4 @@
-{ my, pkgs, lib, my_gaps, ... }:
+{ my, pkgs, lib, gaps, ... }:
 
 let
   wallpaper = my.config.wallpaper;
@@ -7,13 +7,13 @@ let
   browser = "${pkgs.firefox}/bin/firefox";
   terminal = "${pkgs.kitty}/bin/kitty";
 
-  scripts = "${my.config.nixpkgs}/programs/i3/scripts";
+  scripts = "${my.config.nixpkgs}/applications/i3/scripts";
   volume = "bash ${scripts}/volume.sh";
   light = "bash ${scripts}/backlight.sh";
   screenshot = "bash ${scripts}/screenshot.sh";
 
   # Rofi
-  powermenu = import "${my.config.nixpkgs}/programs/rofi/powermenu" { inherit my pkgs; };
+  powermenu = import "${my.config.nixpkgs}/applications/rofi/powermenu" { inherit my pkgs; };
 
   ws1 = "1";
   ws2 = "2";
@@ -36,19 +36,19 @@ in
       modifier = "Mod4";
       inherit terminal;
 
-      gaps = my_gaps;
+      inherit gaps;
       defaultWorkspace = ws1;
 
       keybindings = lib.mkOptionDefault {
         "${modifier}+Return" = "exec ${terminal}";
         "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal ${terminal}";
         "${modifier}+Shift+d" = "exec rofi -sho-icons -show window";
-        "${modifier}+Shift+w" = "exec ${my.config.nixpkgs}/programs/rofi/network/rofi-network-manager.sh";
+        "${modifier}+Shift+w" = "exec ${my.config.nixpkgs}/applications/rofi/network/rofi-network-manager.sh";
         "${modifier}+Shift+q" = "kill";
 
         # Rofi menu selection
         "${modifier}+e" = "exec EDITOR='/usr/bin/env nvim' ${terminal} -e ranger"; # file explorer
-        #"${modifier}+Shift+e" = "exec rofi -modi 'Powermenu:~/.config/nixpkgs/programs/polybar/scripts/powermenu.sh' -show Powermenu";
+        #"${modifier}+Shift+e" = "exec rofi -modi 'Powermenu:~/.config/nixpkgs/applications/polybar/scripts/powermenu.sh' -show Powermenu";
         "${modifier}+Shift+e" = "exec ${powermenu}";
         "${modifier}+comma" = "exec rofi -show-emoji";
 

@@ -1,7 +1,7 @@
 { my, pkgs, ... }:
 
 let
-  dir = "${my.config.nixpkgs}/programs/polybar";
+  dir = "${my.config.nixpkgs}/applications/polybar";
 
   # Config HERE
   network_interface = "wlp0s20f3";

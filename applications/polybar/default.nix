@@ -8,7 +8,7 @@
 with my.config.colorscheme;
 
 let
-  dir = "${my.config.nixpkgs}/programs/polybar";
+  dir = "${my.config.nixpkgs}/applications/polybar";
 
   # Config HERE
   # Find theses names with $ls -1 /sys/class/power_supply/
@@ -121,7 +121,7 @@ in
         type = "custom/text";
         content = "%{O-3}";
         format-spacing = 1;
-        click-left = "rofi -modi 'Powermenu:~/.config/nixpkgs/programs/polybar/scripts/powermenu.sh' -show Powermenu";
+        click-left = "rofi -modi 'Powermenu:~/.config/nixpkgs/applications/polybar/scripts/powermenu.sh' -show Powermenu";
       };
 
       "module/xwindow" = {
@@ -155,7 +155,7 @@ in
 
       "module/wireless-network" =
         let
-          rofi = "${my.config.nixpkgs}/programs/rofi";
+          rofi = "${my.config.nixpkgs}/applications/rofi";
           nmcli-polybar = pkgs.writeShellApplication {
             name = "nmcli-polybar";
             text = "${rofi}/network/rofi-network-manager.sh";

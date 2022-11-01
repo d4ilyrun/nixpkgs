@@ -1,0 +1,20 @@
+Script started on 2022-05-18 22:32:40+02:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="189" LINES="48"]
+[?2004h]0;fish /home/leo/.config/nixpkgs/applications/polybar[30m(B[m[K[J[K
+[1;36mnixpkgs/applications/polybar[0m on [1;35m awesome[0m [1;31m[✘!?][0m 
+[1;32m➜[0m [38;2;218;218;232m[K[C[Cl[3C[38;2;227;140;143ml[3C[38;2;218;218;232m[38;2;110;108;126ms[3C[38;2;218;218;232m[38;2;227;140;143ms[4C[38;2;218;218;232m[38;2;164;185;239mls[4C[38;2;218;218;232m[4C
+[30m(B[m[?2004l]0;ls /home/leo/.config/nixpkgs/applications/polybar[30m(B[m[30m(B[mdefault.nix  old.nix  [1;34mscripts[0m  typescript  wip.nix
+[2m⏎(B[m                                                                                                                                                                                            ⏎ [K[?2004h]0;fish /home/leo/.config/nixpkgs/applications/polybar[30m(B[m[K[J[K
+[1;36mnixpkgs/applications/polybar[0m on [1;35m awesome[0m [1;31m[✘!?][0m 
+[1;32m➜[0m [38;2;218;218;232m[K[C[Cls[4C[38;2;164;185;239mls[4C[38;2;218;218;232m[38;2;164;185;239mscript[8C[38;2;218;218;232m[38;2;164;185;239ms[9C[38;2;218;218;232m[38;2;227;140;143mscripts[9C[38;2;218;218;232m
+[30m(B[m[?2004l]0;scripts /home/leo/.config/nixpkgs/applications/polybar[30m(B[m[30m(B[mDBI connect('dbname=/nix/var/nix/profiles/per-user/root/channels/nixos/applications.sqlite','',...) failed: unable to open database file at /run/current-system/sw/bin/command-not-found line 13.
+cannot open database `/nix/var/nix/profiles/per-user/root/channels/nixos/applications.sqlite' at /run/current-system/sw/bin/command-not-found line 13.
+[2m⏎(B[m                                                                                                                                                                                            ⏎ [K[?2004h]0;fish /home/leo/.config/nixpkgs/applications/polybar[30m(B[m[K[J[K
+[1;36mnixpkgs/applications/polybar[0m on [1;35m awesome[0m [1;31m[✘!?][0m 
+[1;31m127[0m [1;31m➜[0m [38;2;218;218;232m[K[6Cl[7C[38;2;110;108;126ms[7C[38;2;218;218;232m[38;2;227;140;143ml[38;2;110;108;126ms[7C[38;2;218;218;232m[38;2;227;140;143ms[8C[38;2;218;218;232m[38;2;164;185;239mls[8C[38;2;218;218;232m[8C
+[30m(B[m[?2004l]0;ls /home/leo/.config/nixpkgs/applications/polybar[30m(B[m[30m(B[mdefault.nix  old.nix  [1;34mscripts[0m  typescript  wip.nix
+[2m⏎(B[m                                                                                                                                                                                            ⏎ [K[?2004h]0;fish /home/leo/.config/nixpkgs/applications/polybar[30m(B[m[K[J[K
+[1;36mnixpkgs/applications/polybar[0m on [1;35m awesome[0m [1;31m[✘!?][0m 
+[1;32m➜[0m [38;2;218;218;232m[K[C[C.[3C[38;2;164;185;239m.[3C[38;2;218;218;232m[38;2;110;108;126m [3C[38;2;218;218;232m[38;2;164;185;239m/[4C[38;2;218;218;232m[38;2;110;108;126mscripts/[4C[38;2;218;218;232m[38;2;164;185;239ms[38;2;110;108;126mcripts/[5C[38;2;218;218;232m[38;2;227;140;143m./s[38;2;110;108;126mcripts/[5C[38;2;218;218;232m[38;2;227;140;143mc[38;2;110;108;126mripts/[6C[38;2;218;218;232m[38;2;227;140;143mripts/[12C[38;2;218;218;232m[10D[38;2;164;185;239m./scripts/[12C[38;2;218;218;232m[12C
+[30m(B[m[?2004l]0;./scripts/ /home/leo/.config/nixpkgs/applications/polybar[30m(B[m[30m(B[m[2m⏎(B[m                                                                                                                                                                                            ⏎ [K[?2004h]0;fish /home/leo/.config/nixpkgs/applications/polybar/scripts[30m(B[m[K[J[K
+[1;36mnixpkgs/applications/polybar/scripts[0m on [1;35m awesome[0m [1;31m[✘!?][0m via [1;33m🐍 v3.9.6 [0m
+[1;32m➜[0m [38;2;218;218;232m[K[C[Cl[3C[38;2;110;108;126ms[3C[38;2;218;218;232m[38;2;227;1

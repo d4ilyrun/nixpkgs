@@ -13,5 +13,5 @@
   baseIndex = 1;
   sensibleOnTop = true;
 
-  extraConfig = builtins.readFile "${my.config.nixpkgs}/programs/tmux/tokyodark.conf";
+  extraConfig = builtins.readFile "${my.config.nixpkgs}/applications/tmux/tokyodark.conf";
 }

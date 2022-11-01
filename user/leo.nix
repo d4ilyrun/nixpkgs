@@ -32,7 +32,7 @@ in
   };
 
   programs = {
-    git = import "${my.config.nixpkgs}/programs/git" { inherit my pkgs; };
+    git = import "${my.config.nixpkgs}/applications/git" { inherit my pkgs; };
   };
 
   systemd.user.startServices = true;

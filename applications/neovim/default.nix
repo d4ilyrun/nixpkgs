@@ -3,7 +3,7 @@
 let
   my = import ../../config;
 
-  vim_folder = "${my.config.nixpkgs}/programs/neovim";
+  vim_folder = "${my.config.nixpkgs}/applications/neovim";
   vim_plugins = "${vim_folder}/plugins";
   vim_lua = "${vim_folder}/lua";
   vim_themes = "${vim_folder}/themes";

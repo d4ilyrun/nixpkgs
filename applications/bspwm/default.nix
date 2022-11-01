@@ -21,7 +21,7 @@
     startupPrograms = [
       "${pkgs.feh}/bin/feh --bg-scale ${my.config.wallpaper}"
       "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${my.config.wallpaper}"
-      "${pkgs.eww}/bin/eww -c ${my.config.nixpkgs}/programs/eww/bar"
+      "${pkgs.eww}/bin/eww -c ${my.config.nixpkgs}/applications/eww/bar"
       "${pkgs.autorandr}/bin/autorandr -c"
     ];
 
