@@ -66,10 +66,12 @@
 
       homeConfigurations =
         let
-          homeConfig = imports: home-manager.lib.homeManagerConfiguration rec {
+          myModules = [ ./modules ./themes ];
+
+          homeConfig = imports: home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             extraSpecialArgs = { inherit my; inherit (inputs) spicetify-nix; };
-            modules = imports;
+            modules = imports ++ myModules;
           };
         in
         {
