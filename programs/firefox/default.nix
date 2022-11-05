@@ -9,11 +9,9 @@
     refined-github
     return-youtube-dislikes
     ublock-origin
-    tree-style-tab
-    bitwarden
     c-c-search-extension
     consent-o-matic
-    # vim-vixen
+    onepassword-password-manager
   ];
 
   profiles = {
