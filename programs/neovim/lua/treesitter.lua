@@ -1,5 +1,6 @@
 -- Treesitter
 require'nvim-treesitter.configs'.setup {
+  parser_install_dir = "~/.parsers",
   highlight = {
     enable = true,
     custom_captures = {
@@ -14,3 +15,4 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+vim.opt.runtimepath:append("~/.parsers")

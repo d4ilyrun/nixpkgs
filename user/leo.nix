@@ -27,6 +27,7 @@ in
     packages = with pkgs; [
       miru
       _1password
+      home-manager
     ];
   };
 

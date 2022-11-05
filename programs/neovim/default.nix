@@ -118,7 +118,7 @@ in
       glow-nvim
 
       # themes
-      (plugin "catppuccin/nvim")
+      (pluginWithName "catpuccin" "catppuccin/nvim")
       (plugin "joshdick/onedark.vim")
       (plugin "tiagovla/tokyodark.nvim")
     ];
