@@ -19,8 +19,10 @@
 
   # Nix settings, auto cleanup and enable flakes
   nix = {
-    autoOptimiseStore = true;
-    allowedUsers = [ "leo" ];
+    settings = {
+      auto-optimise-store = true;
+      allowed-users = [ "leo" ];
+    };
     gc = {
       automatic = true;
       dates = "daily";
@@ -30,11 +32,6 @@
       experimental-features = nix-command flakes
     '';
   };
-
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
     hostName = "leo";
