@@ -14,6 +14,7 @@
       window = {
         dynamic_padding = true;
         title = "Alacritty";
+        opacity = 0.93;
       };
 
       font = {
@@ -42,8 +43,6 @@
       };
 
       colors = my.config.colorscheme;
-
-      background_opacity = 0.93;
 
       shell = {
         program = "${pkgs.fish}/bin/fish";
