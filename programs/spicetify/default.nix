@@ -1,4 +1,4 @@
-{ spicetify-nix, ... }:
+{ pkgs, spicetify-nix, ... }:
 
 # see https://github.com/the-argus/spicetify-nix/blob/master/README.md
 
@@ -6,7 +6,7 @@
   # import the flake's module for your system
   imports = [ spicetify-nix.homeManagerModule ];
 
-  programs.spicetify.spicetifyPackage = spicetify-cli.overrideAttrs (oa: rec {
+  programs.spicetify.spicetifyPackage = pkgs.spicetify-cli.overrideAttrs (oa: rec {
     pname = "spicetify-cli";
     version = "2.9.9";
     src = pkgs.fetchgit {

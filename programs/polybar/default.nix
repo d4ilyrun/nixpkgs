@@ -22,9 +22,6 @@ let
     background = primary.background;
     purple = magenta;
   };
-
-  unstable = import <unstable> { };
-
 in
 {
   home.packages = [ ];
@@ -32,7 +29,7 @@ in
   services.polybar = {
     enable = true;
 
-    package = unstable.polybar.override {
+    package = pkgs.polybar.override {
       i3GapsSupport = true;
       alsaSupport = true;
       iwSupport = true;
