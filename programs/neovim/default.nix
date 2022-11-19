@@ -52,10 +52,19 @@ in
       lua path = "${vim_lua}"
       let g:vim_plugins_path="${vim_plugins}"
 
+      " You might have to force true color when using regular vim inside tmux as the
+      " colorscheme can appear to be grayscale with "termguicolors" option enabled.
+      if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+      endif
+
+      set termguicolors
+
+      source ${vim_themes}/${my.config.colorscheme_name}.vim
+
       source ${vim_folder}/settings.vim
       source ${vim_plugins}/plugins.vim
-      source ${vim_themes}/${my.config.colorscheme_name}.vim
-      lua dofile("${vim_lua}/init.lua")
     '';
 
     plugins = with pkgs.vimPlugins; [
@@ -117,7 +126,7 @@ in
       (plugin "marioortizmanero/adoc-pdf-live.nvim") # PDF viewer
       glow-nvim
 
-      # themes
+      # Themes
       (pluginWithName "catpuccin" "catppuccin/nvim")
       (plugin "joshdick/onedark.vim")
       (plugin "tiagovla/tokyodark.nvim")

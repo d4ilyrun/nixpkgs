@@ -1,3 +1,5 @@
+local mocha = require('catppuccin.palettes').get_palette "mocha"
+
 diagnostics_indicator = function(count, level, diagnostics_dict, context)
   local s = " "
   for e, n in pairs(diagnostics_dict) do
@@ -30,17 +32,24 @@ require("bufferline").setup{
         always_show_bufferline = true,
     },
 
-    highlights = {
-        modified = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
+    highlights = require("catppuccin.groups.integrations.bufferline").get {
+        styles = { "italic", "bold" },
+        custom = {
+            modified = {
+                fg = { attribute = "fg", highlight = "TabLine" },
+                bg = { attribute = "bg", highlight = "TabLine" },
+            },
+            modified_selected = {
+                fg = { attribute = "fg", highlight = "Normal" },
+                bg = { attribute = "bg", highlight = "Normal" },
+            },
+            modified_visible = {
+                fg = { attribute = "fg", highlight = "TabLine" },
+                bg = { attribute = "bg", highlight = "TabLine" },
+            },
+            mocha = {
+                background = { fg = mocha.text }
+            },
         },
-        modified_selected = {
-            fg = { attribute = "fg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "Normal" },
-        },
-        modified_visible = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        }, },
-    }
+    },
+}
