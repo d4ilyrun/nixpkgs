@@ -14,7 +14,6 @@ in
     sessionVariables = rec {
       PATH = "${my.config.home}/.nix-profile/bin:${my.config.home}/.npm-packages/bin/:$PATH";
       EDITOR = "nvim";
-      TERMINAL = "alacritty";
       BROWSER = my_browser;
     };
 

@@ -22,20 +22,14 @@
 
         normal = {
           family = "FiraCode Nerd Font";
-          #family = "JetBrainsMono Nerd Font";
-          #family = "UbuntuMono Nerd Font";
           style = "Regular";
         };
         bold = {
           family = "FiraCode Nerd Font";
-          #family = "JetBrainsMono Nerd Font";
-          #family = "UbuntuMono Nerd Font";
           style = "Bold";
         };
         italic = {
           family = "FiraCode Nerd Font";
-          #family = "JetBrainsMono Nerd Font";
-          #family = "UbuntuMono Nerd Font";
           style = "Italic";
         };
 

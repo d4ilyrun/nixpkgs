@@ -9,6 +9,7 @@ in
     "${programs}/neovim"
     "${programs}/fish"
     "${programs}/rofi"
+    "${programs}/kitty"
 
     (import "${programs}/picom" { inherit pkgs; })
   ];

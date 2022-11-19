@@ -1,11 +1,11 @@
-{ my, pkgs, lib, my_gaps }:
+{ my, pkgs, lib, my_gaps, ... }:
 
 let
   wallpaper = my.config.wallpaper;
   wallpaper_2 = my.wallpapers.vertical.anime.koucha_bench; # wallpaper for second screen
 
   browser = "${pkgs.firefox}/bin/firefox";
-  term = "${pkgs.alacritty}/bin/alacritty";
+  terminal = "${pkgs.kitty}/bin/kitty";
 
   scripts = "${my.config.nixpkgs}/programs/i3/scripts";
   volume = "bash ${scripts}/volume.sh";
@@ -34,20 +34,20 @@ in
     config = rec {
 
       modifier = "Mod4";
-      terminal = term;
+      inherit terminal;
 
       gaps = my_gaps;
       defaultWorkspace = ws1;
 
       keybindings = lib.mkOptionDefault {
-        "${modifier}+Return" = "exec ${term}";
-        "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal ${term}";
+        "${modifier}+Return" = "exec ${terminal}";
+        "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal ${terminal}";
         "${modifier}+Shift+d" = "exec rofi -sho-icons -show window";
         "${modifier}+Shift+w" = "exec ${my.config.nixpkgs}/programs/rofi/network/rofi-network-manager.sh";
         "${modifier}+Shift+q" = "kill";
 
         # Rofi menu selection
-        "${modifier}+e" = "exec EDITOR='/usr/bin/env nvim' alacritty -e ranger"; # file explorer
+        "${modifier}+e" = "exec EDITOR='/usr/bin/env nvim' ${terminal} -e ranger"; # file explorer
         #"${modifier}+Shift+e" = "exec rofi -modi 'Powermenu:~/.config/nixpkgs/programs/polybar/scripts/powermenu.sh' -show Powermenu";
         "${modifier}+Shift+e" = "exec ${powermenu}";
         "${modifier}+comma" = "exec rofi -show-emoji";

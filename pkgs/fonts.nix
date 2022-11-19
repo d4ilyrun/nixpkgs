@@ -5,6 +5,7 @@
 
   home.packages = with pkgs; [
     # Fonts
+    fira
     fira-code
     roboto-mono
     iosevka
