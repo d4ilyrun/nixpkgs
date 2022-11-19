@@ -14,7 +14,7 @@
       window = {
         dynamic_padding = true;
         title = "Alacritty";
-        opacity = 0.93;
+        opacity = 1; # 0.93
       };
 
       font = {

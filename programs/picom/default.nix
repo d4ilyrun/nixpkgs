@@ -22,8 +22,8 @@
     ];
 
     opacityRules = [
-      "100:class_g = 'Alacritty' && focused"
-      "90:class_g = 'Alacritty' && !focused"
+      #"100:class_g = 'Alacritty' && focused"
+      #"90:class_g = 'Alacritty' && !focused"
     ];
 
     vSync = true;
