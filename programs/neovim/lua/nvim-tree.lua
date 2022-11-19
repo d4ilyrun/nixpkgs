@@ -1,7 +1,41 @@
+-- examples for your init.lua
+
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
 require'nvim-tree'.setup {
+    sync_root_with_cwd = true,
+
+    update_focused_file = {
+        enable = true,
+        update_cwd = false,
+    },
+
     view = {
-        width = 20,
-        height = 20,
+        adaptive_size = false,
+        centralize_selection = false,
+        width = 30,
+        side = "left",
+        preserve_window_proportions = false,
+        number = false,
+        relativenumber = false,
+        signcolumn = "yes",
+        hide_root_folder = false,
+        float = {
+            enable = false,
+            open_win_config = {
+                relative = "editor",
+                border = "rounded",
+                width = 30,
+                height = 30,
+                row = 1,
+                col = 1,
+            },
+        },
     },
 
     create_in_closed_folder = true,
