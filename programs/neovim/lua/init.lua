@@ -5,7 +5,8 @@ end
 local plugins = {
     'bufferline',
     'cmp',
-    'galaxyline/evilline',
+    -- 'galaxyline/evilline',
+    'lualine',
     'gitsigns',
     'glow',
     'indent-blankline',

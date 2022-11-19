@@ -34,12 +34,13 @@ in
 {
   # Packages needed for neovim to work
   home.packages = with pkgs; [
-    rnix-lsp
+    nodePackages.npm
     nodePackages.pyright
     nodePackages.typescript-language-server
     sumneko-lua-language-server
-    glow
     ripgrep
+    glow
+    nil
   ];
 
   programs.neovim = {
@@ -83,6 +84,8 @@ in
       # Eyecandy
       nvim-treesitter
       nvim-web-devicons
+      # (plugin "glepnir/galaxyline.nvim")
+      (plugin "nvim-lualine/lualine.nvim")
       (plugin "glepnir/galaxyline.nvim")
       (plugin "norcalli/nvim-colorizer.lua") # color-previewer
       (plugin "lukas-reineke/indent-blankline.nvim")
