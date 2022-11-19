@@ -1,4 +1,6 @@
-require("notify").setup {
+local notify = require("notify")
+
+notify.setup ({
     background_colour = "FloatShadow",
     fps = 60,
     icons = {
@@ -8,11 +10,12 @@ require("notify").setup {
         TRACE = "✎",
         WARN = ""
     },
-    level = 2,
+    level = 'TRACE',
     minimum_width = 20,
     render = "default",
     stages = "fade_in_slide_out",
     timeout = 2000
-}
+})
 
-vim.notify = require("notify")
+
+vim.notify = notify
