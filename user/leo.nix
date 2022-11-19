@@ -28,6 +28,7 @@ in
       miru
       _1password
       home-manager
+      nixpkgs-fmt
     ];
   };
 
