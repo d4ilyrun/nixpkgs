@@ -66,6 +66,7 @@ in
 
       source ${vim_folder}/settings.vim
       source ${vim_plugins}/plugins.vim
+      lua dofile("${vim_lua}/init.lua")
     '';
 
     plugins = with pkgs.vimPlugins; [
