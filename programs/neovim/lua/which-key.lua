@@ -18,6 +18,7 @@ local keymaps = {
         name = "Telescope", -- optional group name
         f = { "<cmd>Telescope find_files<cr>", "Find File" },
         o = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+        p = { "<cmd>Telescope projections<cr>", "Projects" },
         b = { "<cmd>Telescope buffers<cr>", "Switch Buffer" },
         g = { "<cmd>Telescope live_grep<cr>", "Find Text in Workspace" },
         r = { "<cmd>Telescope resume<cr>", "Resume Last Search" },
@@ -113,6 +114,7 @@ local keymaps = {
     },
 
     ["<F1>"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+    ["?"] = { "<cmd>Telescope help_tags<cr>", "Vim docs" },
     ["<M-cr>"] = { "<cmd>Lspsaga open_floaterm<cr>", "Floating Terminal" },
     l = { "<cmd>!clang-format --style=file -i %<cr>", "Clang-format" },
 

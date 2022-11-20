@@ -125,6 +125,7 @@ in
       (plugin "nvim-neotest/neotest")
       (plugin "alfaix/neotest-gtest")
       (plugin "antoinemadec/FixCursorHold.nvim")
+      (plugin "GnikDroy/projections.nvim")
 
       # Media files
       (plugin "marioortizmanero/adoc-pdf-live.nvim") # PDF viewer
