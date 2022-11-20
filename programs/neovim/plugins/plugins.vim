@@ -1,7 +1,3 @@
-execute 'source' g:vim_plugins_path . '/lsp.vim'
 execute 'source' g:vim_plugins_path . '/fzf.vim'
-"execute 'source' g:vim_plugins_path . '/ranger.vim'
 execute 'source' g:vim_plugins_path . '/rooter.vim'
-execute 'source' g:vim_plugins_path . '/nvim-tree.vim'
-execute 'source' g:vim_plugins_path . '/bufferline.vim'
-execute 'source' g:vim_plugins_path . '/media.vim'
+" execute 'source' g:vim_plugins_path . '/media.vim'
