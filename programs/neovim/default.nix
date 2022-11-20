@@ -4,9 +4,9 @@ let
   my = import ../../config;
 
   vim_folder = "${my.config.nixpkgs}/programs/neovim";
-  vim_plugins = "${my.config.nixpkgs}/programs/neovim/plugins";
-  vim_lua = "${my.config.nixpkgs}/programs/neovim/lua";
-  vim_themes = "${my.config.nixpkgs}/programs/neovim/themes";
+  vim_plugins = "${vim_folder}/plugins";
+  vim_lua = "${vim_folder}/lua";
+  vim_themes = "${vim_folder}/themes";
 
   # installs a vim plugin from git with a given tag / branch
   pluginGit = ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
@@ -64,7 +64,7 @@ in
 
       source ${vim_themes}/${my.config.colorscheme_name}.vim
 
-      source ${vim_folder}/settings.vim
+      source ${vim_folder}/init.vim
       source ${vim_plugins}/plugins.vim
       lua dofile("${vim_lua}/init.lua")
     '';

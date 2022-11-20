@@ -60,8 +60,17 @@ nnoremap <Leader>vr :source $MYVIMRC<CR>	" reload
 " tabs
 set hidden
 
-nnoremap <Leader>tt :enew<cr>
-nnoremap <Leader>td :Bdelete<cr>
-nmap <M-right> :bnext<cr>
-nmap <M-left> :bprev<cr>
+nnoremap <leader>tt :enew<cr>
+nnoremap <leader>td :bdelete<cr>
+nmap <M-right>  :bnext<cr>
+nmap <M-left>   :bprev<cr>
 nmap <Leader>tl :ls<cr>
+
+" windows
+nmap <M-up>    :tabnext<cr>
+nmap <M-down>  :tabprev<cr>
+
+nnoremap <C-M-up>       :resize +1<cr>
+nnoremap <C-M-down>     :resize -1<cr>
+nnoremap <C-M-right>    :vertical resize +3<cr>
+nnoremap <C-M-left>     :vertical resize -3<cr>
