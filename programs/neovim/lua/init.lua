@@ -5,11 +5,11 @@ end
 local plugins = {
     'bufferline',
     'cmp',
-    -- 'galaxyline/evilline',
-    'lualine',
+    'fidget',
     'gitsigns',
     'glow',
     'indent-blankline',
+    'lualine',
     'notify',
     'null-ls',
     'nvim-tree',

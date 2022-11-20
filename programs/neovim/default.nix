@@ -92,6 +92,7 @@ in
       (plugin "lukas-reineke/indent-blankline.nvim")
       (plugin "smithbm2316/centerpad.nvim")
       (plugin "rcarriga/nvim-notify")
+      (plugin "j-hui/fidget.nvim")
 
       # LSP
       (plugin "neovim/nvim-lspconfig")

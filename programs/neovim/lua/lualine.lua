@@ -1,17 +1,3 @@
-local function diff_source()
-    local gitsigns = vim.b.gitsigns_status_dict
-    if gitsigns then
-        return {
-            added = gitsigns.added,
-            modified = gitsigns.changed,
-            removed = gitsigns.removed,
-        }
-    end
-end
-
-local active_lsp = vim.lsp.get_active_clients()
-active_lsp = active_lsp ~= nil and active_lsp[1] or "None"
-
 require("lualine").setup({
     options = {
         icons_enabled = true,
@@ -23,7 +9,7 @@ require("lualine").setup({
     sections = {
         lualine_a = { "mode" },
         lualine_b = { { "branch" }, { "diff", source = diff_source } },
-        lualine_c = { { lsp_info } },
+        lualine_c = { },
         lualine_x = {
             {
                 "diagnostics",
@@ -69,4 +55,3 @@ require("lualine").setup({
         "fugitive",
     },
 })
-
