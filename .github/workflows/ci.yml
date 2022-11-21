@@ -1,0 +1,46 @@
+name: Build Config
+
+on:
+  pull_request:
+    paths:
+    - '**'
+    - '!**.md'
+  push:
+    paths:
+    - '**'
+    - '!**.md'
+
+jobs:
+
+  home-manager:
+    strategy:
+      matrix:
+        config: [ laptop, desktop ]
+
+    name: Build home-manager
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Nix
+      uses: cachix/install-nix-action@v17
+      with:
+        extra_nix_config: |
+          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set user config
+      run: |
+        # Change username
+        sed "s|username = .*;|username = \"$USER\";|" -i 'config/default.nix'
+        # Change nixpkgs location
+        sed "s|nixpkgs = .*;|nixpkgs = \"$PWD\";|" -i 'config/default.nix'
+        # Set submodules
+        git submodule update --init
+
+    - name: Build and switch to home-manager env
+      run: |
+        # Build and switch to home-manager env
+        nix build .#homeConfigurations.${{ matrix.config }}.activationPackage --impure; ./result/activate

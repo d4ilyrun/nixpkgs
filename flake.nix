@@ -76,9 +76,9 @@
           desktop = homeConfig [ ./user/leo.nix ./config/desktop ];
           laptop = homeConfig [ ./user/leo.nix ./config/laptop ];
           yaka = homeConfig [ ./user/leo.nix ./config/yaka ];
-          empty = homeConfig [ ];
+          minimal = homeConfig [ ];
 
-          "${username}" = self.homeConfigurations.empty;
+          "${username}" = self.homeConfigurations.minimal;
         };
     };
 }

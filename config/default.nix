@@ -4,8 +4,8 @@ rec {
   wallpapers = import "${config.nixpkgs}/config/wallpapers.nix";
 
   config = rec {
-    username = "leo";
     machine = "desktop";
+    username = "leo";
     home = "/home/${config.username}";
     nixpkgs = "${config.home}/.config/nixpkgs";
 
