@@ -1,4 +1,4 @@
-{ my, pkgs, lib, gaps, ... }:
+{ config, my, pkgs, lib, gaps, ... }:
 
 let
   wallpaper = my.config.wallpaper;
@@ -142,7 +142,7 @@ in
         ];
       };
 
-      colors = with my.config.colorscheme; {
+      colors = with config.dotfiles.theme.colors; {
         background = primary.background;
 
         focused = {

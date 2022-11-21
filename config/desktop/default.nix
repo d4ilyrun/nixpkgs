@@ -30,7 +30,7 @@ in
 
     (import "${programs}/spicetify" { inherit my pkgs spicetify-nix; })
     (import "${programs}/polybar" { inherit my pkgs lib; network = "wlp35s0"; })
-    (import "${programs}/i3" { inherit my pkgs lib gaps; })
+    (import "${programs}/i3" { inherit my config pkgs lib gaps; })
   ];
 
   home.packages = with pkgs; [

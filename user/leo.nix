@@ -11,7 +11,7 @@ in
     stateVersion = "22.11";
 
     homeDirectory = my.config.home;
-    sessionVariables = rec {
+    sessionVariables = {
       PATH = "${my.config.home}/.nix-profile/bin:${my.config.home}/.npm-packages/bin/:$PATH";
       EDITOR = "nvim";
       BROWSER = my_browser;
