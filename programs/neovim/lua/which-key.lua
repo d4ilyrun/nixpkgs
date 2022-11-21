@@ -34,10 +34,23 @@ local keymaps = {
             d = {"<cmd>Gitsigns diffthis<cr>", "Show Diff"},
         },
 
+        d = {
+            name = "Diffview",
+            o = {"<cmd>DiffviewOpen<cr>", "Show Current Diffs"},
+            f = {"<cmd>DiffviewFileHistory<cr>", "Show File History"},
+            q = {"<cmd>DiffviewClose<cr>", "Close Diffs"},
+        },
+
         a = {
             name = "Add",
             h = {"<cmd>Gitsigns stage_hunk<cr>", "Hunk"},
             b = {"<cmd>Gitsigns stage_buffer<cr>", "Buffer"},
+        },
+
+        r = {
+            name = "reset",
+            h = {"<cmd>Gitsigns reset_hunk<cr>", "Hunk"},
+            b = {"<cmd>Gitsigns reset_buffer<cr>", "Buffer"},
         },
 
         ["<S-a>"] = {

@@ -6,6 +6,7 @@ local plugins = {
     'cmake',
     'dap',
     'dapui',
+    'diffview',
     'neotest',
 }
 

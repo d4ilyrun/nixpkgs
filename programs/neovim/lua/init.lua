@@ -13,7 +13,7 @@ local plugins = {
     'notify',
     'null-ls',
     'nvim-tree',
-    -- 'projections',
+    'projections',
     'startup',
     'telescope',
     'todo',

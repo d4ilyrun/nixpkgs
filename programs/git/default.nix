@@ -13,7 +13,7 @@
     psu = "push --set-upstream";
 
     # commit
-    c  = "commit";
+    c = "commit";
     ca = "commit --amend";
     ce = "commit --allow-empty";
     cf = "commit --fixup";
@@ -23,6 +23,7 @@
     rbi = "rebase -i";
     rba = "rebase --abort";
     rbc = "rebase --continue";
+    mt = "mergetool";
 
     # log
     lo = "log --oneline";
@@ -66,8 +67,8 @@
 
     core.editor = "nvim";
 
-    merge.tool = "vimdiff";
-    mergetool.vimdiff.cmd = "${pkgs.neovim}/bin/nvim -d $LOCAL $REMOTE $MERGED";
+    merge.tool = "nvimdiff";
+    mergetool.nvimdiff.cmd = "nvim -c 'DiffviewOpen'";
 
     pager = {
       status = false;
