@@ -1,11 +1,24 @@
-{ config, lib, ... }:
-
-with lib;
+{ config, ... }:
 
 let
   name = "catppuccin";
+  flavour = "mocha";
 in
 {
+  imports = [ ];
+
+  programs.kitty.extraConfig =
+    builtins.readFile (
+      builtins.fetchurl
+        "https://raw.githubusercontent.com/catppuccin/kitty/main/themes/${flavour}.conf"
+    );
+
+  dotfiles.extraOptions = {
+    theme = {
+      inherit flavour;
+    };
+  };
+
   dotfiles.theme = {
     inherit name;
     colors = rec {

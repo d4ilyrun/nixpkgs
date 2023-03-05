@@ -1,10 +1,4 @@
-{ pkgs, lib, ... }:
-
-let
-
-  fetchCatppuccin = flavour: builtins.fetchurl "https://raw.githubusercontent.com/catppuccin/kitty/main/${flavour}.conf";
-
-in
+{ config, pkgs, lib, ... }:
 
 {
   programs.kitty = {
@@ -28,9 +22,6 @@ in
     environment = {
       "TERM" = "xterm-256color";
     };
-
-    # TODO: Theme directory -> import depending on the theme
-    extraConfig = builtins.readFile (fetchCatppuccin "mocha");
   };
 
   home.sessionVariables."TERMINAL" = "kitty";
