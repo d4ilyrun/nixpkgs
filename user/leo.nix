@@ -5,8 +5,12 @@ let
   my_browser = "firefox";
 in
 {
+  dotfiles = {
+    username = "leo";
+  };
+
   home = {
-    inherit (my.config) username;
+    inherit (config.dotfiles) username;
 
     stateVersion = "22.11";
 

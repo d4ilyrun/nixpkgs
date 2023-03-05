@@ -1,14 +1,19 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  my = import ../../config/.;
-  dir = "${my.config.nixpkgs}/applications/fish";
+
+  dir = ./.;
+  dotfiles = config.dotfiles;
+  theme = dotfiles.theme;
+  theme_file = "${theme.directory}/${theme.name}.fish";
+
 in
 
 {
   imports = [
     ./bat.nix
     ./fzf.nix
+    ../starship
   ];
 
   home.packages = with pkgs; [
@@ -17,8 +22,6 @@ in
     bat
     neofetch
   ];
-
-  programs.starship = import "${dir}/../starship" { inherit my pkgs lib; };
 
   programs.fish = {
     enable = true;
@@ -29,16 +32,21 @@ in
       #forgit
     ];
 
-    shellInit = " \
-      source ${dir}/themes/${my.config.colorscheme_name}.fish
+    shellInit = ''
       source ${dir}/functions.fish
       set fish_greeting
       set fzf_preview_dir_cmd exa -al --color=always --icons
 
-      if [ ${my.config.colorscheme_name} = \"onedark\" ];
+      if [ ${theme.name} = \"onedark\" ];
         set_onedark
       end
-      ";
+
+      if [ -f ${theme_file} ]
+        source ${theme_file}
+      else
+        echo "ERROR: NO THEME FILE AVAILABLE" &>2
+      end
+    '';
 
     shellAliases = {
       # progam overrides;
@@ -73,12 +81,12 @@ in
 
       neofetch = "neofetch --config ~/.config/nixpkgs/applications/neofetch/config.conf";
       nix-shell = "nix-shell --command 'fish'";
-      dotfiles = "cd ${my.config.nixpkgs}";
+      dotfiles = "cd ${dotfiles.repository}";
     };
 
     functions = {
-      hms = ''home-manager switch --impure --cores 12 --flake ${my.config.nixpkgs}#$argv'';
-      nrs = "sudo nixos-rebuild switch --impure -j 12 --flake ${my.config.nixpkgs}#$argv";
+      hms = ''home-manager switch --impure --cores 12 --flake ${dotfiles.repository}#$argv'';
+      nrs = "sudo nixos-rebuild switch --impure -j 12 --flake ${dotfiles.repository}#$argv";
     };
   };
 }

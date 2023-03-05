@@ -1,12 +1,11 @@
-let
-  my = import ../../config;
-in
+{ config, ... }:
+
 {
   programs.fzf = {
     enable = true;
 
     defaultCommand = "";
-    defaultOptions = with my.config.colorscheme.primary; [
+    defaultOptions = [
       "--height 40%"
       "--layout=reverse --border"
     ];
@@ -14,7 +13,5 @@ in
     changeDirWidgetOptions = [
       "--preview 'exa -la --icons {} --git-ignore --no-permissions | head -200'"
     ];
-
-    enableFishIntegration = true;
   };
 }

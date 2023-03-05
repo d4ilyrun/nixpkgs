@@ -21,6 +21,7 @@ in
 
   dotfiles.theme = {
     inherit name;
+    directory = "${config.dotfiles.repository}/themes/catppuccin";
     colors = rec {
       primary = {
         background = "#1E1D2F";
