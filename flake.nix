@@ -70,8 +70,18 @@
 
           homeConfig = imports: home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-            extraSpecialArgs = { inherit my; inherit (inputs) spicetify-nix; };
             modules = imports ++ myModules;
+            extraSpecialArgs = {
+              inherit my;
+              inherit (inputs) spicetify-nix;
+              lib = nixpkgs.lib.extend (final: prev:
+                prev // home-manager.lib // (import ./pkgs/lib {
+                  inherit pkgs;
+                  inherit (pkgs) stdenv;
+                  lib = prev;
+                })
+              );
+            };
           };
         in
         {

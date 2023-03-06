@@ -1,22 +1,27 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 let
   name = "catppuccin";
   flavour = "mocha";
+  accent = "rosewater";
 in
 {
-  imports = [ ];
-
-  programs.kitty.extraConfig =
-    builtins.readFile (
-      builtins.fetchurl
-        "https://raw.githubusercontent.com/catppuccin/kitty/main/themes/${flavour}.conf"
-    );
+  imports = [
+    ./firefox.nix
+  ];
 
   dotfiles.extraOptions = {
     theme = {
-      inherit flavour;
+      inherit flavour accent;
     };
+  };
+
+  programs = {
+    kitty.extraConfig =
+      builtins.readFile (
+        builtins.fetchurl
+          "https://raw.githubusercontent.com/catppuccin/kitty/main/themes/${flavour}.conf"
+      );
   };
 
   dotfiles.theme = {
