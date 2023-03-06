@@ -66,7 +66,7 @@
 
       homeConfigurations =
         let
-          myModules = [ ./modules ./themes ];
+          myModules = [ ./pkgs/modules ./themes ];
 
           homeConfig = imports: home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
