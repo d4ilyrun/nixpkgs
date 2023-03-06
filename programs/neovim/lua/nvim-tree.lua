@@ -38,8 +38,6 @@ require'nvim-tree'.setup {
         },
     },
 
-    create_in_closed_folder = true,
-
     renderer = {
         highlight_opened_files = "icon",
         group_empty = true,

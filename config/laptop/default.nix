@@ -1,5 +1,5 @@
 #~/.config/nixpkgs/config/desktop/index.nix
-{ my, config, lib, pkgs, spicetify-nix ... }:
+{ my, config, lib, pkgs, spicetify-nix, ... }:
 
 let
   nixpkgs = my.config.nixpkgs;

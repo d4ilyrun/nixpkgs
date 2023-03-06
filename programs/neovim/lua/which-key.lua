@@ -129,8 +129,10 @@ local keymaps = {
     ["<F1>"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     ["?"] = { "<cmd>Telescope help_tags<cr>", "Vim docs" },
     ["<M-cr>"] = { "<cmd>Lspsaga open_floaterm<cr>", "Floating Terminal" },
-    l = { "<cmd>!clang-format --style=file -i %<cr>", "Clang-format" },
 
+    l = {
+        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+    },
 }
 
 which_key.register(keymaps, opts)
