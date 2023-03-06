@@ -10,11 +10,8 @@ in
   };
 
   home = {
-    inherit (config.dotfiles) username;
-
     stateVersion = "22.11";
 
-    homeDirectory = my.config.home;
     sessionVariables = {
       PATH = "${my.config.home}/.nix-profile/bin:${my.config.home}/.npm-packages/bin/:$PATH";
       EDITOR = "nvim";

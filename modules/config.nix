@@ -66,6 +66,11 @@ in
         };
       };
     };
+  };
 
+  config = {
+    home = {
+      inherit (cfg) username homeDirectory;
+    };
   };
 }
