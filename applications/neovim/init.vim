@@ -46,6 +46,7 @@ let g:startify_custom_header = [
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set scrolloff=10
 
 au FileType Makefile setlocal noexpandtab
 au FileType nix setlocal tabstop=2 shiftwidth=2 expandtab
