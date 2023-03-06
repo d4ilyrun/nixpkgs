@@ -1,9 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  my = import ../../config;
-
-  vim_folder = "${my.config.nixpkgs}/applications/neovim";
+  vim_folder = "${config.dotfiles.folders.applications}/neovim";
   vim_plugins = "${vim_folder}/plugins";
   vim_lua = "${vim_folder}/lua";
   vim_themes = "${vim_folder}/themes";
@@ -49,7 +47,7 @@ in
     viAlias = true;
 
     extraConfig = ''
-      lua home = "${my.config.home}"
+      lua home = "${config.dotfiles.homeDirectory}"
       lua path = "${vim_lua}"
       let g:vim_plugins_path="${vim_plugins}"
 
@@ -62,7 +60,7 @@ in
 
       set termguicolors
 
-      source ${vim_themes}/${my.config.colorscheme_name}.vim
+      source ${vim_themes}/${config.dotfiles.theme.name}.vim
 
       source ${vim_folder}/init.vim
       source ${vim_plugins}/plugins.vim
