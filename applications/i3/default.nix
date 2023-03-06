@@ -173,6 +173,7 @@ in
         { command = "bash ${scripts}/capslock_remap.sh"; always = true; }
         { command = "systemctl --user restart polybar"; always = true; }
         { command = "setxkbmap -layout fr,fr -variant ,bepo_afnor -option grp:win_space_toggle,eurosigne:e"; always = true; }
+        { command = "${pkgs.xorg.xset}/bin/xset r rate 280 60"; always = true; }
       ];
     };
   }; # // lib.mkIf (config.dotfiles.extraOptions ? i3) config.dotfiles.extraOptions;
