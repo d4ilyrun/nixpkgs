@@ -5,7 +5,7 @@
 with lib;
 
 let
-  cfg = config.services.batteryNotifier;
+  cfg = config.services.lowbatt;
   script = pkgs.writeShellApplication {
     name = "lowbatt-start";
     text = ''
@@ -23,13 +23,8 @@ let
 in
 {
   options = {
-    services.batteryNotifier = {
-      enable = mkOption {
-        default = false;
-        description = ''
-          Whether to enable battery notifier.
-        '';
-      };
+    services.lowbatt = {
+      enable = mkEnableOption "battery notifier";
       device = mkOption {
         default = "BAT0";
         description = ''
@@ -58,26 +53,22 @@ in
   };
 
   config = mkIf cfg.enable {
-    systemd.user.timers."lowbatt" = {
-      Unit = {
-        Description = "check battery level";
-      };
+    systemd.user.timers.lowbatt = {
+
+      Unit.Description = "check battery level";
+      Install.WantedBy = [ "timers.target" ];
 
       Timer = {
-        OnBootSec = "1min";
-        OnUnitInactiveSec = "1min";
+        OnBootSec = "1m";
+        OnUnitInactiveSec = "1m";
         Unit = "lowbatt.service";
       };
 
-      Install = {
-        WantedBy = [ "timers.target" ];
-      };
     };
 
-    systemd.user.services."lowbatt" = {
-      Unit = {
-        Description = "battery level notifier";
-      };
+    systemd.user.services.lowbatt = {
+
+      Unit.Description = "battery level notifier";
 
       Service = {
         PassEnvironment = "DISPLAY";

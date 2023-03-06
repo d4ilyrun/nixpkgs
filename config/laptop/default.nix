@@ -28,9 +28,6 @@ in
     # Minimal configuration
     ../minimal
 
-    # TODO: change it to an import function
-    "${programs}/battery.nix"
-
     (import "${programs}/spicetify" { inherit my pkgs spicetify-nix; })
     (import "${programs}/polybar" { inherit my pkgs lib; network = "wlp0s20f3"; })
     (import "${programs}/i3" { inherit my pkgs lib gaps; })
@@ -48,7 +45,7 @@ in
   ];
 
   services = {
-    batteryNotifier = {
+    lowbatt = {
       enable = true;
       device = "BAT1";
       notifyCapacity = 100;
