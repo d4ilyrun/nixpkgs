@@ -4,16 +4,15 @@
   programs.firefox = {
     enable = true;
 
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      darkreader
-      https-everywhere
-      refined-github
-      return-youtube-dislikes
-      ublock-origin
-      c-c-search-extension
-      consent-o-matic
-      onepassword-password-manager
-    ];
+  extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+    darkreader
+    refined-github
+    return-youtube-dislikes
+    ublock-origin
+    c-c-search-extension
+    consent-o-matic
+    onepassword-password-manager
+  ];
 
     profiles = {
       "${config.dotfiles.username}" = {
