@@ -13,5 +13,4 @@ textbox {
     text: "WIFI";
 }
 
-@theme "../catpuccin.rasi"
-
+@theme "~/.config/rofi/theme.rasi"

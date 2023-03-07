@@ -1,17 +1,13 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
-  my = import ../../config;
-  theme = "catpuccin";
   defaultTerminal = "${pkgs.alacritty}/bin/alacritty";
 in
 {
-  xdg.configFile."rofi/${theme}.rasi".source = "${my.config.nixpkgs}/applications/rofi/${theme}.rasi";
-
   programs.rofi = {
-    inherit theme;
     enable = true;
     terminal = defaultTerminal;
+    theme = "theme";
 
     extraConfig = {
       modi = "drun,run,window";

@@ -8,6 +8,7 @@ in
 {
   imports = [
     ./firefox.nix
+    ./rofi.nix
   ];
 
   dotfiles.extraOptions = {
