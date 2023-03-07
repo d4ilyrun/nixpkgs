@@ -5,7 +5,18 @@
 with lib;
 
 let
+
   colorType = types.strMatching "#[0-9A-Fa-f]{6}";
+
+  wallpaperType =
+    let
+      inherit (types) coercedTo str package;
+      downloadWallpaper = url:
+        builtins.fetchurl { inherit url; }
+      ;
+    in
+    coercedTo str downloadWallpaper package
+  ;
 
   mkColorOption = name: mkOption {
     description = "The ${name} color";
@@ -54,6 +65,17 @@ in
 
             normal = colorPalette;
             bright = colorPalette;
+          };
+
+          wallpapers = {
+            all = mkOption {
+              type = types.attrsOf wallpaperType;
+              description = "List of all available wallpapers associated with the theme";
+            };
+            active = mkOption {
+              type = types.listOf wallpaperType;
+              description = "List of active wallpapers associated to the theme";
+            };
           };
         };
       })
