@@ -1,10 +1,11 @@
-{ my, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  enable = true;
+  programs.alacritty = {
 
-  settings =
-    {
+    enable = true;
+
+    settings = {
       live_config_reload = true;
 
       env = {
@@ -36,7 +37,7 @@
         offset.y = 1;
       };
 
-      colors = my.config.colorscheme;
+      colors = config.dotfiles.theme.colors;
 
       shell = {
         program = "${pkgs.fish}/bin/fish";
@@ -48,4 +49,5 @@
         { key = "Equals"; mods = "Control|Alt"; action = "ResetFontSize"; }
       ];
     };
+  };
 }
