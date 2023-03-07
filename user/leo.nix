@@ -1,19 +1,22 @@
 { config, pkgs, ... }:
 
 let
-  my = import ../config;
   my_browser = "firefox";
 in
 {
   dotfiles = {
     username = "leo";
+    extraOptions = {
+      browser = "${pkgs.firefox}/bin/firefox";
+      terminal = "${pkgs.kitty}/bin/kitty";
+    };
   };
 
   home = {
     stateVersion = "22.11";
 
     sessionVariables = {
-      PATH = "${my.config.home}/.nix-profile/bin:${my.config.home}/.npm-packages/bin/:$PATH";
+      PATH = "${config.dotfiles.homeDirectory}/.nix-profile/bin:${config.dotfiles.homeDirectory}/.npm-packages/bin/:$PATH";
       EDITOR = "nvim";
       BROWSER = my_browser;
     };
@@ -33,7 +36,7 @@ in
   };
 
   programs = {
-    git = import "${my.config.nixpkgs}/applications/git" { inherit my pkgs; };
+    git = import "${config.dotfiles.folders.applications}/git" { inherit config pkgs; };
   };
 
   systemd.user.startServices = true;

@@ -36,9 +36,8 @@
       system = "x86_64-linux";
       stateVersion = "22.11";
 
-      my = import ./config;
-      username = my.config.username;
-      homeDirectory = my.config.home;
+      username = "leo"; # TODO: user module
+      homeDirectory = "/home/leo"; # TODO: user module
 
       overlays = import ./pkgs/overlays;
 
@@ -72,7 +71,6 @@
             inherit pkgs;
             modules = imports ++ myModules;
             extraSpecialArgs = {
-              inherit my;
               inherit (inputs) spicetify-nix;
               lib = nixpkgs.lib.extend (final: prev:
                 prev // home-manager.lib // (import ./pkgs/lib {

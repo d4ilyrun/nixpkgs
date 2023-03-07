@@ -1,4 +1,4 @@
-{ my, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   dir = "${my.config.nixpkgs}/applications/polybar";

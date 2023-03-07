@@ -9,6 +9,7 @@ in
   imports = [
     ./firefox.nix
     ./rofi.nix
+    ./wallpapers.nix
   ];
 
   dotfiles.extraOptions = {

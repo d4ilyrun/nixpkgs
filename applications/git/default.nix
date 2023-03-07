@@ -1,4 +1,4 @@
-{ pkgs, my, ... }:
+{ pkgs, ... }:
 
 {
   enable = true;

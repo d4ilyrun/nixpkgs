@@ -1,41 +1,35 @@
 #~/.config/nixpkgs/config/desktop/index.nix
-{ my, config, lib, pkgs, spicetify-nix, ... }:
+{ config, lib, pkgs, spicetify-nix, ... }:
 
 let
-  nixpkgs = my.config.nixpkgs;
-  programs = "${nixpkgs}/applications";
+  inherit (config.dotfiles.folders) applications;
 
   modifier = "Mod4";
   primary = "eDP-1-1";
   secondary = "HDMI-0";
 
-  gaps = {
-    inner = 6;
-    smartGaps = false;
-  };
 in
 {
-  imports = [
-    # Packages
-    "${nixpkgs}/pkgs/system.nix"
-    "${nixpkgs}/pkgs/dev.nix"
-    "${nixpkgs}/pkgs/apps.nix"
-    "${nixpkgs}/pkgs/school.nix"
+  dotfiles = {
+    extraOptions = {
+      network = "wlp0s20f3";
+      monitor = {
+        inherit primary secondary;
+      };
+    };
+  };
 
-    # Fonts
-    "${nixpkgs}/pkgs/fonts.nix"
-
-    # Minimal configuration
-    ../minimal
-
-    (import "${programs}/spicetify" { inherit my pkgs spicetify-nix; })
-    (import "${programs}/polybar" { inherit my pkgs lib; network = "wlp0s20f3"; })
-    (import "${programs}/i3" { inherit my pkgs lib gaps; })
-  ];
+  imports = lib.importConfig {
+    pkgs = [ "system" "dev" "apps" "school" "fonts" ];
+    applications = [ "spicetify" "i3" "polybar" ];
+    imports = [
+      ../minimal
+    ];
+  };
 
   # Standalone programs (don't need to download other configurations or change system-wide configurations)
   programs = {
-    autorandr = import "${programs}/autorandr/laptop.nix";
+    autorandr = import "${applications}/autorandr/laptop.nix";
   };
 
   home.packages = with pkgs; [
@@ -56,6 +50,10 @@ in
     keybindings = lib.mkOptionDefault {
       "Ctrl+${modifier}+Up" = "move workspace to output ${secondary}";
       "Ctrl+${modifier}+Down" = "move workspace to output ${primary}";
+    };
+    gaps = {
+      inner = 8;
+      smartGaps = false;
     };
   };
 }

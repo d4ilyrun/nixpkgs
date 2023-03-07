@@ -1,27 +1,16 @@
 #~/.config/nixpkgs/config/desktop/index.nix
-{ my, config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
-  programs = "${my.config.nixpkgs}/applications";
+  # Cannot use config.dotfiles here or it will cause an inifinite reccursion
+  applications = ../../applications;
+  packages = ../../pkgs;
+  services = ../../services;
+
 in
 {
-  imports = [
-    "${programs}/neovim"
-    "${programs}/fish"
-    "${programs}/rofi"
-    "${programs}/kitty"
-
-    (import "${programs}/picom" { inherit pkgs; })
-  ];
-
-  # Standalone programs (don't need to download other configurations or change system-wide configurations)
-  programs = {
-    alacritty = import "${programs}/alacritty/default-settings.nix" { inherit my pkgs; };
-    firefox = import "${programs}/firefox" { inherit my pkgs lib; };
-    tmux = import "${programs}/tmux" { inherit pkgs my; };
-  };
-
-  services = {
-    dunst = import "${programs}/dunst" { inherit my pkgs; };
+  imports = lib.importConfig {
+    services = [ "dunst" "picom" ];
+    applications = [ "alacritty" "firefox" "fish" "kitty" "neovim" "rofi" "tmux" ];
   };
 }

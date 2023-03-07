@@ -1,3 +1,5 @@
+{ spicetify-nix, ... }:
+
 {
   imports = [
     ./config.nix

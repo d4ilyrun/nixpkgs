@@ -2,13 +2,12 @@
 { config, lib, pkgs, ... }:
 
 let
-  my = import ../.;
-  nixpkgs = my.config.nixpkgs;
-  programs = "${nixpkgs}/applications";
+  inherit (config.dotfiles.folders) pkgs repository;
 in
 {
+  # TODO: Make it only an additional set of options
   imports = [
-    "${nixpkgs}/config/laptop"
-    "${nixpkgs}/pkgs/yaka.nix"
+    "${repository}/config/laptop"
+    "${pkgs}/yaka.nix"
   ];
 }

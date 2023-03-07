@@ -1,19 +1,21 @@
-{ config, my, pkgs, lib, gaps, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  wallpaper = my.config.wallpaper;
-  wallpaper_2 = my.wallpapers.vertical.anime.koucha_bench; # wallpaper for second screen
 
-  browser = "${pkgs.firefox}/bin/firefox";
-  terminal = "${pkgs.kitty}/bin/kitty";
+  inherit (config.dotfiles) homeDirectory;
+  inherit (config.dotfiles.theme) wallpapers;
+  inherit (config.dotfiles.folders) applications;
+  inherit (config.dotfiles.extraOptions) browser terminal;
 
-  scripts = "${my.config.nixpkgs}/applications/i3/scripts";
+  wallpaper = builtins.head wallpapers.active;
+
+  scripts = "${applications}/i3/scripts";
   volume = "bash ${scripts}/volume.sh";
   light = "bash ${scripts}/backlight.sh";
   screenshot = "bash ${scripts}/screenshot.sh";
 
   # Rofi
-  powermenu = import "${my.config.nixpkgs}/applications/rofi/powermenu" { inherit my pkgs; };
+  powermenu = import "${applications}/rofi/powermenu" { inherit config pkgs; };
 
   ws1 = "1";
   ws2 = "2";
@@ -36,14 +38,13 @@ in
       modifier = "Mod4";
       inherit terminal;
 
-      inherit gaps;
       defaultWorkspace = ws1;
 
       keybindings = lib.mkOptionDefault {
         "${modifier}+Return" = "exec ${terminal}";
         "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal ${terminal}";
         "${modifier}+Shift+d" = "exec rofi -sho-icons -show window";
-        "${modifier}+Shift+w" = "exec ${my.config.nixpkgs}/applications/rofi/network/rofi-network-manager.sh";
+        "${modifier}+Shift+w" = "exec ${applications}/rofi/network/rofi-network-manager.sh";
         "${modifier}+Shift+q" = "kill";
 
         # Rofi menu selection
@@ -79,7 +80,7 @@ in
         "${modifier}+Shift+x" = "exec betterlockscreen -l dimblur";
 
         # Screenshot
-        "Shift+Print" = "exec --no-startup-id maim --select \"${my.config.home}/Images/Screenshots/$(date)\"";
+        "Shift+Print" = "exec --no-startup-id maim --select \"${homeDirectory}/Images/Screenshots/$(date)\"";
         # Clipboard Screenshot
         "Print" = "exec --no-startup-id maim | xclip -selection clipboard -t image/png";
         "${modifier}+Print" = "exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png";
@@ -166,7 +167,7 @@ in
 
       startup = [
         { command = "birdtray"; }
-        { command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaper} ${wallpaper_2}"; always = true; }
+        { command = "${pkgs.feh}/bin/feh --bg-fill ${lib.concatStringsSep " " wallpapers.active}"; always = true; }
         { command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}"; always = true; }
         { command = "${pkgs.autorandr}/bin/autorandr -c"; always = false; }
         { command = "bash ${scripts}/capslock_remap.sh"; always = true; }
@@ -174,5 +175,5 @@ in
         { command = "setxkbmap -layout fr,fr -variant ,bepo_afnor -option grp:win_space_toggle,eurosigne:e"; always = true; }
       ];
     };
-  };
+  }; # // lib.mkIf (config.dotfiles.extraOptions ? i3) config.dotfiles.extraOptions;
 }

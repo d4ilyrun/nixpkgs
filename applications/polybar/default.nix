@@ -1,20 +1,25 @@
-{ my
+{ config
 , pkgs
 , lib
-, network ? "wlan0"
 , ...
 }:
 
-with my.config.colorscheme;
+with config.dotfiles.theme.colors;
 
 let
-  dir = "${my.config.nixpkgs}/applications/polybar";
+
+  inherit (lib) existsOr;
+
+  dir = "${config.dotfiles.folders.applications}/polybar";
 
   # Config HERE
   # Find theses names with $ls -1 /sys/class/power_supply/
-  battery_name = "BAT1";
-  battery_adapter = "ACAD";
-  monitor_name = "eDP-1";
+  my_battery = existsOr config.dotfiles.extraOptions "battery" {
+    battery = "BAT1";
+    adapter = "ACAD";
+  };
+
+  network = existsOr config.dotfiles.extraOptions "network" "wlan0";
 
   color = with normal; {
     inherit black red green yellow blue cyan white;
@@ -155,7 +160,7 @@ in
 
       "module/wireless-network" =
         let
-          rofi = "${my.config.nixpkgs}/applications/rofi";
+          rofi = "${config.dotfiles.folders.applications}/rofi";
           nmcli-polybar = pkgs.writeShellApplication {
             name = "nmcli-polybar";
             text = "${rofi}/network/rofi-network-manager.sh";
@@ -203,8 +208,7 @@ in
         full-at = 99;
         low-at = 15;
 
-        battery = battery_name;
-        adapter = "ACAD1";
+        inherit (my_battery) battery adapter;
 
         format-charging = "<animation-charging> <label-charging>";
         format-discharging = "<ramp-capacity> <label-discharging>";
@@ -259,7 +263,7 @@ in
           click-middle = "${mpris}/bin/mpris play-pause &";
         };
 
-      "module/alsa" = rec {
+      "module/alsa" = {
         type = "internal/alsa";
 
         master-soundcard = 0;

@@ -1,17 +1,19 @@
-{ pkgs, my, ... }:
+{ pkgs, config, ... }:
 
 {
-  enable = true;
+  programs.tmux = {
+    enable = true;
 
-  prefix = "C-x";
-  keyMode = "vi";
+    prefix = "C-x";
+    keyMode = "vi";
 
-  terminal = "tmux-256color";
-  shell = "${pkgs.fish}/bin/fish";
+    terminal = "tmux-256color";
+    shell = "${pkgs.fish}/bin/fish";
 
-  clock24 = true;
-  baseIndex = 1;
-  sensibleOnTop = true;
+    clock24 = true;
+    baseIndex = 1;
+    sensibleOnTop = true;
 
-  extraConfig = builtins.readFile "${my.config.nixpkgs}/applications/tmux/tokyodark.conf";
+    extraConfig = builtins.readFile "${config.dotfiles.folders.applications}/tmux/tokyodark.conf";
+  };
 }

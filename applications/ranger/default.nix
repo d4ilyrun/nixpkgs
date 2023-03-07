@@ -1,8 +1,5 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
-let
-  my = import ../../config;
-in
 {
-  xdg.configFile."ranger".source = "${my.config.nixpkgs}/applications/ranger";
+  xdg.configFile."ranger".source = "${config.dotfiles.folders.applications}/ranger";
 }
