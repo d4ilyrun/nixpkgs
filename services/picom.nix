@@ -1,8 +1,4 @@
-{ pkgs }:
-
 {
-  home.packages = [ pkgs.picom ];
-
   services.picom = {
     enable = true;
     experimentalBackends = false;
