@@ -1,6 +1,10 @@
 { pkgs, lib, stdenv, ... }:
 
-{
+let
+  inherit (lib) attrsets;
+in
+
+rec {
   buildFirefoxXpiAddon = { name, url, sha256, addonId }:
     pkgs.stdenv.mkDerivation {
 
@@ -17,4 +21,18 @@
         install -v -m644 "$src" "$dst/${addonId}.xpi"
       '';
     };
+
+  existsOr = set: attr: orValue:
+    if attrsets.hasAttrByPath [ attr ] set then
+      attrsets.getAttr attr set
+    else
+      orValue
+  ;
+
+  importConfig = imports:
+    (map (service: "${../../services}/${service}.nix") (existsOr imports "services" [ ]))
+    ++ (map (app: "${../../applications}/${app}") (existsOr imports "applications" [ ]))
+    ++ (map (pkg: "${../../pkgs}/${pkg}.nix") (existsOr imports "pkgs" [ ]))
+    ++ (existsOr imports "imports" [ ])
+  ;
 }
