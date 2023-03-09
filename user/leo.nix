@@ -4,6 +4,11 @@ let
   my_browser = "firefox";
 in
 {
+  imports = lib.importConfig {
+    pkgs = [ "dev" ];
+    applications = [ "git" ];
+  };
+
   dotfiles = {
     username = "leo";
     extraOptions = {
@@ -36,7 +41,20 @@ in
   };
 
   programs = {
-    git = import "${config.dotfiles.folders.applications}/git" { inherit config pkgs; };
+    git = {
+      userEmail = "leo@duboin.com";
+      userName = "Léo DUBOIN";
+      includes = [
+        {
+          condition = "gitdir:~/School/";
+          contents.user = {
+            name = "Léo DUBOIN";
+            address = "leo.duboin@epita.fr";
+            email = "leo.duboin@epita.fr";
+          };
+        }
+      ];
+    };
   };
 
   systemd.user.startServices = true;
