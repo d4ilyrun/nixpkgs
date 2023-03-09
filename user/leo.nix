@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   my_browser = "firefox";
@@ -7,6 +7,7 @@ in
   imports = lib.importConfig {
     pkgs = [ "dev" ];
     applications = [ "git" ];
+    imports = [ ./yaka.nix ];
   };
 
   dotfiles = {
@@ -109,5 +110,13 @@ in
           "image/*" = image;
         };
       };
+  };
+
+  programs.ssh = {
+    extraConfig = ''
+      AddKeysToAgent yes
+      IdentityFile ~/.ssh/default
+      IdentitiesOnly yes
+    '';
   };
 }

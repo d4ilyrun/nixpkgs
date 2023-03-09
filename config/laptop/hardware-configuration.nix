@@ -15,6 +15,7 @@ in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    ../yaka/hardware-configuration.nix
   ];
 
   boot = {

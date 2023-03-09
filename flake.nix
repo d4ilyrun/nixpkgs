@@ -60,7 +60,6 @@
         {
           desktop = systemConfig [ ./config/desktop/configuration.nix ];
           laptop = systemConfig [ ./config/laptop/configuration.nix ];
-          yaka = systemConfig [ ./config/yaka/configuration.nix ];
         };
 
       homeConfigurations =
@@ -85,7 +84,6 @@
         {
           desktop = homeConfig [ ./user/leo.nix ./config/desktop ];
           laptop = homeConfig [ ./user/leo.nix ./config/laptop ];
-          yaka = homeConfig [ ./user/leo.nix ./config/yaka ];
 
           empty = homeConfig [ ];
 
