@@ -24,19 +24,9 @@ in
     applications = [ "spicetify" "i3" "polybar" ];
     imports = [
       ../minimal
+      ./autorandr.nix
     ];
   };
-
-  # Standalone programs (don't need to download other configurations or change system-wide configurations)
-  programs = {
-    autorandr = import "${applications}/autorandr/laptop.nix";
-  };
-
-  home.packages = with pkgs; [
-    # miru
-    autorandr
-    arandr
-  ];
 
   services = {
     lowbatt = {

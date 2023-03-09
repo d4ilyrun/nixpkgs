@@ -21,15 +21,11 @@ in
     applications = [ "polybar" "i3" "spicetify" ];
     imports = [
       ../minimal
+      ./autorandr.nix
     ];
   };
 
-  home.packages = with pkgs; [
-    autorandr
-  ];
-
   programs = {
-    autorandr = import "${applications}/autorandr/desktop.nix";
     alacritty.settings.font.size = lib.mkForce 12.0;
   };
 
