@@ -34,13 +34,13 @@ jobs:
     - name: Set user config
       run: |
         # Change username
-        sed "s|username = .*;|username = \"$USER\";|" -i 'config/default.nix'
-        # Change nixpkgs location
-        sed "s|nixpkgs = .*;|nixpkgs = \"$PWD\";|" -i 'config/default.nix'
-        # Set submodules
+        sed "s|username = \"leo\"|username = \"$USER\"|" -i 'user/leo.nix'
+        # Workaround, maybe try using a flake check or something
+        sed -i "7 i dotfiles.repository = \"$(pwd)\";" user/leo.nix
         git submodule update --init
 
     - name: Build and switch to home-manager env
       run: |
         # Build and switch to home-manager env
-        nix build .#homeConfigurations.${{ matrix.config }}.activationPackage --impure; ./result/activate
+        nix build .#homeConfigurations.${{ matrix.config }}.activationPackage --impure
+        ./result/activate
