@@ -51,6 +51,23 @@
           nur.overlay
         ] ++ overlays;
       };
+
+      myModules = [ ./pkgs/modules ./themes ];
+
+      homeConfig = imports: home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = imports ++ myModules;
+        extraSpecialArgs = {
+          inherit (inputs) spicetify-nix;
+          lib = nixpkgs.lib.extend (final: prev:
+            prev // home-manager.lib // (import ./pkgs/lib {
+              inherit pkgs;
+              inherit (pkgs) stdenv;
+              lib = prev;
+            })
+          );
+        };
+      };
     in
     {
       nixosConfigurations =
@@ -63,24 +80,6 @@
         };
 
       homeConfigurations =
-        let
-          myModules = [ ./pkgs/modules ./themes ];
-
-          homeConfig = imports: home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = imports ++ myModules;
-            extraSpecialArgs = {
-              inherit (inputs) spicetify-nix;
-              lib = nixpkgs.lib.extend (final: prev:
-                prev // home-manager.lib // (import ./pkgs/lib {
-                  inherit pkgs;
-                  inherit (pkgs) stdenv;
-                  lib = prev;
-                })
-              );
-            };
-          };
-        in
         {
           desktop = homeConfig [ ./user/leo.nix ./config/desktop ];
           laptop = homeConfig [ ./user/leo.nix ./config/laptop ];
@@ -88,6 +87,21 @@
           empty = homeConfig [ ];
 
           "${username}" = self.homeConfigurations.empty;
+        };
+
+      checks."${system}" =
+        let
+          checkConfigModule = {
+            dotfiles.repository = "${./.}";
+          };
+
+          checkConfig = modules:
+            (homeConfig (modules ++ [ ./user/leo.nix checkConfigModule ])).activationPackage
+          ;
+        in
+        {
+          desktop = checkConfig [ ./config/desktop ];
+          laptop = checkConfig [ ./config/laptop ];
         };
     };
 }
