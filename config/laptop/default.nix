@@ -1,54 +1,35 @@
 #~/.config/nixpkgs/config/desktop/index.nix
-{ my, config, lib, pkgs, spicetify-nix, ... }:
+{ config, lib, pkgs, spicetify-nix, ... }:
 
 let
-  nixpkgs = my.config.nixpkgs;
-  programs = "${nixpkgs}/programs";
+  inherit (config.dotfiles.folders) applications;
 
   modifier = "Mod4";
   primary = "eDP-1-1";
   secondary = "HDMI-0";
 
-  my_gaps = {
-    inner = 6;
-    smartGaps = false;
-  };
 in
 {
-  imports = [
-    # Packages
-    "${nixpkgs}/pkgs/system.nix"
-    "${nixpkgs}/pkgs/dev.nix"
-    "${nixpkgs}/pkgs/apps.nix"
-    "${nixpkgs}/pkgs/school.nix"
-
-    # Fonts
-    "${nixpkgs}/pkgs/fonts.nix"
-
-    # Minimal configuration
-    ../minimal
-
-    # TODO: change it to an import function
-    "${programs}/battery.nix"
-
-    (import "${programs}/spicetify" { inherit my pkgs spicetify-nix; })
-    (import "${programs}/polybar" { inherit my pkgs lib; network = "wlp0s20f3"; })
-    (import "${programs}/i3/i3.nix" { inherit my pkgs lib my_gaps; })
-  ];
-
-  # Standalone programs (don't need to download other configurations or change system-wide configurations)
-  programs = {
-    autorandr = import "${programs}/autorandr/laptop.nix";
+  dotfiles = {
+    extraOptions = {
+      network = "wlp0s20f3";
+      monitor = {
+        inherit primary secondary;
+      };
+    };
   };
 
-  home.packages = with pkgs; [
-    # miru
-    autorandr
-    arandr
-  ];
+  imports = lib.importConfig {
+    pkgs = [ "system" "dev" "apps" "school" "fonts" ];
+    applications = [ "spicetify" "i3" "polybar" ];
+    imports = [
+      ../minimal
+      ./autorandr.nix
+    ];
+  };
 
   services = {
-    batteryNotifier = {
+    lowbatt = {
       enable = true;
       device = "BAT1";
       notifyCapacity = 100;
@@ -59,6 +40,10 @@ in
     keybindings = lib.mkOptionDefault {
       "Ctrl+${modifier}+Up" = "move workspace to output ${secondary}";
       "Ctrl+${modifier}+Down" = "move workspace to output ${primary}";
+    };
+    gaps = {
+      inner = 8;
+      smartGaps = false;
     };
   };
 }

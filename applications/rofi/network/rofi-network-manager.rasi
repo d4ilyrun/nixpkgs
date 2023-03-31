@@ -1,0 +1,16 @@
+configuration {
+    show-icons:		false;
+    sidebar-mode: 	false;
+}
+
+window {
+    height: 3em;
+    width: 3em;
+    children: [listview];
+}
+
+textbox {
+    text: "WIFI";
+}
+
+@theme "~/.config/rofi/theme.rasi"

@@ -36,9 +36,8 @@
       system = "x86_64-linux";
       stateVersion = "22.11";
 
-      my = import ./config;
-      username = my.config.username;
-      homeDirectory = my.config.home;
+      username = "leo"; # TODO: user module
+      homeDirectory = "/home/leo"; # TODO: user module
 
       overlays = import ./pkgs/overlays;
 
@@ -52,6 +51,23 @@
           nur.overlay
         ] ++ overlays;
       };
+
+      myModules = [ ./pkgs/modules ./themes ];
+
+      homeConfig = imports: home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = imports ++ myModules;
+        extraSpecialArgs = {
+          inherit (inputs) spicetify-nix;
+          lib = nixpkgs.lib.extend (final: prev:
+            prev // home-manager.lib // (import ./pkgs/lib {
+              inherit pkgs;
+              inherit (pkgs) stdenv;
+              lib = prev;
+            })
+          );
+        };
+      };
     in
     {
       nixosConfigurations =
@@ -61,24 +77,31 @@
         {
           desktop = systemConfig [ ./config/desktop/configuration.nix ];
           laptop = systemConfig [ ./config/laptop/configuration.nix ];
-          yaka = systemConfig [ ./config/yaka/configuration.nix ];
         };
 
       homeConfigurations =
-        let
-          homeConfig = imports: home-manager.lib.homeManagerConfiguration rec {
-            inherit pkgs;
-            extraSpecialArgs = { inherit my; inherit (inputs) spicetify-nix; };
-            modules = imports;
-          };
-        in
         {
           desktop = homeConfig [ ./user/leo.nix ./config/desktop ];
           laptop = homeConfig [ ./user/leo.nix ./config/laptop ];
-          yaka = homeConfig [ ./user/leo.nix ./config/yaka ];
-          minimal = homeConfig [ ];
 
-          "${username}" = self.homeConfigurations.minimal;
+          empty = homeConfig [ ];
+
+          "${username}" = self.homeConfigurations.empty;
+        };
+
+      checks."${system}" =
+        let
+          checkConfigModule = {
+            dotfiles.repository = "${./.}";
+          };
+
+          checkConfig = modules:
+            (homeConfig (modules ++ [ ./user/leo.nix checkConfigModule ])).activationPackage
+          ;
+        in
+        {
+          desktop = checkConfig [ ./config/desktop ];
+          laptop = checkConfig [ ./config/laptop ];
         };
     };
 }

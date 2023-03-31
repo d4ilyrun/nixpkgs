@@ -1,18 +1,28 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  my = import ../config;
   my_browser = "firefox";
 in
 {
-  home = {
-    inherit (my.config) username;
+  imports = lib.importConfig {
+    pkgs = [ "dev" ];
+    applications = [ "git" ];
+    imports = [ ./yaka.nix ];
+  };
 
+  dotfiles = {
+    username = "leo";
+    extraOptions = {
+      browser = "${pkgs.firefox}/bin/firefox";
+      terminal = "${pkgs.kitty}/bin/kitty";
+    };
+  };
+
+  home = {
     stateVersion = "22.11";
 
-    homeDirectory = my.config.home;
-    sessionVariables = rec {
-      PATH = "${my.config.home}/.nix-profile/bin:${my.config.home}/.npm-packages/bin/:$PATH";
+    sessionVariables = {
+      PATH = "${config.dotfiles.homeDirectory}/.nix-profile/bin:${config.dotfiles.homeDirectory}/.npm-packages/bin/:$PATH";
       EDITOR = "nvim";
       BROWSER = my_browser;
     };
@@ -32,7 +42,20 @@ in
   };
 
   programs = {
-    git = import "${my.config.nixpkgs}/programs/git" { inherit my pkgs; };
+    git = {
+      userEmail = "leo@duboin.com";
+      userName = "Léo DUBOIN";
+      includes = [
+        {
+          condition = "gitdir:~/School/";
+          contents.user = {
+            name = "Léo DUBOIN";
+            address = "leo.duboin@epita.fr";
+            email = "leo.duboin@epita.fr";
+          };
+        }
+      ];
+    };
   };
 
   systemd.user.startServices = true;
@@ -87,5 +110,13 @@ in
           "image/*" = image;
         };
       };
+  };
+
+  programs.ssh = {
+    extraConfig = ''
+      AddKeysToAgent yes
+      IdentityFile ~/.ssh/default
+      IdentitiesOnly yes
+    '';
   };
 }

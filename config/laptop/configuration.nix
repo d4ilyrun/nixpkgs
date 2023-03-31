@@ -21,8 +21,10 @@
 
   # Nix settings, auto cleanup and enable flakes
   nix = {
-    autoOptimiseStore = true;
-    allowedUsers = [ "leo" ];
+    settings = {
+      auto-optimise-store = true;
+      allowed-users = [ "leo" ];
+    };
     gc = {
       automatic = true;
       dates = "daily";
