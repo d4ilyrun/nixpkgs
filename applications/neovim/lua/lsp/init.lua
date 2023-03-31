@@ -4,8 +4,7 @@ end
 
 local plugins = {
     'lspsaga',
-    'lsp-installer',
-    'lsp',
+    'mason',
 }
 
 for _,plugin in ipairs(plugins) do

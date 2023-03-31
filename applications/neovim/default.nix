@@ -95,6 +95,8 @@ in
       # LSP
       (plugin "neovim/nvim-lspconfig")
       (plugin "williamboman/nvim-lsp-installer")
+      (plugin "williamboman/mason-lspconfig.nvim")
+      (plugin "williamboman/mason.nvim")
       (plugin "ojroques/nvim-lspfuzzy")
 
       # CMP
