@@ -32,7 +32,7 @@ in
     repository = mkOption {
       type = types.str;
       description = "The path to the config repository";
-      default = "${../..}";
+      default = "${cfg.homeDirectory}/.config/nixpkgs";
     };
 
     # Subfolders
