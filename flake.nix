@@ -103,5 +103,14 @@
           desktop = checkConfig [ ./config/desktop ];
           laptop = checkConfig [ ./config/laptop ];
         };
+
+      devShells."${system}" = {
+        default = pkgs.mkShell {
+          name = "dotfiles";
+          buildInputs = [
+            pkgs.stylua
+          ];
+        };
+      };
     };
 }

@@ -1,0 +1,3 @@
+[submodule "applications/neovim/config"]
+	path = applications/neovim/config
+	url = git@github.com:d4ilyrun/nvim-config.git
