@@ -27,7 +27,7 @@
           "HDMI-A-0" = {
             enable = true;
             mode = "1920x1080";
-            position = "1920x0"; # RightOf DisplayPort-0
+            position = "0x0"; # LeftOf DisplayPort-0
             rotate = "left"; # Vertical screen
           };
         };
