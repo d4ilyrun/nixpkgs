@@ -75,6 +75,7 @@
 
       push.default = "simple";
       pull = { ff = "only"; rebase = true; };
+      merge = { ff = false; }; # semi-linear
 
       init.defaultBranch = "master";
 
