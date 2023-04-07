@@ -98,9 +98,12 @@
     vim
     curl
     git
-    fish
     refind
   ];
+
+  programs = {
+    fish.enable = true;
+  };
 
   # Download patched fonts from nerd fonts to use glyphs in the terminal
   fonts.fonts = with pkgs; [
