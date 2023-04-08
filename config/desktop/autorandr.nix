@@ -19,7 +19,7 @@
           "DisplayPort-0" = {
             enable = true;
             primary = true;
-            position = "0x0";
+            position = "1080x840";
             mode = "1920x1080";
             rate = "144.0";
           };
