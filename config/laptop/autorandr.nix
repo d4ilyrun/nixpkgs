@@ -15,14 +15,14 @@ in
           "eDP-1-1" = {
             enable = true;
             primary = true;
-            position = "0x0";
+            position = "0x1080";
             mode = "1920x1080";
           };
 
           "HDMI-0" = {
             enable = true;
             mode = "1920x1080";
-            position = "1080x840"; # LeftOf eDP-1-1
+            position = "0x0"; # Above eDP-1-1
           };
         };
       };
