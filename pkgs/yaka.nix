@@ -7,6 +7,8 @@
     slack
     # clockify # INSECURE
     thunderbird
+    nodejs
+    pkgs.pyright
   ];
 }
 
