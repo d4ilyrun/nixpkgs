@@ -8,6 +8,7 @@ let
   cfg = config.services.lowbatt;
   script = pkgs.writeShellApplication {
     name = "lowbatt-start";
+    runtimeInputs = [ pkgs.toybox pkgs.libnotify ];
     text = ''
       #!/bin/sh
 

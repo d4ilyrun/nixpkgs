@@ -32,7 +32,7 @@ in
     lowbatt = {
       enable = true;
       device = "BAT1";
-      notifyCapacity = 100;
+      notifyCapacity = 15;
     };
   };
 
