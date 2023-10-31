@@ -1,6 +1,14 @@
 { pkgs, config, ... }:
 
 {
+  xdg.configFile."tmux/plugins/tpm" = {
+    source = pkgs.fetchgit {
+      url = "https://github.com/tmux-plugins/tpm";
+      sha256 = "sha256-1agBX7r4tEdG3fRvsuXHj+YfhsIj0eLLA1Wl8fP+UbQ=";
+      rev = "99469c4";
+    };
+  };
+
   programs.tmux = {
     enable = true;
 
@@ -14,6 +22,8 @@
     baseIndex = 1;
     sensibleOnTop = true;
 
-    extraConfig = builtins.readFile "${config.dotfiles.folders.applications}/tmux/tokyodark.conf";
+    extraConfig = ''
+      source-file ${config.dotfiles.folders.applications}/tmux/tmux.conf
+    '';
   };
 }
