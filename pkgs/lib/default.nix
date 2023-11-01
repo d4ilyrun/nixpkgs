@@ -35,4 +35,6 @@ rec {
     ++ (map (pkg: "${../../pkgs}/${pkg}.nix") (existsOr imports "pkgs" [ ]))
     ++ (existsOr imports "imports" [ ])
   ;
+
+  mkOverridable = lib.mkOptionDefault;
 }

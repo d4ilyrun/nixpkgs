@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   soundNotification = pkgs.writeShellApplication {
     name = "play_sound";
@@ -8,6 +8,9 @@ let
       ${pkgs.pulseaudio}/bin/paplay ${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/window-attention.oga
     '';
   };
+
+  inherit (lib) mkOverridable;
+
 in
 {
   home.packages = [
@@ -32,6 +35,10 @@ in
         origin = "top-right";
         offset = "30x60";
 
+        # default colors
+        frame_color = mkOverridable primary.accent;
+        separator_color = mkOverridable "frame";
+
         progress_bar = "true";
         progress_bar_height = 10;
         progress_bar_frame_width = 1;
@@ -51,8 +58,6 @@ in
         # Draw a line between multiple notifications
         separator_height = 4;
 
-        separator_color = "#1e2137aa";
-
         # Set notification padding
         padding = 16;
         horizontal_padding = 16;
@@ -71,7 +76,7 @@ in
 
         # Set the font
         # font = Noto Sans 11"";
-        font = "Hack Nerd Font 11";
+        font = "Fira Nerd Font 11";
 
         # Set line height to font height
         line_height = 0;
@@ -185,22 +190,23 @@ in
         close_all = "alt+shift+space";
       };
 
-      urgency_low = {
+      # Colors are overridable if defined elsewhere (insidethe theme config for example)
+
+      urgency_low = mkOverridable {
         background = primary.background;
         foreground = primary.foreground;
-        frame_color = primary.foreground;
         highlight = primary.accent;
         timeout = 8;
       };
 
-      urgency_normal = {
+      urgency_normal = mkOverridable {
         background = primary.background;
         foreground = primary.foreground;
         frame_color = primary.foreground;
         timeout = 8;
       };
 
-      urgency_critical = {
+      urgency_critical = mkOverridable {
         background = primary.background;
         foreground = primary.foreground;
         frame_color = normal.red;

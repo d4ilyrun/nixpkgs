@@ -10,6 +10,7 @@ in
     ./firefox.nix
     ./rofi.nix
     ./wallpapers.nix
+    ./dunst.nix
   ];
 
   dotfiles.extraOptions = {
