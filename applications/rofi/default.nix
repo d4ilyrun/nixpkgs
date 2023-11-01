@@ -9,12 +9,13 @@ in
   programs.rofi = {
     enable = true;
     terminal = defaultTerminal;
-    theme = "theme";
 
     plugins = [
       pkgs.rofi-calc
       pkgs.rofi-emoji
     ];
+
+    cycle = false;
 
     extraConfig = {
       modi = "drun,run,window,calc,emoji";
@@ -37,6 +38,6 @@ in
     "Mod4+Shift+e" = "exec ${import ./powermenu { inherit config pkgs; }}";
     "Mod4+Shift+c" = "exec rofi -show calc -modi calc -display-calc 󰃬 -terse | xsel -b";
     "Mod4+Shift+w" = "exec ${applications}/rofi/network/rofi-network-manager.sh";
-    "Mod4+comma" = "exec rofi -show emoji -emoji-mode insert";
+    "Mod4+comma" = "exec rofi -modi emoji -show emoji -emoji-mode insert";
   };
 }

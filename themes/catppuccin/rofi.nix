@@ -1,5 +1,5 @@
 { config, ... }:
 
 {
-  xdg.configFile."rofi/theme.rasi".source = ./catppuccin.rasi;
+  programs.rofi.theme = "${config.dotfiles.theme.directory}/catppuccin.rasi";
 }
