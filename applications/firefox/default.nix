@@ -29,7 +29,7 @@
           ublock-origin
           c-c-search-extension
           consent-o-matic
-          onepassword-password-manager
+          bitwarden
         ];
       };
     };

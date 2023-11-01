@@ -1,9 +1,6 @@
 { config, pkgs, lib, ... }:
 
-let
-  my_browser = "firefox";
-in
-{
+rec {
   news.display = "silent";
 
   imports = lib.importConfig {
@@ -17,16 +14,17 @@ in
     extraOptions = {
       browser = "${pkgs.firefox}/bin/firefox";
       terminal = "${pkgs.kitty}/bin/kitty";
+      editor = "${pkgs.neovim}/bin/nvim";
     };
   };
 
   home = {
     stateVersion = "22.11";
 
-    sessionVariables = {
+    sessionVariables = with dotfiles.extraOptions; {
       PATH = "${config.dotfiles.homeDirectory}/.nix-profile/bin:${config.dotfiles.homeDirectory}/.npm-packages/bin/:$PATH";
-      EDITOR = "nvim";
-      BROWSER = my_browser;
+      EDITOR = editor;
+      BROWSER = browser;
     };
 
     keyboard = {
@@ -37,7 +35,7 @@ in
 
     packages = with pkgs; [
       miru
-      _1password
+      bitwarden
       home-manager
       nixpkgs-fmt
     ];
@@ -77,7 +75,7 @@ in
     mimeApps =
       let
         file-manager = [ "ranger.desktop" ];
-        browser = [ "${my_browser}.desktop" ];
+        browser = [ "firefox.desktop" ];
         text-editor = [ "nvim.desktop" ];
         pdf = [ "evince.desktop" ];
         image = [ "feh.desktop" ];
