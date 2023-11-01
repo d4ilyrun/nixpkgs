@@ -1,32 +1,6 @@
 @theme "/dev/null"
 
-configuration{
-    modi: "run,drun,window";
-    show-icons: true;
-    drun-display-format: "{icon} {name}";
-    location: 0;
-    disable-history: false;
-    hide-scrollbar: true;
-    display-drun: "   Apps ";
-    display-run: "   Run ";
-    display-window: "   Window";
-    display-Network: " 󰤨  Network";
-    sidebar-mode: true;
-}
-
-* {
-    bg-col:  #1e1e2e;
-    bg-col-light: #1e1e2e;
-    border-col: #1e1e2e;
-    selected-col: #1e1e2e;
-    blue: #89b4fa;
-    fg-col: #cdd6f4;
-    fg-col2: #f38ba8;
-    grey: #6c7086;
-
-    width: 600;
-    font: "JetBrainsMono Nerd Font 14";
-}
+@import "~/.config/rofi/theme/theme.rasi"
 
 element-text, element-icon , mode-switcher {
     background-color: inherit;
@@ -125,3 +99,4 @@ textbox {
     text-color: @blue;
     background-color: @bg-col-light;
 }
+

@@ -1,5 +1,21 @@
 { config, ... }:
 
 {
-  programs.rofi.theme = "${config.dotfiles.theme.directory}/catppuccin.rasi";
+  xdg.configFile."rofi/theme/theme.rasi" = {
+    enable = true;
+    text = ''
+      * {
+          width: 600;
+
+          bg-col:  #1e1e2e;
+          bg-col-light: #1e1e2e;
+          border-col: #1e1e2e;
+          selected-col: #1e1e2e;
+          blue: #89b4fa;
+          fg-col: #cdd6f4;
+          fg-col2: #f38ba8;
+          grey: #6c7086;
+      }
+    '';
+  };
 }

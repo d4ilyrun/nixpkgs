@@ -19,17 +19,23 @@ in
 
     extraConfig = {
       modi = "drun,run,window,calc,emoji";
-      font = "JetBrainsMono Nerd Font Medium 13";
+      font = "JetBrainsMono Nerd Font Medium 14";
+      location = 0;
 
+      drun-display-format = "{icon} {name}";
       display-window = " ";
-      display-run = " ";
-      display-drun = " ";
+      display-drun = "   Apps ";
+      display-run = "   Run ";
+      display-Network = " 󰤨  Network";
       display-power = "Powermenu: ";
-      drun-display-format = " {name}";
 
       show-icons = true;
-      sidebar-mode = false;
+      sidebar-mode = true;
+      hide-scrollbar = true;
+      disable-history = false;
     };
+
+    theme = "${applications}/rofi/config.rasi";
   };
 
   xsession.windowManager.i3.config.keybindings = pkgs.lib.mkOptionDefault {
