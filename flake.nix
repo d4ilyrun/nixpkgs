@@ -46,6 +46,9 @@
           neovim.overlay
           discord.overlay
           nur.overlay
+          (self: super: {
+            spicePkgs = spicetify-nix.packages."${system}".default;
+          })
         ] ++ overlays;
       };
 

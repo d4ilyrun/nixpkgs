@@ -18,7 +18,7 @@ in
 
   home.packages = with pkgs; [
     starship
-    exa
+    eza
     bat
     neofetch
   ];

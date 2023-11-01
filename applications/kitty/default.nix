@@ -10,7 +10,7 @@
 
       # FONT
       font_size = "13.0";
-      font_family = "FiraCode Nerd Font";
+      font_family = "Fira Code Nerd Font";
       bold_font = "auto";
       italic_font = "Fira Sans Italic"; # Cause fira code does not include italics
       bold_italic_font = "Fira Sans Bold Italic";

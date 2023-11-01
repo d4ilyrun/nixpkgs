@@ -22,7 +22,7 @@ in
 
     # Rust
     rustup
-    rust-analyzer
+    # rust-analyzer
 
     # Python + packages
     python-with-my-packages

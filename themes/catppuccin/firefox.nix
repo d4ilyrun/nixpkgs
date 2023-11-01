@@ -30,7 +30,7 @@ let
 in
 
 {
-  programs.firefox = {
+  programs.firefox.profiles."${config.dotfiles.username}" = {
 
     extensions = [
       (lib.buildFirefoxXpiAddon {
@@ -41,11 +41,7 @@ in
       })
     ];
 
-    profiles = {
-      "${config.dotfiles.username}" = {
-        userChrome = builtins.readFile "${cascadeCatppuccin}/chrome/userChrome.css";
-      };
-    };
+    userChrome = builtins.readFile "${cascadeCatppuccin}/chrome/userChrome.css";
 
   };
 }

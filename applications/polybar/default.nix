@@ -35,8 +35,9 @@ in
     enable = true;
 
     package = pkgs.polybar.override {
-      i3GapsSupport = true;
+      i3Support = true;
       alsaSupport = true;
+      pulseSupport = true;
       iwSupport = true;
     };
 
@@ -97,7 +98,7 @@ in
         font-3 = "Font Awesome 5 Free Solid:style=Solid:size=12";
         font-4 = "Font Awesome 5 Brands Regular:style=Regular:size=12";
         font-5 = "Material Design Icons:style=Solid:size=13";
-        font-6 = "FiraCode Nerd Font:style=Retina,Regular:size=13";
+        font-6 = "Fira Code Nerd Font:style=Retina,Regular:size=13";
         font-7 = "Font Awesome 5 Free Regular:style=Solid:size=12";
       };
     };

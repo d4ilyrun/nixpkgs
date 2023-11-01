@@ -2,17 +2,8 @@
 
 {
   programs.firefox = {
-    enable = true;
 
-  extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-    darkreader
-    refined-github
-    return-youtube-dislikes
-    ublock-origin
-    c-c-search-extension
-    consent-o-matic
-    onepassword-password-manager
-  ];
+    enable = true;
 
     profiles = {
       "${config.dotfiles.username}" = {
@@ -30,6 +21,16 @@
         };
 
         bookmarks = { };
+
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          darkreader
+          refined-github
+          return-youtube-dislikes
+          ublock-origin
+          c-c-search-extension
+          consent-o-matic
+          onepassword-password-manager
+        ];
       };
     };
   };

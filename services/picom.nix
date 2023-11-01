@@ -1,7 +1,6 @@
 {
   services.picom = {
     enable = true;
-    experimentalBackends = false;
 
     fade = true;
     fadeDelta = 4;

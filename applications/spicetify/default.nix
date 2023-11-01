@@ -6,38 +6,41 @@
   # import the flake's module for your system
   imports = [ spicetify-nix.homeManagerModule ];
 
-  programs.spicetify.spicetifyPackage = pkgs.spicetify-cli.overrideAttrs (oa: rec {
-    pname = "spicetify-cli";
-    version = "2.9.9";
-    src = pkgs.fetchgit {
-      url = "https://github.com/spicetify/${pname}";
-      rev = "v${version}";
-      sha256 = "1a6lqp6md9adxjxj4xpxj0j1b60yv3rpjshs91qx3q7blpsi3z4z";
-    };
-  });
+  home.packages = [ pkgs.go ];
 
   # configure spicetify :)
-  programs.spicetify =
-    {
-      enable = true;
-      theme = "catppuccin-mocha";
-      colorScheme = "flamingo";
+  programs.spicetify = {
 
-      enabledExtensions = [
-        "fullAppDisplay.js"
-        "hidePodcasts.js"
-        "trashbin.js"
-        "adblock.js"
-        "fixEnhance.js"
-        "autoSkip.js"
-        "volumePercentage.js"
-      ];
+    enable = true;
 
-      enabledCustomApps = [
-        "marketplace"
-        "lyrics-plus"
-        "new-releases"
-        "reddit"
-      ];
-    };
+    spicetifyPackage = pkgs.spicetify-cli.overrideAttrs (oa: rec {
+      pname = "spicetify-cli";
+      version = "2.25.3";
+      src = pkgs.fetchgit {
+        url = "https://github.com/spicetify/${pname}";
+        rev = "v${version}";
+        sha256 = "sha256-xEikizbHK32vnldP0jBEOtNwG/R2KpkS9dX4eMabh2E=";
+      };
+      vendorSha256 = pkgs.lib.fakeSha256;
+    });
+
+    theme = pkgs.spicePkgs.themes.catppuccin;
+    colorScheme = "mocha";
+
+    enabledExtensions = with pkgs.spicePkgs.extensions; [
+      fullAppDisplay
+      hidePodcasts
+      trashbin
+      adblock
+      autoSkip
+      volumePercentage
+    ];
+
+    enabledCustomApps = with pkgs.spicePkgs.apps; [
+      marketplace
+      lyrics-plus
+      new-releases
+      reddit
+    ];
+  };
 }

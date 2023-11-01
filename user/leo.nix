@@ -4,6 +4,8 @@ let
   my_browser = "firefox";
 in
 {
+  news.display = "silent";
+
   imports = lib.importConfig {
     pkgs = [ "dev" ];
     applications = [ "git" ];
