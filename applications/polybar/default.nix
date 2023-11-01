@@ -107,9 +107,9 @@ in
       "module/i3" = {
         type = "internal/i3";
 
-        pin-workspace = false;
+        pin-workspace = true;
 
-        ws-icon = [ "0; " "1; " "2; " "3; " "9;󰙯 " ];
+        ws-icon = [ "0; " "1;" "2; " "3; " "9;󰒱" ];
         ws-icon-default = " ";
 
         format = "<label-state>";
@@ -265,57 +265,31 @@ in
           click-middle = "${mpris}/bin/mpris play-pause &";
         };
 
-      "module/alsa" = {
-        type = "internal/alsa";
-
-        master-soundcard = 0;
-        speaker-soundcard = 1;
-        headphone-soundcard = "default";
-
-        master-mixer = "Master";
-        speaker-mixer = "Speaker";
-        headphone-mixer = "Headphone";
-
-        headphone-id = 1;
-
-        mapped = true;
-
-        format = {
-          muted = "🔇 <label-muted>";
-          volume = rec {
-            text = "<ramp-volume> <label-volume>";
-            foreground = color.red;
-            underline = foreground;
-          };
-        };
-
-        label.muted = { text = "Muted"; foreground = bright.black; };
-        ramp.volume = [ "🔈" "🔉" "🔊" ];
-      };
-
-      "module/pulseaudio" = rec {
+      "module/pulseaudio" = {
         type = "internal/pulseaudio";
         use-ui-max = true;
-        sink = "alsa_output.pci-0000_00_1f.3.analog-stereo";
 
         format = {
-          muted = "🔇 <label-muted>";
-          volume = rec {
-            text = "<ramp-volume> <label-volume>";
+          muted = rec {
+            text = "󰸈<label-muted>";
             foreground = color.red;
+            underline = foreground;
+          };
+          volume = rec {
+            text = "<ramp-volume><label-volume>";
+            foreground = color.cyan;
             underline = foreground;
           };
         };
 
-        label.muted = { text = "Muted"; foreground = bright.black; };
+        label.muted = { text = "Muted"; foreground = color.red; };
 
-        ramp.volume = [ "🔈" "🔉" "🔊" ];
-        click.right = "pavucontrol";
+        ramp.volume = [ " " " " "󰕾" ];
       };
 
       "module/kb" = {
         type = "internal/xkeyboard";
-        blacklist = [ "num lock" "scroll lock" ];
+        blacklist = [ ];
 
         format = { text = "<label-indicator> <label-layout>"; foreground = bright.black; };
 
@@ -330,8 +304,8 @@ in
         ];
 
         indicator.icon = [
-          "caps lock;-CL;"
-          "num lock;-NL;"
+          "caps lock;;󰘶"
+          "num lock;;󰎠"
         ];
       };
     };
