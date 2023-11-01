@@ -2,7 +2,7 @@
 
 let
 
-  inherit (config.dotfiles) homeDirectory;
+  inherit (config.dotfiles) homeDirectory extraOptions;
   inherit (config.dotfiles.theme) wallpapers;
   inherit (config.dotfiles.folders) applications;
   inherit (config.dotfiles.extraOptions) browser terminal;
@@ -138,11 +138,27 @@ in
       };
 
       assigns = {
-        "${ws0}" = [
-          { class = "Spotify"; }
+        "${ws3}" = [{ class = "firefox"; }];
+        "${ws0}" = [{ class = "Spotify"; }];
+        "${ws9}" = [
           { class = "discord"; }
+          { class = "Slack"; }
         ];
       };
+
+      # Assign workspaces to second monitor, if any
+      workspaceOutputAssign = lib.lists.optionals (lib.attrsets.hasAttrByPath [ "extraOptions" "monitor" "secondary" ] config.dotfiles) (
+        with extraOptions.monitor; [
+          {
+            workspace = "${ws2}";
+            output = secondary;
+          }
+          {
+            workspace = "${ws3}";
+            output = secondary;
+          }
+        ]
+      );
 
       colors = with config.dotfiles.theme.colors; {
         background = primary.background;

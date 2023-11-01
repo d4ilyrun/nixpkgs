@@ -96,7 +96,7 @@ in
         font-2 = "Unifont:style=Regular,Regular:size=13";
         font-3 = "Font Awesome 5 Free Solid:style=Solid:size=12";
         font-4 = "Font Awesome 5 Brands Regular:style=Regular:size=12";
-        font-5 = "Material Icons:style=Solid:size=13";
+        font-5 = "Material Design Icons:style=Solid:size=13";
         font-6 = "FiraCode Nerd Font:style=Retina,Regular:size=13";
         font-7 = "Font Awesome 5 Free Regular:style=Solid:size=12";
       };
@@ -106,19 +106,20 @@ in
       "module/i3" = {
         type = "internal/i3";
 
-        pin-workspace = true;
+        pin-workspace = false;
 
-        ws-icon = [ "0;" "1;" "2;" "3;" ];
-        ws-icon-default = " ";
+        ws-icon = [ "0; " "1; " "2; " "3; " "9;󰙯 " ];
+        ws-icon-default = " ";
 
         format = "<label-state>";
         format-margin = 0;
 
         label = {
-          unfocused = "%icon%:%name% ";
-          focused = { text = "%icon%:%name% "; foreground = color.green; };
-          visible = { text = "%icon%:%name% "; foreground = color.purple; };
-          urgent = { text = "%icon%:%name% "; foreground = color.red; };
+          # Use font 7 for icons
+          unfocused = "%{T-6}%icon%%{T-}:%name% ";
+          focused = { text = "%{T-6}%icon%%{T-}:%name% "; foreground = color.green; };
+          visible = { text = "%{T-6}%icon%%{T-}:%name% "; foreground = color.purple; };
+          urgent = { text = "%{T-6}%icon%%{T-}:%name% "; foreground = color.red; };
         };
       };
 
