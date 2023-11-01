@@ -41,5 +41,26 @@
         '';
       };
     };
+
+    firefox.profiles."${config.dotfiles.username}" = {
+      bookmarks = [
+        {
+          name = "Clockishift";
+          url = "https://app.clockify.me/tracker";
+        }
+        {
+          name = "GitLab";
+          url = "https://gitlab.cri.epita.fr/";
+        }
+        {
+          name = "Tickets";
+          url = "https://tickets.cri.epita.fr/";
+        }
+        {
+          name = "Operator";
+          url = "https://operator.forge.epita.fr/ui/";
+        }
+      ];
+    };
   };
 }
