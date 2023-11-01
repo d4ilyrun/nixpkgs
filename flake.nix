@@ -34,10 +34,7 @@
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
     let
       system = "x86_64-linux";
-      stateVersion = "22.11";
-
       username = "leo"; # TODO: user module
-      homeDirectory = "/home/leo"; # TODO: user module
 
       overlays = import ./pkgs/overlays;
 
