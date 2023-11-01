@@ -40,18 +40,14 @@ in
 
       defaultWorkspace = ws1;
 
-      keybindings = {
+      keybindings = lib.mkOptionDefault {
+
         "${modifier}+Return" = "exec ${terminal}";
-        "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal ${terminal}";
-        "${modifier}+Shift+d" = "exec rofi -sho-icons -show window";
-        "${modifier}+Shift+w" = "exec ${applications}/rofi/network/rofi-network-manager.sh";
+        "${modifier}+Shift+r" = "restart";
         "${modifier}+Shift+q" = "kill";
 
-        # Rofi menu selection
-        "${modifier}+e" = "exec EDITOR='/usr/bin/env nvim' ${terminal} -e ranger"; # file explorer
-        #"${modifier}+Shift+e" = "exec rofi -modi 'Powermenu:~/.config/nixpkgs/applications/polybar/scripts/powermenu.sh' -show Powermenu";
-        "${modifier}+Shift+e" = "exec ${powermenu}";
-        "${modifier}+comma" = "exec rofi -show-emoji";
+        # file explorer
+        "${modifier}+e" = "exec EDITOR='/usr/bin/env nvim' ${terminal} -e ranger";
 
         # Custom workspaces names
         "${modifier}+1" = "workspace ${ws1}";
@@ -75,6 +71,11 @@ in
         "${modifier}+Shift+9" = "move container to workspace ${ws9}";
         "${modifier}+Shift+0" = "move container to workspace ${ws0}";
         "${modifier}+Shift+h" = "move scratchpad";
+
+        # Switch modes
+        "${modifier}+r" = "mode resize";
+        "${modifier}+f" = "fullscreen";
+        "${modifier}+Shift+f" = "floating toggle";
 
         # Lock
         "${modifier}+Shift+x" = "exec betterlockscreen -l dimblur";
