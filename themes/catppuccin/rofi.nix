@@ -1,5 +1,7 @@
 { config, ... }:
 
+with config.dotfiles.theme.colors;
+
 {
   xdg.configFile."rofi/theme/theme.rasi" = {
     enable = true;
@@ -7,14 +9,16 @@
       * {
           width: 600;
 
-          bg-col:  #1e1e2e;
-          bg-col-light: #1e1e2e;
-          border-col: #1e1e2e;
-          selected-col: #1e1e2e;
-          blue: #89b4fa;
-          fg-col: #cdd6f4;
-          fg-col2: #f38ba8;
+          background:  #181825;
+          background-alt: #11111b;
+          foreground: #cdd6f4;
+          foreground-alt: #f38ba8;
+          border: #1e1e2e;
+          selected: #1e1e2e;
           grey: #6c7086;
+          blue: #89b4fa;
+          red: ${normal.red};
+          green: ${normal.green};
       }
     '';
   };

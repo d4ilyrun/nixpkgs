@@ -10,17 +10,17 @@ element-text, element-icon , mode-switcher {
 window {
     height: 360px;
     border: 3px;
-    border-color: @border-col;
-    background-color: @bg-col;
+    border-color: @grey;
+    background-color: @background;
 }
 
 mainbox {
-    background-color: @bg-col;
+    background-color: @background;
 }
 
 inputbar {
     children: [prompt,entry];
-    background-color: @bg-col;
+    background-color: @background;
     border-radius: 5px;
     padding: 2px;
 }
@@ -28,7 +28,7 @@ inputbar {
 prompt {
     background-color: @blue;
     padding: 6px;
-    text-color: @bg-col;
+    text-color: @background;
     border-radius: 3px;
     margin: 20px 0px 0px 20px;
 }
@@ -41,8 +41,8 @@ textbox-prompt-colon {
 entry {
     padding: 6px;
     margin: 20px 0px 0px 10px;
-    text-color: @fg-col;
-    background-color: @bg-col;
+    text-color: @foreground;
+    background-color: @background;
 }
 
 listview {
@@ -51,13 +51,13 @@ listview {
     margin: 10px 0px 0px 20px;
     columns: 2;
     lines: 5;
-    background-color: @bg-col;
+    background-color: @background;
 }
 
 element {
     padding: 5px;
-    background-color: @bg-col;
-    text-color: @fg-col  ;
+    background-color: @background;
+    text-color: @foreground  ;
 }
 
 element-icon {
@@ -65,8 +65,8 @@ element-icon {
 }
 
 element selected {
-    background-color:  @selected-col ;
-    text-color: @fg-col2  ;
+    background-color:  @selected ;
+    text-color: @foreground-alt  ;
 }
 
 mode-switcher {
@@ -75,19 +75,19 @@ mode-switcher {
 
 button {
     padding: 10px;
-    background-color: @bg-col-light;
+    background-color: @background-alt;
     text-color: @grey;
     vertical-align: 0.5; 
     horizontal-align: 0.5;
 }
 
 button selected {
-  background-color: @bg-col;
+  background-color: @background;
   text-color: @blue;
 }
 
 message {
-    background-color: @bg-col-light;
+    background-color: @background-alt;
     margin: 2px;
     padding: 2px;
     border-radius: 5px;
@@ -97,6 +97,6 @@ textbox {
     padding: 6px;
     margin: 20px 0px 0px 20px;
     text-color: @blue;
-    background-color: @bg-col-light;
+    background-color: @background-alt;
 }
 
