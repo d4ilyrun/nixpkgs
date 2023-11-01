@@ -40,7 +40,7 @@ in
 
       defaultWorkspace = ws1;
 
-      keybindings = lib.mkOptionDefault {
+      keybindings = {
         "${modifier}+Return" = "exec ${terminal}";
         "${modifier}+d" = "exec rofi -show drun -show drun -show-icons -terminal ${terminal}";
         "${modifier}+Shift+d" = "exec rofi -sho-icons -show window";

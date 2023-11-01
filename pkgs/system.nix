@@ -27,7 +27,6 @@
 
     # i3
     dmenu
-    rofi
     betterlockscreen
   ];
 }
