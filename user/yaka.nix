@@ -43,22 +43,19 @@
     };
 
     firefox.profiles."${config.dotfiles.username}" = {
+      settings = lib.mkOverridable {
+        "browser.startup.homepage" = "https://gitlab.cri.epita.fr/";
+      };
       bookmarks = [
         {
-          name = "Clockishift";
-          url = "https://app.clockify.me/tracker";
-        }
-        {
-          name = "GitLab";
-          url = "https://gitlab.cri.epita.fr/";
-        }
-        {
-          name = "Tickets";
-          url = "https://tickets.cri.epita.fr/";
-        }
-        {
-          name = "Operator";
-          url = "https://operator.forge.epita.fr/ui/";
+          name = "YACU";
+          toolbar = true;
+          bookmarks = [
+            { name = "Clockishift"; url = "https://app.clockify.me/tracker"; }
+            { name = "GitLab"; url = "https://gitlab.cri.epita.fr/"; }
+            { name = "Tickets"; url = "https://tickets.cri.epita.fr/"; }
+            { name = "Operator"; url = "https://operator.forge.epita.fr/ui/"; }
+          ];
         }
       ];
     };

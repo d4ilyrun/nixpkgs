@@ -11,7 +11,6 @@
         isDefault = true;
 
         settings = {
-          "browser.startup.homepage" = "https://search.nixos.org/packages";
           "browser.search.region" = "US";
           "browser.search.isUS" = true;
           "distribution.searchplugins.defaultLocale" = "en-US";
@@ -20,14 +19,23 @@
           "layout.css.backdrop-filter.enabled" = true; # blur style
         };
 
-        bookmarks = { };
+        bookmarks = [
+          {
+            name = "Nix";
+            toolbar = true;
+            bookmarks = [
+              { name = "Search: NixOs"; url = "search.nixos.org"; }
+              { name = "Search: Home-Manager"; url = "https://mipmip.github.io/home-manager-option-search/"; }
+              { name = "Manual"; url = "https://ryantm.github.io/nixpkgs/functions/library/attrsets"; }
+            ];
+          }
+        ];
 
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           darkreader
           refined-github
           return-youtube-dislikes
           ublock-origin
-          c-c-search-extension
           consent-o-matic
           bitwarden
         ];
