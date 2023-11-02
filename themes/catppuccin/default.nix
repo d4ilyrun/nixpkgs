@@ -34,7 +34,7 @@ in
       primary = {
         background = "#1E1D2F";
         foreground = "#D9E0EE";
-        accent = normal.magenta;
+        accent = "#B4BEFE";
       };
 
       normal = {
