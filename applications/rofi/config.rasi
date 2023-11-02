@@ -2,6 +2,10 @@
 
 @import "~/.config/rofi/theme/theme.rasi"
 
+* {
+    width:  600;
+}
+
 element-text, element-icon , mode-switcher {
     background-color: inherit;
     text-color:       inherit;
@@ -10,7 +14,7 @@ element-text, element-icon , mode-switcher {
 window {
     height: 360px;
     border: 3px;
-    border-color: @grey;
+    border-color: @accent;
     background-color: @background;
 }
 

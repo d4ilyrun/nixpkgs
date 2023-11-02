@@ -7,8 +7,6 @@ with config.dotfiles.theme.colors;
     enable = true;
     text = ''
       * {
-          width: 600;
-
           background:  #181825;
           background-alt: #11111b;
           foreground: #cdd6f4;
@@ -19,6 +17,7 @@ with config.dotfiles.theme.colors;
           blue: #89b4fa;
           red: ${normal.red};
           green: ${normal.green};
+          accent: ${primary.accent};
       }
     '';
   };
