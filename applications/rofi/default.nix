@@ -58,6 +58,7 @@ in
     "Mod4+Shift+c" = "exec rofi -show calc -modi calc -display-calc 󰃬 -terse | xsel -b";
     "Mod4+Shift+w" = "exec ${applications}/rofi/scripts/network.sh";
     "Mod4+comma" = "exec rofi -modi emoji -show emoji -emoji-mode insert";
+    "Mod4+Shift+s" = "exec ${applications}/rofi/scripts/screenshot.sh";
   };
 } // (
   # Copy all config files into the config folder

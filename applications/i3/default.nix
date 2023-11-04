@@ -81,11 +81,7 @@ in
         "${modifier}+Shift+x" = "exec betterlockscreen -l dimblur";
 
         # Screenshot
-        "Shift+Print" = "exec --no-startup-id maim --select \"${homeDirectory}/Images/Screenshots/$(date)\"";
-        # Clipboard Screenshot
-        "Print" = "exec --no-startup-id maim | xclip -selection clipboard -t image/png";
-        "${modifier}+Print" = "exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png";
-        "${modifier}+Shift+s" = "exec --no-startup-id maim --select | xclip -selection clipboard -t image/png";
+        "Print" = "exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png";
 
         # Light
         "XF86MonBrightnessUp" = "exec ${light} dec";
