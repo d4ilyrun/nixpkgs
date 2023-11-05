@@ -3,7 +3,7 @@
 with config.dotfiles.theme.colors;
 
 {
-  xdg.configFile."rofi/theme/theme.rasi" = {
+  xdg.configFile."rofi/themes/dotfiles.rasi" = {
     enable = true;
     text = ''
       * {

@@ -1,4 +1,4 @@
-@import "~/.config/rofi/theme/theme.rasi"
+@import "dotfiles"
 
 /**
  *

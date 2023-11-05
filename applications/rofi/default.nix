@@ -8,7 +8,7 @@ let
   copyConfigs = names: builtins.listToAttrs (
     map
       (name: pkgs.lib.attrsets.nameValuePair
-        "rofi/theme/${name}.rasi"
+        "rofi/themes/${name}.rasi"
         {
           enable = true;
           source = "${applications}/rofi/${name}.rasi";
@@ -39,7 +39,7 @@ in
 
       drun-display-format = "{icon} {name}";
       display-window = "   Windows ";
-      display-drun = "   Apps ";
+      display-drun = "  Apps ";
       display-run = "   Run ";
 
       show-icons = true;

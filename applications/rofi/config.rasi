@@ -1,6 +1,6 @@
 @theme "/dev/null"
 
-@import "~/.config/rofi/theme/theme.rasi"
+@import "dotfiles"
 
 * {
     width:  600;
