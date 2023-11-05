@@ -42,6 +42,7 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
+        config.outPath = nixpkgs.outPath;
         overlays = with inputs; [
           neovim.overlay
           discord.overlay
@@ -58,7 +59,7 @@
         inherit pkgs;
         modules = imports ++ myModules;
         extraSpecialArgs = {
-          inherit (inputs) spicetify-nix;
+          inherit (inputs) spicetify-nix nixpkgs;
           lib = nixpkgs.lib.extend (final: prev:
             prev // home-manager.lib // (import ./pkgs/lib {
               inherit pkgs;

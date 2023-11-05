@@ -1,15 +1,10 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ../minimal/configuration.nix
+    ./hardware-configuration.nix
+  ];
 
   # Set environment variables
   environment.variables = {
@@ -19,44 +14,19 @@
 
   # Nix settings, auto cleanup and enable flakes
   nix = {
-    settings = {
-      auto-optimise-store = true;
-      allowed-users = [ "leo" ];
-    };
+    settings.allowed-users = [ "leo" ];
     gc = {
       automatic = true;
       dates = "weekly";
     };
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes repl-flake
-    '';
   };
 
   networking = {
     hostName = "leo";
-    networkmanager.enable = true;
-
-    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-    # Per-interface useDHCP will be mandatory in the future, so this generated config
-    # replicates the default behaviour.
     useDHCP = false;
+    networkmanager.enable = true;
     interfaces.enp30s0.useDHCP = true;
     interfaces.wlp35s0.useDHCP = true;
-
-    # Configure network proxy if necessary
-    # proxy.default = "http://user:password@proxy:port/";
-    #
-  };
-
-  # Set your time zone.
-  time.timeZone = "Europe/Paris";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "fr";
   };
 
   services.xserver = {
@@ -79,11 +49,6 @@
     libinput.enable = true;
   };
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.bluetooth.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.leo = {
     isNormalUser = true;
@@ -91,31 +56,14 @@
     shell = pkgs.fish;
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim
-    curl
-    git
-    refind
-  ];
-
   programs = {
     fish.enable = true;
   };
 
   # Download patched fonts from nerd fonts to use glyphs in the terminal
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "UbuntuMono" "JetBrainsMono" ]; })
   ];
-
-  # List services that you want to enable:
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Basic monitor layout
   services.xserver.xrandrHeads = [
@@ -126,7 +74,6 @@
         Option "PreferredMode" "1920x080_144"
       '';
     }
-
     {
       output = "HDMI-A-0";
       monitorConfig = ''
@@ -135,8 +82,6 @@
       '';
     }
   ];
-
-  virtualisation.docker.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
