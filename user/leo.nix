@@ -60,10 +60,6 @@ rec {
 
   systemd.user.startServices = true;
 
-  fonts = {
-    fontconfig.enable = true;
-  };
-
   # Delete old mimeApps to avoid conflict
   home.activation."mimeapps-remove" = {
     before = [ "checkLinkTargets" ];

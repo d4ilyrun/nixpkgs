@@ -184,9 +184,9 @@ in
           label-connected-alt = "%essid%%downspeed:9%";
 
           ramp-signal = [
-            { text = ""; foreground = color.green; }
-            { text = "直"; foreground = color.green; }
-            { text = "睊"; foreground = color.red; }
+            { text = "󰤨 "; foreground = color.green; }
+            { text = "󰤥 "; foreground = color.green; }
+            { text = "󰤟 "; foreground = color.yellow; }
           ];
 
           label-disconnected = " not connected";

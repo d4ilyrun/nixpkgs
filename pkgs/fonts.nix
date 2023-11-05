@@ -18,5 +18,7 @@
     fira-code-symbols
     material-design-icons
     unifont_upper
+
+    (nerdfonts.override { fonts = [ "FiraCode" "UbuntuMono" "JetBrainsMono" ]; })
   ];
 }

@@ -60,11 +60,6 @@
     fish.enable = true;
   };
 
-  # Download patched fonts from nerd fonts to use glyphs in the terminal
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "UbuntuMono" "JetBrainsMono" ]; })
-  ];
-
   # Basic monitor layout
   services.xserver.xrandrHeads = [
     {
