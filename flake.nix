@@ -78,12 +78,14 @@
         {
           desktop = systemConfig [ ./config/desktop/configuration.nix ];
           laptop = systemConfig [ ./config/laptop/configuration.nix ];
+          verna = systemConfig [ ./config/verna/configuration.nix ];
         };
 
       homeConfigurations =
         {
           desktop = homeConfig [ ./user/leo.nix ./config/desktop ];
           laptop = homeConfig [ ./user/leo.nix ./config/laptop ];
+          verna = homeConfig [ ./user/leo.nix ./config/verna ];
 
           empty = homeConfig [ ];
 
