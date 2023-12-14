@@ -8,7 +8,7 @@ with config.dotfiles.theme.colors;
 
 let
 
-  inherit (lib) existsOr;
+  inherit (lib) existsOr lists;
 
   dir = "${config.dotfiles.folders.applications}/polybar";
 
@@ -212,14 +212,13 @@ in
 
         inherit (my_battery) battery adapter;
 
-        format-charging = "<animation-charging> <label-charging>";
-        format-discharging = "<ramp-capacity> <label-discharging>";
-        format-low = "<animation-discharging> <label-low>";
-        format-full = " <label-full>";
+        format-charging = "<animation-charging>  <label-charging>";
+        format-discharging = "<ramp-capacity>  <label-discharging>";
+        format-low = "<animation-low>  <label-low>";
+        format-full = "   <label-full>";
 
         label-charging = "%percentage%%";
         label-discharging = label-charging;
-        label-low = "BATTERY LOW";
         label-full = "Full";
 
         format = rec {
@@ -229,7 +228,7 @@ in
         };
 
         label = {
-          low = rec { text = "BATTERY LOW"; foreground = color.red; underline = foreground; };
+          low = rec { foreground = color.red; underline = foreground; };
         };
 
         animation-charging = [ "" "" "" "" "" ];
@@ -239,7 +238,7 @@ in
 
         animation-low-0 = "";
         animation-low-1 = " ";
-        animation-low-framerate = 200;
+        animation-low-framerate = 750;
       };
 
       "module/mpris-tail" =
