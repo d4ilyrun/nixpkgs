@@ -2,6 +2,10 @@
 
 rec {
 
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
   environment.variables = {
     NIX_PATH = builtins.concatStringsSep ":" nix.nixPath;
   };
