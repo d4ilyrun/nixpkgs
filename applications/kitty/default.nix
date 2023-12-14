@@ -20,9 +20,7 @@
     };
 
     environment = {
-      "TERM" = "xterm-256color";
+      "TERM" = "kitty";
     };
   };
-
-  home.sessionVariables."TERMINAL" = "kitty";
 }
