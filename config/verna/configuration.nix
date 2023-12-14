@@ -8,6 +8,7 @@
   imports =
     [
       # Include the results of the hardware scan.
+      ../minimal/configuration.nix
       ./hardware-configuration.nix
     ];
 
@@ -20,38 +21,13 @@
   # Nix settings, auto cleanup and enable flakes
   nix = {
     settings = {
-      auto-optimise-store = true;
       allowed-users = [ "leo" ];
     };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-    };
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes repl-flake
-    '';
   };
-
-  # Set up locales (timezone and keyboard layout)
-  # Select internationalisation properties.
-  time.timeZone = "Europe/Paris";
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    useXkbConfig = true;
-  };
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
     hostName = "verna";
     networkmanager.enable = true;
-    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-    # Per-interface useDHCP will be mandatory in the future, so this generated config
-    # replicates the default behaviour.
     useDHCP = false;
     interfaces.enp0s31f6.useDHCP = true;
     interfaces.wlp4s0.useDHCP = true;
@@ -69,14 +45,7 @@
 
     displayManager = {
       defaultSession = "none+i3";
-      startx.enable = true;
-      lightdm = {
-        enable = true;
-      };
-      autoLogin = {
-        enable = false;
-        user = "leo";
-      };
+      lightdm.enable = true;
     };
 
     desktopManager = {
@@ -93,43 +62,19 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.bluetooth.enable = true;
-
   users.users.leo = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" ];
     shell = pkgs.fish;
   };
-
-  environment.systemPackages = with pkgs; [
-    refind
-    git
-    vim
-    curl
-    docker
-  ];
 
   programs = {
     fish.enable = true;
   };
 
-  # Download patched fonts from nerd fonts to use glyphs in the terminal
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "UbuntuMono" "JetBrainsMono" ]; })
-  ];
+  environment.systemPackages = with pkgs; [ virt-manager ];
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  services.logind.extraConfig = ''
-    # don’t shutdown when power button is short-pressed
-    HandlePowerKey=ignore
-  '';
-
-  virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
