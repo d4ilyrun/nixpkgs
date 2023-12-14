@@ -10,7 +10,6 @@
 ## style-1   style-2   style-3   style-4   style-5
 
 # Current Theme
-themes="$HOME/.config/rofi/theme"
 theme='powermenu'
 
 # CMDs
@@ -31,7 +30,7 @@ rofi_cmd() {
 	rofi -dmenu \
 		-p "$host" \
 		-mesg "Uptime: $uptime" \
-		-theme "${themes}/${theme}.rasi"
+		-theme "${theme}"
 }
 
 # Confirmation CMD
@@ -44,7 +43,7 @@ confirm_cmd() {
 		-dmenu \
 		-p 'Confirmation' \
 		-mesg 'Are you Sure?' \
-		-theme "${themes}/${theme}.rasi"
+		-theme "${theme}"
 }
 
 # Ask for confirmation
