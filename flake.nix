@@ -81,6 +81,8 @@
           verna = systemConfig [ ./config/verna/configuration.nix ];
         };
 
+      apps = pkgs;
+
       homeConfigurations =
         {
           desktop = homeConfig [ ./user/leo.nix ./config/desktop ];
