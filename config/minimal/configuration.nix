@@ -27,7 +27,10 @@ rec {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  programs.command-not-found.dbPath = "${pkgs.config.outPath}/programs.sqlite";
+  programs.command-not-found = {
+    enable = false; # FIXME: no programs.sqlite when working with a flake
+    dbPath = "${pkgs.config.outPath}/programs.sqlite";
+  };
 
   environment.systemPackages = with pkgs; [
     git
