@@ -19,7 +19,7 @@ let
 
 in
 {
-  xdg.configFile = copyConfigs [ "config" "powermenu" ];
+  xdg.configFile = copyConfigs [ "config" "powermenu" "screenshot" ];
 
   programs.rofi = {
     enable = true;
