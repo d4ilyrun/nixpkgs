@@ -25,10 +25,6 @@ in
     ];
   };
 
-  programs = {
-    alacritty.settings.font.size = lib.mkForce 12.0;
-  };
-
   xsession.windowManager.i3.config = {
     keybindings = lib.mkOptionDefault {
       "Ctrl+${modifier}+Left" = "move workspace to output ${secondary}";

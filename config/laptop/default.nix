@@ -46,4 +46,6 @@ in
       smartGaps = false;
     };
   };
+
+  programs.kitty.settings.font_size = "20.0";
 }

@@ -32,6 +32,7 @@
 
   services.xserver = {
     enable = true;
+    dpi = 150;
 
     displayManager = {
       lightdm.enable = true;
