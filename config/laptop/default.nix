@@ -1,18 +1,23 @@
-#~/.config/nixpkgs/config/desktop/index.nix
-{ config, lib, pkgs, spicetify-nix, ... }:
+# laptop-specific configuration
+# Lenovo T14
+
+{ lib, ... }:
 
 let
-  inherit (config.dotfiles.folders) applications;
-
   modifier = "Mod4";
-  primary = "eDP-1-1";
-  secondary = "HDMI-0";
+  primary = "eDP-1";
+  secondary = "HDMI-1";
+  battery = "BAT0";
 
 in
 {
   dotfiles = {
     extraOptions = {
       network = "wlp2s0";
+      battery = {
+        inherit battery;
+        adapter = "ACAD";
+      };
       monitor = {
         inherit primary secondary;
       };
@@ -31,7 +36,7 @@ in
   services = {
     lowbatt = {
       enable = true;
-      device = "BAT0";
+      device = battery;
       notifyCapacity = 15;
     };
   };
@@ -48,4 +53,10 @@ in
   };
 
   programs.kitty.settings.font_size = "20.0";
+  services.polybar.settings = {
+    "module/filesystem" = {
+      mount-1 = lib.mkForce "/home";
+      mount-2 = lib.mkForce "/nix";
+    };
+  };
 }
