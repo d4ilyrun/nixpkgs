@@ -3,63 +3,52 @@
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, modulesPath, ... }:
 
-let
-  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
-    export __NV_PRIME_RENDER_OFFLOAD=1
-    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-    export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    export __VK_LAYER_NV_optimus=NVIDIA_only
-    exec "$@"
-  '';
-in
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    ../yaka/hardware-configuration.nix
-  ];
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
-  boot = {
-    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-    initrd.kernelModules = [ "nvidia-uvm" "nvidia" "nvidia_modeset" "nvidia_drm" ];
-    kernelParams = [ "nvidia-drm.modeset=1" ];
-    kernelModules = [ "kvm-intel" "nvidia-uvm" "nvidia" "nvidia_modeset" "nvidia_drm" ];
-    blacklistedKernelModules = [ "nouveau" ];
-    extraModulePackages = [ ];
-  };
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
 
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-label/nixos";
+  fileSystems."/" =
+    { device = "/dev/dm-3";
       fsType = "ext4";
     };
 
-    "/boot" = {
-      device = "/dev/disk/by-label/BOOT";
+  fileSystems."/nix" =
+    { device = "/dev/dm-1";
+      fsType = "ext4";
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/12CE-A600";
       fsType = "vfat";
     };
-  };
-  swapDevices = [
-    { device = "/dev/disk/by-label/swap"; }
-  ];
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-
-  # NVIDIA STUFF
-
-  environment.systemPackages = [ nvidia-offload ];
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware = {
-    opengl = {
-      enable = true;
+  fileSystems."/home" =
+    { device = "/dev/dm-2";
+      fsType = "ext4";
     };
-    nvidia = {
-      modesetting.enable = true;
-      prime = {
-        sync.enable = true;
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
-      };
-    };
+
+
+  boot.initrd.luks.devices."acu" = {
+	device = "/dev/nvme0n1p2";
+	preLVM = true;
   };
+
+  swapDevices = [ ];
+
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkDefault true;
+  networking.interfaces.enp1s0f0.useDHCP = lib.mkDefault true;
+  networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

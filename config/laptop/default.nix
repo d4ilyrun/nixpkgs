@@ -12,7 +12,7 @@ in
 {
   dotfiles = {
     extraOptions = {
-      network = "wlp0s20f3";
+      network = "wlp2s0";
       monitor = {
         inherit primary secondary;
       };
@@ -31,7 +31,7 @@ in
   services = {
     lowbatt = {
       enable = true;
-      device = "BAT1";
+      device = "BAT0";
       notifyCapacity = 15;
     };
   };
