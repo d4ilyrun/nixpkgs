@@ -68,6 +68,19 @@ rec {
   };
 
   xdg = {
+
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+      pictures = "${config.dotfiles.homeDirectory}/Images";
+      extraConfig = {
+        SCHOOL = "${config.dotfiles.homeDirectory}/School";
+      };
+      publicShare = null;
+      templates = null;
+      videos = null;
+    };
+
     mimeApps =
       let
         file-manager = [ "ranger.desktop" ];

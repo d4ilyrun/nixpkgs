@@ -11,6 +11,10 @@
     };
   };
 
+  xdg.userDirs.extraConfig = {
+    YAKA = "${config.dotfiles.homeDirectory}/School/YAKA";
+  };
+
   programs = {
     ssh = {
       enable = true;
