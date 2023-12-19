@@ -59,6 +59,15 @@
 
   programs = {
     fish.enable = true;
+    light.enable = true;
+  };
+
+  services = {
+    fprintd = {
+      enable = true;
+      tod.enable = true;
+      tod.driver = pkgs.libfprint-2-tod1-vfs0090;
+    };
   };
 
   # This value determines the NixOS release from which the default
