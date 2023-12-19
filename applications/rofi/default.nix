@@ -5,6 +5,8 @@ let
   inherit (config.dotfiles.extraOptions) terminal;
   defaultTerminal = "${pkgs.alacritty}/bin/alacritty";
 
+  scripts = "${applications}/rofi/scripts";
+
   copyConfigs = names: builtins.listToAttrs (
     map
       (name: pkgs.lib.attrsets.nameValuePair
@@ -54,11 +56,12 @@ in
   xsession.windowManager.i3.config.keybindings = pkgs.lib.mkOptionDefault {
     "Mod4+d" = "exec rofi -show drun -show drun -show-icons -terminal ${terminal}";
     "Mod4+Shift+d" = "exec rofi -sho-icons -show window";
-    "Mod4+Shift+e" = "exec ${applications}/rofi/scripts/powermenu.sh";
+    "Mod4+Shift+e" = "exec ${scripts}/powermenu.sh";
     "Mod4+Shift+c" = "exec rofi -show calc -modi calc -display-calc 󰃬 -terse | xsel -b";
-    "Mod4+Shift+w" = "exec ${applications}/rofi/scripts/network.sh";
+    "Mod4+Shift+w" = "exec ${scripts}/network.sh";
     "Mod4+comma" = "exec rofi -modi emoji -show emoji -emoji-mode insert";
-    "Mod4+Shift+s" = "exec ${applications}/rofi/scripts/screenshot.sh";
+    "Mod4+Shift+s" = "exec ${scripts}/screenshot.sh";
+    "XF86Display" = "exec ${scripts}/autorandr.sh";
   };
 } // (
   # Copy all config files into the config folder
