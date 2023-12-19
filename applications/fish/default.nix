@@ -85,8 +85,8 @@ in
     };
 
     functions = {
-      hms = ''home-manager switch --impure --cores 12 --flake ${dotfiles.repository}#$argv'';
-      nrs = "sudo nixos-rebuild switch --impure -j 12 --flake ${dotfiles.repository}#$argv";
+      hms = "home-manager switch --impure --cores 12 --flake ${dotfiles.repository}#$argv[1] $argv[2..-1]";
+      nrs = "sudo nixos-rebuild switch --impure -j 12 --flake ${dotfiles.repository}#$argv[1] $argv[2..-1]";
     };
   };
 }
