@@ -7,7 +7,6 @@
     betterdiscordctl
     lazygit
     feh
-    zathura
     thunderbird
     birdtray
     libnotify

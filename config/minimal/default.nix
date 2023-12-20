@@ -1,4 +1,4 @@
-{ config, lib, pkgs, nixpkgs, ... }:
+{ lib, nixpkgs, ... }:
 
 {
   home.sessionVariables = {
@@ -11,6 +11,6 @@
 
   imports = lib.importConfig {
     services = [ "dunst" "picom" ];
-    applications = [ "alacritty" "firefox" "fish" "kitty" "neovim" "rofi" "tmux" ];
+    applications = [ "alacritty" "firefox" "fish" "kitty" "neovim" "rofi" "tmux" "zathura" ];
   };
 }
