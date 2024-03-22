@@ -36,7 +36,7 @@ jobs:
         # Change username
         sed "s|username = \"leo\"|username = \"$USER\"|" -i 'user/leo.nix'
         # Workaround, maybe try using a flake check or something
-        sed -i "7 i dotfiles.repository = \"$(pwd)\";" user/leo.nix
+        sed -i "4 i dotfiles.repository = \"$(pwd)\";" user/leo.nix
         git submodule update --init
 
     - name: Build and switch to home-manager env
