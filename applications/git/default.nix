@@ -18,6 +18,7 @@
       ca = "commit --amend";
       ce = "commit --allow-empty";
       cf = "commit --fixup";
+      cs = "commit --signoff -S";
 
       # rebase
       rb = "rebase";

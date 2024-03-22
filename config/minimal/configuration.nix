@@ -27,9 +27,16 @@ rec {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  programs.command-not-found = {
-    enable = false; # FIXME: no programs.sqlite when working with a flake
-    dbPath = "${pkgs.config.outPath}/programs.sqlite";
+  programs = {
+    gnupg.agent = {
+      enable = true;
+      pinentryFlavor = "curses";
+      enableSSHSupport = true;
+    };
+    command-not-found = {
+      enable = false; # FIXME: no programs.sqlite when working with a flake
+      dbPath = "${pkgs.config.outPath}/programs.sqlite";
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -58,6 +65,7 @@ rec {
   services = {
     openssh.enable = true;
     printing.enable = true;
+    pcscd.enable = true;
     logind.extraConfig = ''
       # don’t shutdown when power button is short-pressed
       HandlePowerKey=ignore
