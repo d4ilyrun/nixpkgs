@@ -15,7 +15,6 @@ let
     # Replace files as described in:
     # https://github.com/andreasgrafen/cascade#catppuccin
     installPhase = ''
-      cp -r $src/* .
       chmod -R u+w .
 
       cp ./integrations/catppuccin/cascade-${flavour}.css ./chrome/includes/
@@ -24,12 +23,16 @@ let
 
       cp -r ./chrome $out
     '';
+
+    patches = [
+      ./firefox-navbar.patch
+    ];
   };
 
 in
 
 {
-  home.file.".mozilla/firefox/${config.dotfiles.username}/chrome" = {
+  home.file.".mozilla/firefox/${config.dotfiles.username}/chrome/theme" = {
     enable = true;
     source = "${cascadeCatppuccin}";
     recursive = true;

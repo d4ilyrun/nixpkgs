@@ -31,6 +31,12 @@
           }
         ];
 
+        userChrome = ''
+          /* Custom theme defined inside the 'themes' nix dconfiguration */
+          @import 'theme/userChrome.css';
+        '';
+
+
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           darkreader
           refined-github
@@ -41,5 +47,11 @@
         ];
       };
     };
+  };
+
+  xsession.windowManager.i3 = {
+    config.window.commands = [
+      { command = "floating disable border none"; criteria = { class = "Firefox"; }; }
+    ];
   };
 }

@@ -1,0 +1,66 @@
+diff --git a/chrome/includes/cascade-config.css b/chrome/includes/cascade-config.css
+index a22fa4a..12b661e 100644
+--- a/chrome/includes/cascade-config.css
++++ b/chrome/includes/cascade-config.css
+@@ -43,7 +43,7 @@
+  *  4 – toolbar on bottom
+  */
+ :root {
+-  --uc-toolbar-position: 0;
++  --uc-toolbar-position: 4;
+ }
+ 
+ /*  Darken the Personal Toolbar by X amount
+@@ -69,7 +69,7 @@
+   /*  Width of the URL Bar for the Oneline layout
+    *  If enabled the max-width is applied on focus
+    *  otherwise the URL Bar will always be it's min-width
+-   */ --uc-urlbar-min-width: 35vw;
++   */ --uc-urlbar-min-width: 0vw;
+       --uc-urlbar-max-width: 35vw;
+ 
+   /*  Position of the URL Bar
+@@ -87,7 +87,10 @@
+ 
+ 
+ /* Disable the Navigation Buttons */
++#star-button-box,
+ #back-button,
++#reload-button,
++#tabs-newtab-button, #new-tab-button,
+ #forward-button { display: none !important; }
+ 
+ /* Disables the Tracking Protection Shield */
+@@ -100,7 +103,7 @@
+   /* #identity-box { display: none !important } */
+ 
+ /* Hide everything BUT the zoom indicator within the URL Bar */
+-/* #page-action-buttons > :not(#urlbar-zoom-button) { display: none !important; } */
++#page-action-buttons > :not(#urlbar-zoom-button) { display: none !important; }
+ 
+ /* Hide the »Go«-arrow in the URL Bar */
+ #urlbar-go-button { display: none !important; }
+diff --git a/chrome/includes/cascade-tabs.css b/chrome/includes/cascade-tabs.css
+index 1f7bbc9..43dc488 100644
+--- a/chrome/includes/cascade-tabs.css
++++ b/chrome/includes/cascade-tabs.css
+@@ -32,8 +32,17 @@
+ 
+ 
+ /* adaptive tab width */
+-.tabbrowser-tab[selected][fadein]:not([pinned]) { max-width: var(--uc-active-tab-width) !important; }
+-.tabbrowser-tab[fadein]:not([selected]):not([pinned]) { max-width: var(--uc-inactive-tab-width) !important; }
++.tabbrowser-tab[selected][fadein]:not([pinned]) {
++    max-width: var(--uc-active-tab-width) !important;
++    transform: translateX(0);
++    transition-delay: 500ms;
++}
++
++.tabbrowser-tab[fadein]:not([selected]):not([pinned]) {
++    max-width: var(--uc-inactive-tab-width) !important;
++    transform: translateX(0);
++    transition-delay: 500ms;
++}
+ 
+ 
+ 
