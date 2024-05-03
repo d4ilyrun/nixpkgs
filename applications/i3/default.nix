@@ -38,7 +38,7 @@ in
       modifier = "Mod4";
       inherit terminal;
 
-      defaultWorkspace = ws1;
+      defaultWorkspace = "workspace number ${ws1}";
 
       keybindings = lib.mkOptionDefault {
 
@@ -70,15 +70,29 @@ in
         "${modifier}+Shift+8" = "move container to workspace ${ws8}";
         "${modifier}+Shift+9" = "move container to workspace ${ws9}";
         "${modifier}+Shift+0" = "move container to workspace ${ws0}";
-        "${modifier}+Shift+h" = "move scratchpad";
+        "${modifier}+BackSpace" = "move scratchpad";
+
+        # Vim keybindings to move between windows
+        "${modifier}+h" = "focus left";
+        "${modifier}+j" = "focus down";
+        "${modifier}+k" = "focus up";
+        "${modifier}+l" = "focus right";
+        "${modifier}+Shift+h" = "move left";
+        "${modifier}+Shift+j" = "move down";
+        "${modifier}+Shift+k" = "move up";
+        "${modifier}+Shift+l" = "move right";
+
 
         # Switch modes
-        "${modifier}+r" = "mode resize";
         "${modifier}+f" = "fullscreen";
-        "${modifier}+Shift+f" = "floating toggle";
+        "Ctr+Shift+r" = "mode resize";
+        "Ctr+Shift+s" = "layout stacking";
+        "Ctr+Shift+t" = "layout tabbed";
+        "Ctr+Shift+d" = "layout default";
+        "Ctrl+Shift+f" = "floating toggle";
 
         # Lock
-        "${modifier}+Shift+x" = "exec betterlockscreen -l dimblur";
+        "${modifier}+Shift+x" = "exec i3lock -i ${config.dotfiles.homeDirectory}/.wallpaper";
 
         # Screenshot
         "Print" = "exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png";
