@@ -98,10 +98,10 @@ in
         "Print" = "exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png";
 
         # Light
-        "XF86MonBrightnessUp" = "exec ${light} dec";
-        "XF86MonBrightnessDown" = "exec ${light} inc";
-        "Shift+XF86MonBrightnessUp" = "exec ${light} dec 1";
-        "Shift+XF86MonBrightnessDown" = "exec ${light} inc 1";
+        "XF86MonBrightnessUp" = "exec ${light} inc 5";
+        "XF86MonBrightnessDown" = "exec ${light} dec 5";
+        "Shift+XF86MonBrightnessUp" = "exec ${light} inc 10";
+        "Shift+XF86MonBrightnessDown" = "exec ${light} dec 10";
 
         # Audio
         "XF86AudioLowerVolume" = "exec ${volume} down";

@@ -1,49 +1,28 @@
 #!/bin/bash
 
-icon_path="TODO"
-subinc=2
-subchange=$(echo "1 / $subinc" | bc -l)
-delay=$(echo "(0.02 / $2)/$subinc" | bc -l)
-opt=""
 
+current=$(light | cut -d '.' -f 1)
 
-getIcon() {
-    if [ "$1" -eq 0 ]; then
-        echo "$icon_path/display-brightness-off-symbolic.svg"
-    elif [ "$1" -lt 33 ]; then
-        echo "$icon_path/display-brightness-low-symbolic.svg"
-    elif [ "$1" -lt 66 ]; then
-        echo "$icon_path/display-brightness-medium-symbolic.svg"
-    else
-        echo "$icon_path/display-brightness-high-symbolic.svg"
-    fi
-
-}
-
+if [ $# -eq 1 ]; then
+    change=1
+else
+    change="$2"
+fi
 
 if [ "$1" == "inc" ]; then
     opt="-A"
+    new_value=$((current + change))
 else
     opt="-U"
+    new_value=$((current - change))
 fi
 
 
-for i in $(seq $2); do
-    current=$(light)
-    truncated=$(echo "$current" | cut -d '.' -f1)
+if  [ "$current" == "100" ] && [ "$opt" == "-A" ]; then
+    exit 0
+elif [ "$current" == "0" ] && [ "$opt" == "-U" ]; then
+    exit 0
+fi
 
-    if (( $(echo "$current==0" | bc -l) )) && [ "$opt" == "-U" ]; then
-        exit 0;
-    elif (( $(echo "$current==100" | bc -l) )) && [ "$opt" == "-A"  ]; then
-        exit 0;
-    fi
-
-    for i in $(seq $subinc); do
-        sudo light $opt "$subchange"
-        sleep "$delay"
-    done
-        
-    
-    #dunstify "Brightness at ${truncated}%" -i $(getIcon "$truncated") -a "Backlight" -u low -h "int:value:$current" -h string:x-dunst-stack-tag:backlight
-    dunstify "Brightness at ${truncated}%" -a "Backlight" -u low -h "int:value:$current" -h string:x-dunst-stack-tag:backlight
-done
+light "$opt" "$change"
+dunstify "Brightness at ${new_value}%" -a "Backlight" -u low -h "int:value:$new_value" -h string:x-dunst-stack-tag:backlight
